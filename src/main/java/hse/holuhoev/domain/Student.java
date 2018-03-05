@@ -1,6 +1,5 @@
 package hse.holuhoev.domain;
 
-import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,6 @@ import javax.persistence.Id;
  *
  * @author Evgeny Kholukhoev
  */
-@Data
 @Entity
 public class Student {
     @Id
@@ -19,10 +17,30 @@ public class Student {
     private Long id;
     private String firstName;
     private String lastName;
-    /**
-     * Часовая загруженность студента за неделю.
-     */
-    private Integer workload;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public Student() {
     }
@@ -30,6 +48,5 @@ public class Student {
     public Student(String firstName, String lastName, Integer workload) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.workload = workload;
     }
 }
