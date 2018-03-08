@@ -9,6 +9,15 @@ public class RuzLecturer extends RuzObject {
     private Integer chairOid; // департамент
     private String fio;
     private String shortFio;
+    private Integer lecturerOid;
+
+    public Integer getLecturerOid() {
+        return lecturerOid;
+    }
+
+    public void setLecturerOid(Integer lecturerOid) {
+        this.lecturerOid = lecturerOid;
+    }
 
     public RuzLecturer() {
     }

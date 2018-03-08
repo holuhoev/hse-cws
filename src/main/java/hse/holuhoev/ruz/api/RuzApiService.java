@@ -13,15 +13,16 @@ import java.util.List;
  *
  * @author Evgeny Kholukhoev
  */
-public interface RuzApi {
+public interface RuzApiService {
     List<RuzLesson> getStudentLessons(Integer studentId, String fromDate, String toDate);
 
-    // TODO:
     List<RuzLesson> getLecturerLessons(Integer lecturerId, String fromDate, String toDate);
 
     List<RuzStudent> getStudents(final Integer groupOid);
 
     List<RuzGroup> getGroups();
 
-    Iterable<RuzLecturer> getLecturers();
+    List<RuzLecturer> getLecturers(Integer chairId);
+
+    List<RuzLecturer> getAllLecturers();
 }

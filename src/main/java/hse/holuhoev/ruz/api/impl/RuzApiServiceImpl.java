@@ -1,15 +1,14 @@
 package hse.holuhoev.ruz.api.impl;
 
 
-
-
 import hse.holuhoev.domain.RuzGroup;
 import hse.holuhoev.domain.RuzLecturer;
 import hse.holuhoev.domain.RuzLesson;
 import hse.holuhoev.domain.RuzStudent;
 import hse.holuhoev.ruz.RuzURL;
-import hse.holuhoev.ruz.api.RuzApi;
+import hse.holuhoev.ruz.api.RuzApiService;
 import hse.holuhoev.ruz.util.RuzJsonParser;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,15 +22,24 @@ import java.util.Map;
 /**
  * @author Evgeny Kholukhoev
  */
-public class RuzApiImpl implements RuzApi {
+@Service
+public class RuzApiServiceImpl implements RuzApiService {
     private final RuzJsonParser ruzJsonParser;
 
-    public RuzApiImpl() {
+    public RuzApiServiceImpl() {
         this.ruzJsonParser = RuzJsonParser.getInstance();
     }
 
     @Override
-    public Iterable<RuzLecturer> getLecturers() {
+    public List<RuzLecturer> getLecturers(Integer chairId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(RuzURL.CHAIR_ID, chairId);
+        String lecturersInString = readRuz(RuzURL.LECTURERS_ENDPOINS, params);
+        return ruzJsonParser.parse(lecturersInString, RuzLecturer.class);
+    }
+
+    @Override
+    public List<RuzLecturer> getAllLecturers() {
         String lecturersInString = readRuz(RuzURL.LECTURERS_ENDPOINS, null);
         return ruzJsonParser.parse(lecturersInString, RuzLecturer.class);
     }
@@ -42,13 +50,17 @@ public class RuzApiImpl implements RuzApi {
         params.put(RuzURL.STUDENT_ID, studentId);
         params.put(RuzURL.FROM_DATE, fromDate);
         params.put(RuzURL.TO_DATE, toDate);
-        String studentLesson = readLessons(params);
-        return ruzJsonParser.parse(studentLesson, RuzLesson.class);
+        return getLessons(params);
     }
 
     @Override
     public List<RuzLesson> getLecturerLessons(Integer lecturerId, String fromDate, String toDate) {
-        return null;
+        Map<String, Object> params = new HashMap<>();
+        params.put(RuzURL.LECTURER_ID, lecturerId);
+        params.put(RuzURL.LESSON_TYPE, RuzURL.LECTURER_LESSON_TYPE);
+        params.put(RuzURL.FROM_DATE, fromDate);
+        params.put(RuzURL.TO_DATE, toDate);
+        return getLessons(params);
     }
 
     @Override
@@ -66,9 +78,8 @@ public class RuzApiImpl implements RuzApi {
 
     }
 
-
-    private String readLessons(Map<String, ?> params) {
-        return readRuz(RuzURL.LESSONS_ENDPOINS, params);
+    private List<RuzLesson> getLessons(Map<String, ?> params) {
+        return ruzJsonParser.parse(readRuz(RuzURL.LESSONS_ENDPOINS, params), RuzLesson.class);
     }
 
     private String paramsToString(Map<String, ?> params) {

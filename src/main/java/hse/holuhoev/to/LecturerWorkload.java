@@ -3,10 +3,13 @@ package hse.holuhoev.to;
 /**
  * @author Evgeny Kholukhoev
  */
-public class StudentWorkload {
+public class LecturerWorkload {
     private Integer workload;
-    private Integer studentOid;
+    private Integer lecturerId;
     private String fio;
+
+    public LecturerWorkload() {
+    }
 
     public Integer getWorkload() {
         return workload;
@@ -16,12 +19,12 @@ public class StudentWorkload {
         this.workload = workload;
     }
 
-    public Integer getStudentOid() {
-        return studentOid;
+    public Integer getLecturerId() {
+        return lecturerId;
     }
 
-    public void setStudentOid(Integer studentOid) {
-        this.studentOid = studentOid;
+    public void setLecturerId(Integer lecturerId) {
+        this.lecturerId = lecturerId;
     }
 
     public String getFio() {
@@ -32,12 +35,9 @@ public class StudentWorkload {
         this.fio = fio;
     }
 
-    public StudentWorkload(Integer workload, Integer studentOid, String fio) {
+    public LecturerWorkload(Integer workload, Integer lecturerOid, String fio) {
         this.workload = workload;
-        this.studentOid = studentOid;
+        this.lecturerId = lecturerOid;
         this.fio = fio;
-    }
-
-    public StudentWorkload() {
     }
 }
