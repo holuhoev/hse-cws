@@ -5,9 +5,10 @@ package hse.holuhoev.ruz;
  */
 public class RuzURL {
     public final static String URL = "http://ruz.hse.ru/RUZService.svc/";
-    public final static String GROUPS_ENDPOINS = "groups";
-    public final static String LESSONS_ENDPOINS = "personLessons";
-    public final static String LECTURERS_ENDPOINS = "lecturers";
+    public final static String GROUPS_ENDPOINT = "groups";
+    public final static String LESSONS_ENDPOINT = "personLessons";
+    public final static String LECTURERS_ENDPOINT = "lecturers";
+    public final static String FACULTIES_ENDPOING = "faculties";
     public final static String STAFF_OF_GROUP = "StaffOfGroup";
     public final static String GROUP_ID = "groupOid";
     public final static String STUDENT_ID = "studentOid";

@@ -1,52 +1,72 @@
 package hse.holuhoev.domain;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
- * Студент.
- *
  * @author Evgeny Kholukhoev
  */
 @Entity
+@Table(name = "STUDENT")
 public class Student {
     @Id
-    @GeneratedValue
-    private Long id;
-    private String firstName;
-    private String lastName;
+    @Column(name = "ID")
+    private Integer studentOid;
 
-    public Long getId() {
-        return id;
+    @Column(name = "fio")
+    private String fio;
+
+    @Column(name = "facultyID")
+    private Integer facultyID;
+
+    @Column(name = "groupID")
+    private Integer groupID;
+
+    @Column(name = "instituteID")
+    private Integer instituteID;
+
+    public Integer getFacultyID() {
+        return facultyID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setFacultyID(Integer facultyID) {
+        this.facultyID = facultyID;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Integer getGroupID() {
+        return groupID;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setGroupID(Integer groupID) {
+        this.groupID = groupID;
     }
 
-    public String getLastName() {
-        return lastName;
+    public Integer getInstituteID() {
+        return instituteID;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setInstituteID(Integer instituteID) {
+        this.instituteID = instituteID;
     }
 
     public Student() {
     }
 
-    public Student(String firstName, String lastName, Integer workload) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public String getFio() {
+        return fio;
+    }
+
+    public void setFio(String fio) {
+        this.fio = fio;
+    }
+
+    public Integer getStudentOid() {
+        return studentOid;
+    }
+
+    public void setStudentOid(Integer studentOid) {
+        this.studentOid = studentOid;
     }
 }

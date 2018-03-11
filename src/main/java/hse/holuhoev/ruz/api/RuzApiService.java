@@ -1,10 +1,7 @@
 package hse.holuhoev.ruz.api;
 
 
-import hse.holuhoev.domain.RuzGroup;
-import hse.holuhoev.domain.RuzLecturer;
-import hse.holuhoev.domain.RuzLesson;
-import hse.holuhoev.domain.RuzStudent;
+import hse.holuhoev.domain.*;
 
 import java.util.List;
 
@@ -14,15 +11,17 @@ import java.util.List;
  * @author Evgeny Kholukhoev
  */
 public interface RuzApiService {
-    List<RuzLesson> getStudentLessons(Integer studentId, String fromDate, String toDate);
+    List<Lesson> getStudentLessons(Integer studentId, String fromDate, String toDate);
 
-    List<RuzLesson> getLecturerLessons(Integer lecturerId, String fromDate, String toDate);
+    List<Lesson> getLecturerLessons(Integer lecturerId, String fromDate, String toDate);
 
-    List<RuzStudent> getStudents(final Integer groupOid);
+    List<Student> getStudents(final Integer groupOid);
 
-    List<RuzGroup> getGroups();
+    List<Group> getGroups();
 
-    List<RuzLecturer> getLecturers(Integer chairId);
+    List<Lecturer> getLecturers(Integer chairId);
 
-    List<RuzLecturer> getAllLecturers();
+    List<Lecturer> getAllLecturers();
+
+    List<Faculty> getAllFaculties();
 }

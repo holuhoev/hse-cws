@@ -5,13 +5,13 @@ package hse.holuhoev.domain;
  *
  * @author Evgeny Kholukhoev
  */
-public class RuzChair extends RuzObject {
+public class Chair extends RuzObject {
     private Integer facultyOid; // ID программы
     private String name;
     private String chairOid;
     private String code;
 
-    public RuzChair() {
+    public Chair() {
     }
 
     public Integer getFacultyOid() {

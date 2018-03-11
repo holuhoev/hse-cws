@@ -1,22 +1,28 @@
 package hse.holuhoev.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author Evgeny Kholukhoev
  */
-public class RuzGroup extends RuzObject {
-    private Integer chairOid;
-    private Integer course;
-    private String faculty;
-    private Integer facultyOid;
+@Entity
+@Table(name = "GROUP")
+public class Group extends RuzObject {
+    @Id
+    @Column(name = "ID")
     private Integer groupOid;
 
-    public Integer getChairOid() {
-        return chairOid;
-    }
+    @Column(name = "course")
+    private Integer course;
 
-    public void setChairOid(Integer chairOid) {
-        this.chairOid = chairOid;
-    }
+    @Column(name = "facultyID")
+    private Integer facultyOid;
+
+    @Column(name = "name")
+    private String name;
 
     public Integer getCourse() {
         return course;
@@ -24,14 +30,6 @@ public class RuzGroup extends RuzObject {
 
     public void setCourse(Integer course) {
         this.course = course;
-    }
-
-    public String getFaculty() {
-        return faculty;
-    }
-
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
     }
 
     public Integer getFacultyOid() {
@@ -50,16 +48,22 @@ public class RuzGroup extends RuzObject {
         this.groupOid = groupOid;
     }
 
-    public RuzGroup() {
+    public Group() {
 
     }
 
-    public RuzGroup(Integer chairOid, Integer course, String faculty, Integer facultyOid, Integer groupOid) {
-        this.chairOid = chairOid;
+    public Group(Integer course, Integer facultyOid, Integer groupOid) {
         this.course = course;
-        this.faculty = faculty;
         this.facultyOid = facultyOid;
         this.groupOid = groupOid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 

@@ -1,10 +1,7 @@
 package hse.holuhoev.ruz.api.impl;
 
 
-import hse.holuhoev.domain.RuzGroup;
-import hse.holuhoev.domain.RuzLecturer;
-import hse.holuhoev.domain.RuzLesson;
-import hse.holuhoev.domain.RuzStudent;
+import hse.holuhoev.domain.*;
 import hse.holuhoev.ruz.RuzURL;
 import hse.holuhoev.ruz.api.RuzApiService;
 import hse.holuhoev.ruz.util.RuzJsonParser;
@@ -31,21 +28,27 @@ public class RuzApiServiceImpl implements RuzApiService {
     }
 
     @Override
-    public List<RuzLecturer> getLecturers(Integer chairId) {
+    public List<Lecturer> getLecturers(Integer chairId) {
         Map<String, Object> params = new HashMap<>();
         params.put(RuzURL.CHAIR_ID, chairId);
-        String lecturersInString = readRuz(RuzURL.LECTURERS_ENDPOINS, params);
-        return ruzJsonParser.parse(lecturersInString, RuzLecturer.class);
+        String lecturersInString = readRuz(RuzURL.LECTURERS_ENDPOINT, params);
+        return ruzJsonParser.parse(lecturersInString, Lecturer.class);
     }
 
     @Override
-    public List<RuzLecturer> getAllLecturers() {
-        String lecturersInString = readRuz(RuzURL.LECTURERS_ENDPOINS, null);
-        return ruzJsonParser.parse(lecturersInString, RuzLecturer.class);
+    public List<Lecturer> getAllLecturers() {
+        String lecturersInString = readRuz(RuzURL.LECTURERS_ENDPOINT, null);
+        return ruzJsonParser.parse(lecturersInString, Lecturer.class);
     }
 
     @Override
-    public List<RuzLesson> getStudentLessons(Integer studentId, String fromDate, String toDate) {
+    public List<Faculty> getAllFaculties() {
+        String facultiesInString = readRuz(RuzURL.FACULTIES_ENDPOING, null);
+        return ruzJsonParser.parse(facultiesInString, Faculty.class);
+    }
+
+    @Override
+    public List<Lesson> getStudentLessons(Integer studentId, String fromDate, String toDate) {
         Map<String, Object> params = new HashMap<>();
         params.put(RuzURL.STUDENT_ID, studentId);
         params.put(RuzURL.FROM_DATE, fromDate);
@@ -54,7 +57,7 @@ public class RuzApiServiceImpl implements RuzApiService {
     }
 
     @Override
-    public List<RuzLesson> getLecturerLessons(Integer lecturerId, String fromDate, String toDate) {
+    public List<Lesson> getLecturerLessons(Integer lecturerId, String fromDate, String toDate) {
         Map<String, Object> params = new HashMap<>();
         params.put(RuzURL.LECTURER_ID, lecturerId);
         params.put(RuzURL.LESSON_TYPE, RuzURL.LECTURER_LESSON_TYPE);
@@ -64,22 +67,22 @@ public class RuzApiServiceImpl implements RuzApiService {
     }
 
     @Override
-    public List<RuzStudent> getStudents(final Integer groupId) {
+    public List<Student> getStudents(final Integer groupId) {
         Map<String, Object> params = new HashMap<>();
         params.put(RuzURL.GROUP_ID, groupId);
         String studentsInString = readRuz(RuzURL.STAFF_OF_GROUP, params);
-        return ruzJsonParser.parse(studentsInString, RuzStudent.class);
+        return ruzJsonParser.parse(studentsInString, Student.class);
     }
 
     @Override
-    public List<RuzGroup> getGroups() {
-        String groupsInString = readRuz(RuzURL.GROUPS_ENDPOINS, null);
-        return ruzJsonParser.parse(groupsInString, RuzGroup.class);
+    public List<Group> getGroups() {
+        String groupsInString = readRuz(RuzURL.GROUPS_ENDPOINT, null);
+        return ruzJsonParser.parse(groupsInString, Group.class);
 
     }
 
-    private List<RuzLesson> getLessons(Map<String, ?> params) {
-        return ruzJsonParser.parse(readRuz(RuzURL.LESSONS_ENDPOINS, params), RuzLesson.class);
+    private List<Lesson> getLessons(Map<String, ?> params) {
+        return ruzJsonParser.parse(readRuz(RuzURL.LESSONS_ENDPOINT, params), Lesson.class);
     }
 
     private String paramsToString(Map<String, ?> params) {

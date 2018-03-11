@@ -5,7 +5,7 @@ package hse.holuhoev.domain;
  *
  * @author Evgeny Kholukhoev
  */
-public class RuzLecturer extends RuzObject {
+public class Lecturer extends RuzObject {
     private Integer chairOid; // департамент
     private String fio;
     private String shortFio;
@@ -19,7 +19,7 @@ public class RuzLecturer extends RuzObject {
         this.lecturerOid = lecturerOid;
     }
 
-    public RuzLecturer() {
+    public Lecturer() {
     }
 
     public Integer getChairOid() {
