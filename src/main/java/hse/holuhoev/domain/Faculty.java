@@ -13,7 +13,7 @@ public class Faculty {
     private Integer facultyOid;
 
     @Column(name = "instituteID")
-    private String instituteId; // факультет
+    private Integer instituteId; // факультет
 
     @Column(name = "name")
     private String name;  // сама программа образовательная
@@ -32,11 +32,11 @@ public class Faculty {
         this.facultyOid = facultyOid;
     }
 
-    public String getInstituteId() {
+    public Integer getInstituteId() {
         return instituteId;
     }
 
-    public void setInstituteId(String instituteId) {
+    public void setInstituteId(Integer instituteId) {
         this.instituteId = instituteId;
     }
 

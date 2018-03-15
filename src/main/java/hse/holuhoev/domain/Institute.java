@@ -1,9 +1,6 @@
 package hse.holuhoev.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Evgeny Kholukhoev
@@ -12,11 +9,13 @@ import javax.persistence.Table;
 @Table(name = "INSTITUTE")
 public class Institute {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ID")
     private Integer id;
 
     @Column(name = "name")
     private String name;
+
 
     public Institute(String name) {
         this.name = name;
