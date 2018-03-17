@@ -42,7 +42,22 @@ public class DataBaseLoader implements CommandLineRunner {
         loadInstitutes();
         loadFaculties();
         loadGroups();
+        loadStudents();
+    }
 
+    private void loadStudents() {
+        studentRepository.deleteAll();
+        groupRepository.findAll()
+                .parallelStream()
+                .parallel()
+                .forEach(group -> studentRepository.saveAll(ruzApiService.getStudents(group.getGroupOid())
+                        .stream()
+                        .peek(student -> {
+                                    student.setGroupID(group.getGroupOid());
+                                    student.setFacultyID(group.getFacultyOid());
+                                    student.setInstituteID(group.getInstituteId());
+                                }
+                        ).collect(Collectors.toList())));
     }
 
     private void loadGroups() {
