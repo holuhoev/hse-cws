@@ -1,9 +1,6 @@
 package hse.holuhoev.loader;
 
-import hse.holuhoev.domain.Faculty;
-import hse.holuhoev.domain.Institute;
-import hse.holuhoev.domain.QFaculty;
-import hse.holuhoev.domain.QInstitute;
+import hse.holuhoev.domain.*;
 import hse.holuhoev.repo.*;
 import hse.holuhoev.ruz.api.RuzApiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +11,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-public class DomainLoader{
+public class DomainLoader {
     private final RuzApiService ruzApiService;
     private final StudentRepository studentRepository;
     private final FacultyRepository facultyRepository;
     private final InstituteRepository instituteRepository;
     private final GroupRepository groupRepository;
     private final ChairRepository chairRepository;
+    private final LecturerRepository lecturerRepository;
 
     @Autowired
     public DomainLoader(RuzApiService ruzApiService
@@ -28,13 +26,14 @@ public class DomainLoader{
             , FacultyRepository facultyRepository
             , InstituteRepository instituteRepository
             , GroupRepository groupRepository
-            , ChairRepository chairRepository) {
+            , ChairRepository chairRepository, LecturerRepository lecturerRepository) {
         this.ruzApiService = ruzApiService;
         this.studentRepository = studentRepository;
         this.facultyRepository = facultyRepository;
         this.instituteRepository = instituteRepository;
         this.groupRepository = groupRepository;
         this.chairRepository = chairRepository;
+        this.lecturerRepository = lecturerRepository;
     }
 
     public void run() {
@@ -43,6 +42,12 @@ public class DomainLoader{
         loadGroups();
         loadStudents();
         loadChairs();
+        loadLecturers();
+    }
+
+    private void loadLecturers() {
+        lecturerRepository.deleteAll();
+        lecturerRepository.saveAll(ruzApiService.getAllLecturers());
     }
 
 
