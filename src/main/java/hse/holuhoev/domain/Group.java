@@ -9,7 +9,7 @@ import javax.persistence.Table;
  * @author Evgeny Kholukhoev
  */
 @Entity
-@Table(name = "GROUP")
+@Table(name = "STUDGROUP")
 public class Group extends RuzObject {
     @Id
     @Column(name = "ID")
@@ -18,11 +18,14 @@ public class Group extends RuzObject {
     @Column(name = "course")
     private Integer course;
 
-    @Column(name = "facultyID")
+    @Column(name = "institute_id")
+    private Integer instituteId;
+
+    @Column(name = "faculty_id")
     private Integer facultyOid;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "group_number")
+    private String number;
 
     public Integer getCourse() {
         return course;
@@ -52,18 +55,20 @@ public class Group extends RuzObject {
 
     }
 
-    public Group(Integer course, Integer facultyOid, Integer groupOid) {
-        this.course = course;
-        this.facultyOid = facultyOid;
-        this.groupOid = groupOid;
+    public String getNumber() {
+        return number;
     }
 
-    public String getName() {
-        return name;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Integer getInstituteId() {
+        return instituteId;
+    }
+
+    public void setInstituteId(Integer instituteId) {
+        this.instituteId = instituteId;
     }
 }
 

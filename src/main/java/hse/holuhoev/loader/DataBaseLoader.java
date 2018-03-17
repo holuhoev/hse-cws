@@ -1,8 +1,6 @@
 package hse.holuhoev.loader;
 
-import hse.holuhoev.domain.Faculty;
-import hse.holuhoev.domain.Institute;
-import hse.holuhoev.domain.QInstitute;
+import hse.holuhoev.domain.*;
 import hse.holuhoev.repo.FacultyRepository;
 import hse.holuhoev.repo.GroupRepository;
 import hse.holuhoev.repo.InstituteRepository;
@@ -43,11 +41,25 @@ public class DataBaseLoader implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         loadInstitutes();
         loadFaculties();
+        loadGroups();
 
+    }
+
+    private void loadGroups() {
+        groupRepository.deleteAll();
+
+        QFaculty qFaculty = QFaculty.faculty;
+        groupRepository.saveAll(ruzApiService.getGroups().stream()
+                .peek(group -> {
+                    Optional<Faculty> faculty = facultyRepository.findOne(qFaculty.facultyOid.eq(group.getFacultyOid()));
+                    faculty.ifPresent(faculty1 -> group.setInstituteId(faculty1.getInstituteId()));
+                })
+                .collect(Collectors.toList()));
     }
 
     private void loadFaculties() {
         facultyRepository.deleteAll();
+
         QInstitute qInstitute = QInstitute.institute;
         List<Faculty> faculties = ruzApiService.getAllFaculties();
         faculties.forEach(faculty -> {

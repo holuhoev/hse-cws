@@ -15,7 +15,7 @@ public class Faculty {
     @Column(name = "instituteID")
     private Integer instituteId; // факультет
 
-    @Column(name = "name")
+    @Column(name = "faculty_name")
     private String name;  // сама программа образовательная
 
     @Transient

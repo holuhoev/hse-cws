@@ -13,7 +13,7 @@ public class Institute {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "institute_name")
     private String name;
 
 
