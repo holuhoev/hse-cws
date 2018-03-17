@@ -37,14 +37,17 @@ public class RuzApiServiceImpl implements RuzApiService {
 
     @Override
     public List<Lecturer> getAllLecturers() {
-        String lecturersInString = readRuz(RuzURL.LECTURERS_ENDPOINT, null);
-        return ruzJsonParser.parse(lecturersInString, Lecturer.class);
+        return ruzJsonParser.parse(readRuz(RuzURL.LECTURERS_ENDPOINT, null), Lecturer.class);
+    }
+
+    @Override
+    public List<Chair> getAllChairs() {
+        return ruzJsonParser.parse(readRuz(RuzURL.CHAIRS_ENDPOINT, null), Chair.class);
     }
 
     @Override
     public List<Faculty> getAllFaculties() {
-        String facultiesInString = readRuz(RuzURL.FACULTIES_ENDPOING, null);
-        return ruzJsonParser.parse(facultiesInString, Faculty.class);
+        return ruzJsonParser.parse(readRuz(RuzURL.FACULTIES_ENDPOING, null), Faculty.class);
     }
 
     @Override
@@ -76,8 +79,7 @@ public class RuzApiServiceImpl implements RuzApiService {
 
     @Override
     public List<Group> getGroups() {
-        String groupsInString = readRuz(RuzURL.GROUPS_ENDPOINT, null);
-        return ruzJsonParser.parse(groupsInString, Group.class);
+        return ruzJsonParser.parse(readRuz(RuzURL.GROUPS_ENDPOINT, null), Group.class);
 
     }
 

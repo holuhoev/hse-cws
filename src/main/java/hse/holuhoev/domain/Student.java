@@ -18,13 +18,13 @@ public class Student {
     @Column(name = "fio")
     private String fio;
 
-    @Column(name = "facultyID")
+    @Column(name = "faculty_id")
     private Integer facultyID;
 
-    @Column(name = "groupID")
+    @Column(name = "group_id")
     private Integer groupID;
 
-    @Column(name = "instituteID")
+    @Column(name = "institute_id")
     private Integer instituteID;
 
     public Integer getFacultyID() {

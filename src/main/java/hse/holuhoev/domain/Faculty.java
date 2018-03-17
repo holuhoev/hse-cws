@@ -12,7 +12,7 @@ public class Faculty {
     @Column(name = "ID")
     private Integer facultyOid;
 
-    @Column(name = "instituteID")
+    @Column(name = "institute_id")
     private Integer instituteId; // факультет
 
     @Column(name = "faculty_name")

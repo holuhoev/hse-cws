@@ -23,5 +23,7 @@ public interface RuzApiService {
 
     List<Lecturer> getAllLecturers();
 
+    List<Chair> getAllChairs();
+
     List<Faculty> getAllFaculties();
 }

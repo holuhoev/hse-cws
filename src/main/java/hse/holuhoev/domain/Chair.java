@@ -1,14 +1,27 @@
 package hse.holuhoev.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Департамент
  *
  * @author Evgeny Kholukhoev
  */
+@Entity
 public class Chair extends RuzObject {
+    @Id
+    @Column(name = "ID")
+    private Integer chairOid;
+
+    @Column(name = "faculty_id")
     private Integer facultyOid; // ID программы
+
+    @Column(name = "chair_name")
     private String name;
-    private String chairOid;
+
+    @Column(name = "code")
     private String code;
 
     public Chair() {
@@ -30,11 +43,11 @@ public class Chair extends RuzObject {
         this.name = name;
     }
 
-    public String getChairOid() {
+    public Integer getChairOid() {
         return chairOid;
     }
 
-    public void setChairOid(String chairOid) {
+    public void setChairOid(Integer chairOid) {
         this.chairOid = chairOid;
     }
 

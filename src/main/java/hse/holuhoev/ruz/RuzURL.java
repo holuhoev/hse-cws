@@ -17,6 +17,7 @@ public class RuzURL {
     public final static String TO_DATE = "toDate";
     public final static String CHAIR_ID = "chairOid";
     public final static String LESSON_TYPE = "receiverType";
+    public final static String CHAIRS_ENDPOINT = "chairs";
     public final static Integer LECTURER_LESSON_TYPE = 1;
 
 }

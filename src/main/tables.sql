@@ -7,7 +7,7 @@ CREATE TABLE FACULTY
   ID           INT          NOT NULL
     PRIMARY KEY,
   faculty_name VARCHAR(255) NULL,
-  instituteID  INT          NULL,
+  institute_id  INT          NULL,
   CONSTRAINT FACULTY_ID_uindex
   UNIQUE (ID)
 );
@@ -25,9 +25,9 @@ CREATE TABLE STUDENT
   ID          INT          NOT NULL
     PRIMARY KEY,
   fio         VARCHAR(255) NULL,
-  facultyID   INT          NULL,
-  groupID     INT          NULL,
-  instituteID INT          NULL,
+  faculty_id   INT          NULL,
+  group_id     INT          NULL,
+  institute_id INT          NULL,
   CONSTRAINT STUDENT_ID_uindex
   UNIQUE (ID)
 );
@@ -45,3 +45,13 @@ CREATE TABLE STUDGROUP
 );
 
 
+CREATE TABLE CHAIR
+(
+  ID         INT          NOT NULL
+    PRIMARY KEY,
+  faculty_id INT          NULL,
+  code       VARCHAR(255) NULL,
+  chair_name VARCHAR(255) NULL,
+  CONSTRAINT GROUP_ID_uindex
+  UNIQUE (ID)
+);
