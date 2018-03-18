@@ -1,8 +1,8 @@
 package hse.holuhoev.datasource;
 
 import hse.holuhoev.ruz.api.RuzApiService;
-import hse.holuhoev.to.LecturerWorkload;
-import hse.holuhoev.to.StudentWorkload;
+import hse.holuhoev.domain.LecturerWorkload;
+import hse.holuhoev.domain.StudentWorkload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

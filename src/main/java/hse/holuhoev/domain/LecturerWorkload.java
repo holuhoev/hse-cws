@@ -1,4 +1,4 @@
-package hse.holuhoev.to;
+package hse.holuhoev.domain;
 
 /**
  * @author Evgeny Kholukhoev

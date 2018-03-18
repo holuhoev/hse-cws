@@ -1,10 +1,7 @@
 package hse.holuhoev.domain;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 /**
  * Преподаватель.
@@ -12,6 +9,7 @@ import javax.persistence.Transient;
  * @author Evgeny Kholukhoev
  */
 @Entity
+@Table(name = "LECTURER")
 public class Lecturer extends RuzObject {
     @Id
     @Column(name = "ID")

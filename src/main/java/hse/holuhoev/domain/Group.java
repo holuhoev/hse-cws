@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
+ * Группа студентов.
+ *
  * @author Evgeny Kholukhoev
  */
 @Entity

@@ -3,6 +3,8 @@ package hse.holuhoev.domain;
 import javax.persistence.*;
 
 /**
+ * Образовательная программа.
+ *
  * @author Evgeny Kholukhoev
  */
 @Entity

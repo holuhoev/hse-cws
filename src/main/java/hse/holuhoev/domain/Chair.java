@@ -3,6 +3,7 @@ package hse.holuhoev.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Департамент
@@ -10,6 +11,7 @@ import javax.persistence.Id;
  * @author Evgeny Kholukhoev
  */
 @Entity
+@Table(name = "CHAIR")
 public class Chair extends RuzObject {
     @Id
     @Column(name = "ID")
