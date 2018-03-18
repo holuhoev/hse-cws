@@ -24,31 +24,32 @@ public class WorkloadDatasource {
 
     public List<LecturerWorkload> getLecturerWorkload(final Integer chairId,
                                                       final String fromDate,
-                                                      final String toDate)
-    {
-        return ruzApiService.getLecturers(chairId)
-                .stream()
-                .map(ruzLecturer ->
-                        new LecturerWorkload(
-                                ruzApiService.getLecturerLessons(ruzLecturer.getLecturerOid(), fromDate, toDate).size()
-                                , ruzLecturer.getLecturerOid()
-                                , ruzLecturer.getFio()
-                        )
-                ).collect(Collectors.toList());
+                                                      final String toDate) {
+        return null;
+//        return ruzApiService.getLecturers(chairId)
+//                .stream()
+//                .map(ruzLecturer ->
+//                        new LecturerWorkload(
+//                                ruzApiService.getLecturerLessons(ruzLecturer.getLecturerOid(), fromDate, toDate).size()
+//                                , ruzLecturer.getLecturerOid()
+//                                , ruzLecturer.getFio()
+//                        )
+//                ).collect(Collectors.toList());
     }
 
     public List<StudentWorkload> getStudentWorkload(final Integer groupId,
                                                     final String fromDate,
                                                     final String toDate) {
-        return ruzApiService.getStudents(groupId)
-                .stream()
-                .map(ruzStudent ->
-                        new StudentWorkload(
-                                ruzApiService.getStudentLessons(ruzStudent.getStudentOid(), fromDate, toDate).size()
-                                , ruzStudent.getStudentOid()
-                                , ruzStudent.getFio()
-                        )
-                ).collect(Collectors.toList());
+        return null;
+//        return ruzApiService.getStudents(groupId)
+//                .stream()
+//                .map(ruzStudent ->
+//                        new StudentWorkload(
+//                                ruzApiService.getStudentLessons(ruzStudent.getStudentOid(), fromDate, toDate).size()
+//                                , ruzStudent.getStudentOid()
+//                                , ruzStudent.getFio()
+//                        )
+//                ).collect(Collectors.toList());
     }
 
     //    NOTE для фильтров: Если запрашивают в фильтре по имени фамилии

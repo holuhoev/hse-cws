@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 
@@ -22,7 +21,6 @@ public class WorkloadLoader {
     private final StudentWorkloadRepository studentWorkloadRepository;
     private final StudentRepository studentRepository;
     private final RuzApiService ruzApiService;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.d");
 
     @Autowired
     public WorkloadLoader(StudentWorkloadRepository studentWorkloadRepository, StudentRepository studentRepository, RuzApiService ruzApiService) {
@@ -50,12 +48,12 @@ public class WorkloadLoader {
     }
 
     private void createWorkload(Student student, LocalDate fromDate, LocalDate toDate) {
-        ruzApiService.getStudentLessons(student.getStudentOid(), fromDate.format(formatter), toDate.format(formatter))
+        ruzApiService.getStudentLessons(student.getStudentOid(), fromDate, toDate)
                 .stream()
                 .collect(Collectors.groupingBy(Lesson::getDate, Collectors.counting()))
                 .forEach((date, count) -> {
                     StudentWorkload workload = new StudentWorkload();
-                    workload.setDate(LocalDate.parse(date, formatter));
+                    workload.setDate(LocalDate.parse(date, RuzApiService.formatter));
                     workload.setStudentId(student.getStudentOid());
                     workload.setWorkload(count.intValue());
                     studentWorkloadRepository.save(workload);

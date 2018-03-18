@@ -3,6 +3,8 @@ package hse.holuhoev.ruz.api;
 
 import hse.holuhoev.domain.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -11,9 +13,11 @@ import java.util.List;
  * @author Evgeny Kholukhoev
  */
 public interface RuzApiService {
-    List<Lesson> getStudentLessons(Integer studentId, String fromDate, String toDate);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.d");
 
-    List<Lesson> getLecturerLessons(Integer lecturerId, String fromDate, String toDate);
+    List<Lesson> getStudentLessons(Integer studentId, LocalDate fromDate, LocalDate toDate);
+
+    List<Lesson> getLecturerLessons(Integer lecturerId, LocalDate fromDate, LocalDate toDate);
 
     List<Student> getStudents(final Integer groupOid);
 

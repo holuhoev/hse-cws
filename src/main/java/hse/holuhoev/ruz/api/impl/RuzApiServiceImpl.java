@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,21 +54,21 @@ public class RuzApiServiceImpl implements RuzApiService {
     }
 
     @Override
-    public List<Lesson> getStudentLessons(Integer studentId, String fromDate, String toDate) {
+    public List<Lesson> getStudentLessons(Integer studentId, LocalDate fromDate, LocalDate toDate) {
         Map<RuzParam, Object> params = new HashMap<>();
         params.put(RuzParam.STUDENT_ID, studentId);
-        params.put(RuzParam.FROM_DATE, fromDate);
-        params.put(RuzParam.TO_DATE, toDate);
+        params.put(RuzParam.FROM_DATE, fromDate.format(formatter));
+        params.put(RuzParam.TO_DATE, toDate.format(formatter));
         return getLessons(params);
     }
 
     @Override
-    public List<Lesson> getLecturerLessons(Integer lecturerId, String fromDate, String toDate) {
+    public List<Lesson> getLecturerLessons(Integer lecturerId, LocalDate fromDate, LocalDate toDate) {
         Map<RuzParam, Object> params = new HashMap<>();
         params.put(RuzParam.LECTURER_ID, lecturerId);
         params.put(RuzParam.LESSON_TYPE, RuzURL.LECTURER_LESSON_TYPE);
-        params.put(RuzParam.FROM_DATE, fromDate);
-        params.put(RuzParam.TO_DATE, toDate);
+        params.put(RuzParam.FROM_DATE, fromDate.format(formatter));
+        params.put(RuzParam.TO_DATE, toDate.format(formatter));
         return getLessons(params);
     }
 
