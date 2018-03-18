@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author Evgeny Kholukhoev
  */
-@Converter(autoApply = true)
+//@Converter(autoApply = true)
 public class LocalDateConverter implements AttributeConverter<LocalDate, Date>
 {
 

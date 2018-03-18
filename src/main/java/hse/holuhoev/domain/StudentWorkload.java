@@ -1,9 +1,8 @@
 package hse.holuhoev.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import hse.holuhoev.jpa.converter.LocalDateConverter;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
@@ -12,6 +11,7 @@ import java.time.LocalDate;
  * @author Evgeny Kholukhoev
  */
 @Entity
+@Table(name = "STUDWORKLOAD")
 public class StudentWorkload {
     @Id
     @Column(name = "ID")
@@ -24,6 +24,7 @@ public class StudentWorkload {
     private Integer studentId;
 
     @Column(name = "day", nullable = false)
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate date;
 
     @Transient
