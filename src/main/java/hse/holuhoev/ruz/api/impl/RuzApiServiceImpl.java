@@ -2,6 +2,8 @@ package hse.holuhoev.ruz.api.impl;
 
 
 import hse.holuhoev.domain.*;
+import hse.holuhoev.ruz.RuzEndpoint;
+import hse.holuhoev.ruz.RuzParam;
 import hse.holuhoev.ruz.RuzURL;
 import hse.holuhoev.ruz.api.RuzApiService;
 import hse.holuhoev.ruz.util.RuzJsonParser;
@@ -29,69 +31,69 @@ public class RuzApiServiceImpl implements RuzApiService {
 
     @Override
     public List<Lecturer> getLecturers(Integer chairId) {
-        Map<String, Object> params = new HashMap<>();
-        params.put(RuzURL.CHAIR_ID, chairId);
-        String lecturersInString = readRuz(RuzURL.LECTURERS_ENDPOINT, params);
+        Map<RuzParam, Object> params = new HashMap<>();
+        params.put(RuzParam.CHAIR_ID, chairId);
+        String lecturersInString = readRuz(RuzEndpoint.LECTURERS, params);
         return ruzJsonParser.parse(lecturersInString, Lecturer.class);
     }
 
     @Override
     public List<Lecturer> getAllLecturers() {
-        return ruzJsonParser.parse(readRuz(RuzURL.LECTURERS_ENDPOINT, null), Lecturer.class);
+        return ruzJsonParser.parse(readRuz(RuzEndpoint.LECTURERS, null), Lecturer.class);
     }
 
     @Override
     public List<Chair> getAllChairs() {
-        return ruzJsonParser.parse(readRuz(RuzURL.CHAIRS_ENDPOINT, null), Chair.class);
+        return ruzJsonParser.parse(readRuz(RuzEndpoint.CHAIRS, null), Chair.class);
     }
 
     @Override
     public List<Faculty> getAllFaculties() {
-        return ruzJsonParser.parse(readRuz(RuzURL.FACULTIES_ENDPOING, null), Faculty.class);
+        return ruzJsonParser.parse(readRuz(RuzEndpoint.FACULTIES, null), Faculty.class);
     }
 
     @Override
     public List<Lesson> getStudentLessons(Integer studentId, String fromDate, String toDate) {
-        Map<String, Object> params = new HashMap<>();
-        params.put(RuzURL.STUDENT_ID, studentId);
-        params.put(RuzURL.FROM_DATE, fromDate);
-        params.put(RuzURL.TO_DATE, toDate);
+        Map<RuzParam, Object> params = new HashMap<>();
+        params.put(RuzParam.STUDENT_ID, studentId);
+        params.put(RuzParam.FROM_DATE, fromDate);
+        params.put(RuzParam.TO_DATE, toDate);
         return getLessons(params);
     }
 
     @Override
     public List<Lesson> getLecturerLessons(Integer lecturerId, String fromDate, String toDate) {
-        Map<String, Object> params = new HashMap<>();
-        params.put(RuzURL.LECTURER_ID, lecturerId);
-        params.put(RuzURL.LESSON_TYPE, RuzURL.LECTURER_LESSON_TYPE);
-        params.put(RuzURL.FROM_DATE, fromDate);
-        params.put(RuzURL.TO_DATE, toDate);
+        Map<RuzParam, Object> params = new HashMap<>();
+        params.put(RuzParam.LECTURER_ID, lecturerId);
+        params.put(RuzParam.LESSON_TYPE, RuzURL.LECTURER_LESSON_TYPE);
+        params.put(RuzParam.FROM_DATE, fromDate);
+        params.put(RuzParam.TO_DATE, toDate);
         return getLessons(params);
     }
 
     @Override
     public List<Student> getStudents(final Integer groupId) {
-        Map<String, Object> params = new HashMap<>();
-        params.put(RuzURL.GROUP_ID, groupId);
-        String studentsInString = readRuz(RuzURL.STAFF_OF_GROUP, params);
+        Map<RuzParam, Object> params = new HashMap<>();
+        params.put(RuzParam.GROUP_ID, groupId);
+        String studentsInString = readRuz(RuzEndpoint.STAFF_OF_GROUP, params);
         return ruzJsonParser.parse(studentsInString, Student.class);
     }
 
     @Override
     public List<Group> getGroups() {
-        return ruzJsonParser.parse(readRuz(RuzURL.GROUPS_ENDPOINT, null), Group.class);
+        return ruzJsonParser.parse(readRuz(RuzEndpoint.GROUPS, null), Group.class);
 
     }
 
-    private List<Lesson> getLessons(Map<String, ?> params) {
-        return ruzJsonParser.parse(readRuz(RuzURL.LESSONS_ENDPOINT, params), Lesson.class);
+    private List<Lesson> getLessons(Map<RuzParam, ?> params) {
+        return ruzJsonParser.parse(readRuz(RuzEndpoint.LESSONS, params), Lesson.class);
     }
 
-    private String paramsToString(Map<String, ?> params) {
+    private String paramsToString(Map<RuzParam, ?> params) {
         StringBuilder parameters = new StringBuilder();
         if (params != null) {
             parameters.append("?");
-            for (String key : params.keySet()) {
+            for (RuzParam key : params.keySet()) {
                 parameters.append(key)
                         .append("=")
                         .append(params.get(key))
@@ -101,9 +103,9 @@ public class RuzApiServiceImpl implements RuzApiService {
         return parameters.toString();
     }
 
-    private String readRuz(String endpoint, Map<String, ?> params) {
+    private String readRuz(RuzEndpoint endpoint, Map<RuzParam, ?> params) {
         try {
-            URL url = new URL(RuzURL.URL.concat(endpoint).concat(paramsToString(params)));
+            URL url = new URL(RuzURL.URL.concat(endpoint.toString()).concat(paramsToString(params)));
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
