@@ -21,7 +21,7 @@ public class DomainLoader {
     private final GroupRepository groupRepository;
     private final ChairRepository chairRepository;
     private final LecturerRepository lecturerRepository;
-    final Logger logger = LoggerFactory.getLogger(DomainLoader.class);
+    private final Logger logger = LoggerFactory.getLogger(DomainLoader.class);
 
     @Autowired
     public DomainLoader(RuzApiService ruzApiService

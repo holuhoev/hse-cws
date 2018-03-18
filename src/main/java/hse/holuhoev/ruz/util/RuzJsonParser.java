@@ -2,6 +2,8 @@ package hse.holuhoev.ruz.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;
@@ -11,6 +13,8 @@ import java.util.List;
  * @author Evgeny Kholukhoev
  */
 public class RuzJsonParser {
+    private final Logger logger = LoggerFactory.getLogger(RuzJsonParser.class);
+
     public <T> List<T> parse(String str, Class<T> clazz) {
         if (str == null)
             return null;
@@ -30,10 +34,8 @@ public class RuzJsonParser {
                 list.add(object);
             }
             return list;
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (InstantiationException | IllegalAccessException e) {
+            logger.error(e.getMessage());
         }
         return null;
     }
