@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Table(name = "STUDWORKLOAD")
 public class StudentWorkload {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ID")
     private Integer id;
 
