@@ -1,5 +1,8 @@
 package hse.holuhoev.domain;
 
+/**
+ * Суммарная часовая загруженность студента.
+ */
 public class StudentSumWorkload {
     private String fio;
     private Integer workload;
