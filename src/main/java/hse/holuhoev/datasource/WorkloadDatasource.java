@@ -1,13 +1,16 @@
 package hse.holuhoev.datasource;
 
-import hse.holuhoev.ruz.api.RuzApiService;
-import hse.holuhoev.domain.LecturerWorkload;
-import hse.holuhoev.domain.StudentWorkload;
+import hse.holuhoev.domain.*;
+import hse.holuhoev.repo.StudentRepository;
+import hse.holuhoev.repo.StudentWorkloadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * @author Evgeny Kholukhoev
@@ -15,43 +18,40 @@ import java.util.stream.Collectors;
 @Service
 public class WorkloadDatasource {
 
-    private final RuzApiService ruzApiService;
+    private final StudentWorkloadRepository studentWorkloadRepository;
+    private final StudentRepository studentRepository;
 
     @Autowired
-    public WorkloadDatasource(RuzApiService ruzApiService) {
-        this.ruzApiService = ruzApiService;
+    public WorkloadDatasource(StudentWorkloadRepository studentWorkloadRepository, StudentRepository studentRepository) {
+        this.studentWorkloadRepository = studentWorkloadRepository;
+        this.studentRepository = studentRepository;
     }
 
     public List<LecturerWorkload> getLecturerWorkload(final Integer chairId,
                                                       final String fromDate,
                                                       final String toDate) {
         return null;
-//        return ruzApiService.getLecturers(chairId)
-//                .stream()
-//                .map(ruzLecturer ->
-//                        new LecturerWorkload(
-//                                ruzApiService.getLecturerLessons(ruzLecturer.getLecturerOid(), fromDate, toDate).size()
-//                                , ruzLecturer.getLecturerOid()
-//                                , ruzLecturer.getFio()
-//                        )
-//                ).collect(Collectors.toList());
     }
 
-    public List<StudentWorkload> getStudentWorkload(final Integer groupId,
-                                                    final String fromDate,
-                                                    final String toDate) {
-        return null;
-//        return ruzApiService.getStudents(groupId)
-//                .stream()
-//                .map(ruzStudent ->
-//                        new StudentWorkload(
-//                                ruzApiService.getStudentLessons(ruzStudent.getStudentOid(), fromDate, toDate).size()
-//                                , ruzStudent.getStudentOid()
-//                                , ruzStudent.getFio()
-//                        )
-//                ).collect(Collectors.toList());
+    public List<StudentSumWorkload> getStudentWorkload(final Integer groupId,
+                                                       final LocalDate fromDate,
+                                                       final LocalDate toDate) {
+
+        QStudent qStudent = QStudent.student;
+        QStudentWorkload qStudentWorkload = QStudentWorkload.studentWorkload;
+        Stream<Student> studentStream = StreamSupport.stream(studentRepository.findAll(qStudent.groupID.eq(groupId)).spliterator(), false);
+        return studentStream.map(student -> {
+            Integer workload =
+                    StreamSupport.stream(studentWorkloadRepository.findAll(qStudentWorkload.date.between(fromDate, toDate)
+                            .and(qStudentWorkload.studentId.eq(student.getStudentOid()))).spliterator(), false)
+                            .map(StudentWorkload::getWorkload)
+                            .mapToInt(Integer::intValue)
+                            .sum();
+            return new StudentSumWorkload(student.getFio(), workload, student.getStudentOid());
+        }).collect(Collectors.toList());
     }
 
+    //    NOTE почему хранить: 1. Можем считать среднюю статистику по загруженности по факультетам/группам/образовательным программам
     //    NOTE для фильтров: Если запрашивают в фильтре по имени фамилии
     //    +добавить всех лекторов и студентов в бд.
     //    -добавляем пагинацию

@@ -47,6 +47,8 @@ public class WorkloadLoader {
         logger.info("Student workload loader ends.");
     }
 
+    // TODO: saveAll() instead of save?
+    // TODO: Parallel? How?
     private void createWorkload(Student student, LocalDate fromDate, LocalDate toDate) {
         ruzApiService.getStudentLessons(student.getStudentOid(), fromDate, toDate)
                 .stream()

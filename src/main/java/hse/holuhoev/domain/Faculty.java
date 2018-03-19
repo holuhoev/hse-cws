@@ -20,6 +20,7 @@ public class Faculty {
     @Column(name = "faculty_name")
     private String name;  // сама программа образовательная
 
+    // Можно заполнять в service
     @Transient
     private String institute;
 
