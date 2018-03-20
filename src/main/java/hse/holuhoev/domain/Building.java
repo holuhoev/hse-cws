@@ -10,12 +10,12 @@ import javax.persistence.Table;
 public class Building {
     @Id
     @Column(name = "ID")
-    private String buildingOid;
+    private Integer buildingOid;
 
     @Column(name = "address")
     private String address;
 
-    @Column(name = "buildingName")
+    @Column(name = "building_name")
     private String name;
 
     public Building() {
@@ -29,11 +29,11 @@ public class Building {
         this.address = address;
     }
 
-    public String getBuildingOid() {
+    public Integer getBuildingOid() {
         return buildingOid;
     }
 
-    public void setBuildingOid(String buildingOid) {
+    public void setBuildingOid(Integer buildingOid) {
         this.buildingOid = buildingOid;
     }
 

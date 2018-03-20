@@ -21,6 +21,7 @@ public class DomainLoader {
     private final GroupRepository groupRepository;
     private final ChairRepository chairRepository;
     private final LecturerRepository lecturerRepository;
+    private final BuildingRepository buildingRepository;
     private final Logger logger = LoggerFactory.getLogger(DomainLoader.class);
 
     @Autowired
@@ -29,7 +30,7 @@ public class DomainLoader {
             , FacultyRepository facultyRepository
             , InstituteRepository instituteRepository
             , GroupRepository groupRepository
-            , ChairRepository chairRepository, LecturerRepository lecturerRepository) {
+            , ChairRepository chairRepository, LecturerRepository lecturerRepository, BuildingRepository buildingRepository) {
         this.ruzApiService = ruzApiService;
         this.studentRepository = studentRepository;
         this.facultyRepository = facultyRepository;
@@ -37,6 +38,7 @@ public class DomainLoader {
         this.groupRepository = groupRepository;
         this.chairRepository = chairRepository;
         this.lecturerRepository = lecturerRepository;
+        this.buildingRepository = buildingRepository;
     }
 
     public void run() {
@@ -47,7 +49,15 @@ public class DomainLoader {
         loadStudents();
         loadChairs();
         loadLecturers();
+        loadBuildings();
         logger.info("Domain loader ends.");
+    }
+
+    private void loadBuildings() {
+        logger.info("Buildings loader starts");
+        buildingRepository.deleteAll();
+        buildingRepository.saveAll(ruzApiService.getAllBuildings());
+        logger.info("Buildings loader ends");
     }
 
     private void loadLecturers() {
