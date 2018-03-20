@@ -29,6 +29,11 @@ public class RuzApiServiceImpl implements RuzApiService {
     private final RuzJsonParser ruzJsonParser;
     private final LessonParser lessonParser;
 
+    @Override
+    public List<Building> getAllBuildings() {
+        return ruzJsonParser.parse(readRuz(RuzEndpoint.BUILDINGS, null), Building.class);
+    }
+
     @Autowired
     public RuzApiServiceImpl(LessonParser lessonParser) {
         this.lessonParser = lessonParser;

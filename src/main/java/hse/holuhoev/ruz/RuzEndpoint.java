@@ -6,7 +6,8 @@ public enum RuzEndpoint {
     LECTURERS("lecturers"),
     FACULTIES("faculties"),
     STAFF_OF_GROUP("StaffOfGroup"),
-    CHAIRS("chairs");
+    CHAIRS("chairs"),
+    BUILDINGS("buildings");
 
     private final String value;
 

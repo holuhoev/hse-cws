@@ -30,4 +30,6 @@ public interface RuzApiService {
     List<Chair> getAllChairs();
 
     List<Faculty> getAllFaculties();
+
+    List<Building> getAllBuildings();
 }
