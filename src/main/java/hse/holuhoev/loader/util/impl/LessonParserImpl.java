@@ -29,9 +29,9 @@ public class LessonParserImpl implements LessonParser {
         if (lessons != null && lessons.size() > 0) {
             lessons.forEach(lesson -> {
                 buildingRepository.findOne(qBuilding.name.eq(lesson.getBuilding()))
-                        .ifPresent(building1 -> {
-                            // TODO: Взять время занятий согласно городу
-                            // TODO: Распарсить
+                        .ifPresent(building -> {
+                            // TODO: 1 Взять время занятий согласно городу
+                            // TODO: 2 Распарсить через распределение по времени
                         });
             });
         }
