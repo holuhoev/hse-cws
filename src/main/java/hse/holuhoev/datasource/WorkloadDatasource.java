@@ -44,8 +44,7 @@ public class WorkloadDatasource {
             Integer workload =
                     StreamSupport.stream(studentWorkloadRepository.findAll(qStudentWorkload.date.between(fromDate, toDate)
                             .and(qStudentWorkload.studentId.eq(student.getStudentOid()))).spliterator(), false)
-                            .map(StudentWorkload::getWorkload)
-                            .mapToInt(Integer::intValue)
+                            .mapToInt(StudentWorkload::getWorkload)
                             .sum();
             return new StudentSumWorkload(student.getFio(), workload, student.getStudentOid());
         }).collect(Collectors.toList());
