@@ -1,4 +1,4 @@
-package hse.holuhoev.ruz.util;
+package hse.holuhoev.loader.util;
 
 import hse.holuhoev.domain.Lesson;
 

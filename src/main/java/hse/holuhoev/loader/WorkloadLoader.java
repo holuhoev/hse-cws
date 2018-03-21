@@ -3,6 +3,7 @@ package hse.holuhoev.loader;
 import hse.holuhoev.domain.Lesson;
 import hse.holuhoev.domain.Student;
 import hse.holuhoev.domain.StudentWorkload;
+import hse.holuhoev.loader.util.LessonParser;
 import hse.holuhoev.repo.StudentRepository;
 import hse.holuhoev.repo.StudentWorkloadRepository;
 import hse.holuhoev.ruz.api.RuzApiService;
@@ -21,45 +22,48 @@ public class WorkloadLoader {
     private final StudentWorkloadRepository studentWorkloadRepository;
     private final StudentRepository studentRepository;
     private final RuzApiService ruzApiService;
+    private final LessonParser lessonParser;
 
     @Autowired
-    public WorkloadLoader(StudentWorkloadRepository studentWorkloadRepository, StudentRepository studentRepository, RuzApiService ruzApiService) {
+    public WorkloadLoader(StudentWorkloadRepository studentWorkloadRepository, StudentRepository studentRepository, RuzApiService ruzApiService, LessonParser lessonParser) {
         this.studentWorkloadRepository = studentWorkloadRepository;
         this.studentRepository = studentRepository;
         this.ruzApiService = ruzApiService;
+        this.lessonParser = lessonParser;
     }
 
     public void run() {
         logger.info("Workload loader starts.");
-        studentWorkloadLoad();
+        loadStudentWorkload();
         logger.info("Workload loader ends.");
     }
 
-    private void studentWorkloadLoad() {
+    private void loadStudentWorkload() {
         logger.info("Student workload loader starts.");
         studentWorkloadRepository.deleteAll();
         LocalDate now = LocalDate.now();
         studentRepository.findAll().forEach(student -> {
-            createWorkload(student, now, now.plusMonths(3));
-            createWorkload(student, now.plusMonths(3), now.plusMonths(6));
-            createWorkload(student, now.plusMonths(6), now.plusMonths(9));
+            createAndSaveWorkload(student, now, now.plusMonths(3));
+            createAndSaveWorkload(student, now.plusMonths(3), now.plusMonths(6));
+            createAndSaveWorkload(student, now.plusMonths(6), now.plusMonths(9));
         });
         logger.info("Student workload loader ends.");
     }
 
-    // TODO: saveAll() instead of save?
-    // TODO: Parallel? How?
-    private void createWorkload(Student student, LocalDate fromDate, LocalDate toDate) {
-        ruzApiService.getStudentLessons(student.getStudentOid(), fromDate, toDate)
+    private void createAndSaveWorkload(Student student, LocalDate fromDate, LocalDate toDate) {
+        studentWorkloadRepository.saveAll(lessonParser.parse(ruzApiService.getStudentLessons(student.getStudentOid(), fromDate, toDate))
                 .stream()
                 .collect(Collectors.groupingBy(Lesson::getDate, Collectors.counting()))
-                .forEach((date, count) -> {
+                .entrySet()
+                .stream()
+                .map(entry -> {
                     StudentWorkload workload = new StudentWorkload();
-                    workload.setDate(LocalDate.parse(date, RuzApiService.formatter));
+                    workload.setDate(LocalDate.parse(entry.getKey(), RuzApiService.formatter));
                     workload.setStudentId(student.getStudentOid());
-                    workload.setWorkload(count.intValue());
-                    studentWorkloadRepository.save(workload);
-                });
+                    workload.setWorkload(entry.getValue().intValue());
+                    return workload;
+                })
+                .collect(Collectors.toList()));
     }
 
     private void lecturerWorkloadLoad() {

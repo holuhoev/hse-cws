@@ -43,12 +43,12 @@ public class DomainLoader {
 
     public void run() {
         logger.info("Domain loader starts.");
-//        loadInstitutes();
-//        loadFaculties();
-//        loadGroups();
-//        loadStudents();
-//        loadChairs();
-//        loadLecturers();
+        loadInstitutes();
+        loadFaculties();
+        loadGroups();
+        loadStudents();
+        loadChairs();
+        loadLecturers();
         loadBuildings();
         logger.info("Domain loader ends.");
     }
