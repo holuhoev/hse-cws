@@ -93,6 +93,7 @@ CREATE TABLE BUILDING
   ID            INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   address       VARCHAR(255) NULL,
   building_name VARCHAR(255) NULL,
+  city          INT          NULL,
   CONSTRAINT BUILDING_ID_uindex
   UNIQUE (ID)
 );

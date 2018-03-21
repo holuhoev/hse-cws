@@ -43,20 +43,24 @@ public class DomainLoader {
 
     public void run() {
         logger.info("Domain loader starts.");
-        loadInstitutes();
-        loadFaculties();
-        loadGroups();
-        loadStudents();
-        loadChairs();
-        loadLecturers();
+//        loadInstitutes();
+//        loadFaculties();
+//        loadGroups();
+//        loadStudents();
+//        loadChairs();
+//        loadLecturers();
         loadBuildings();
         logger.info("Domain loader ends.");
     }
 
+
     private void loadBuildings() {
         logger.info("Buildings loader starts");
         buildingRepository.deleteAll();
-        buildingRepository.saveAll(ruzApiService.getAllBuildings());
+        buildingRepository.saveAll(ruzApiService.getAllBuildings()
+                .stream()
+                .peek(building -> building.setCity(CityType.getCityType(building.getAddress())))
+                .collect(Collectors.toList()));
         logger.info("Buildings loader ends");
     }
 

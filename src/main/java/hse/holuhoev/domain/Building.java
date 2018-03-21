@@ -18,6 +18,9 @@ public class Building {
     @Column(name = "building_name")
     private String name;
 
+    @Column(name = "city")
+    private CityType city;
+
     public Building() {
     }
 
@@ -43,5 +46,13 @@ public class Building {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public CityType getCity() {
+        return city;
+    }
+
+    public void setCity(CityType city) {
+        this.city = city;
     }
 }
