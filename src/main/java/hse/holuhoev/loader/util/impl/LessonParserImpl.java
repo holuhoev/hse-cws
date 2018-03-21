@@ -1,6 +1,7 @@
 package hse.holuhoev.loader.util.impl;
 
 import hse.holuhoev.domain.Building;
+import hse.holuhoev.domain.CityType;
 import hse.holuhoev.domain.Lesson;
 import hse.holuhoev.domain.QBuilding;
 import hse.holuhoev.loader.util.LessonParser;
@@ -8,8 +9,10 @@ import hse.holuhoev.repo.BuildingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.Option;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class LessonParserImpl implements LessonParser {
@@ -28,11 +31,10 @@ public class LessonParserImpl implements LessonParser {
 
         if (lessons != null && lessons.size() > 0) {
             lessons.forEach(lesson -> {
-                buildingRepository.findOne(qBuilding.name.eq(lesson.getBuilding()))
-                        .ifPresent(building -> {
-                            // TODO: 1 Взять время занятий согласно городу
-                            // TODO: 2 Распарсить через распределение по времени
-                        });
+                CityType cityType = buildingRepository.findOne(qBuilding.name.eq(lesson.getBuilding() != null ? lesson.getBuilding() : ""))
+                        .map(Building::getCity)
+                        .orElse(CityType.OTHER);
+                // NOTE: Так как везде по 8 пар, можно завести таблицу в бд: ID, CityType, Номер пары, начало, конец
             });
         }
         return list;
