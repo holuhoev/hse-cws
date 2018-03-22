@@ -51,16 +51,17 @@ public class WorkloadLoader {
     }
 
     private void createAndSaveWorkload(Student student, LocalDate fromDate, LocalDate toDate) {
+        // TODO: (проверить подсчет через hours)
         studentWorkloadRepository.saveAll(lessonParser.parse(ruzApiService.getStudentLessons(student.getStudentOid(), fromDate, toDate))
                 .stream()
-                .collect(Collectors.groupingBy(Lesson::getDate, Collectors.counting()))
+                .collect(Collectors.groupingBy(Lesson::getDate, Collectors.summingInt(Lesson::getHours)))
                 .entrySet()
                 .stream()
                 .map(entry -> {
                     StudentWorkload workload = new StudentWorkload();
                     workload.setDate(LocalDate.parse(entry.getKey(), RuzApiService.formatter));
                     workload.setStudentId(student.getStudentOid());
-                    workload.setWorkload(entry.getValue().intValue());
+                    workload.setWorkload(entry.getValue());
                     return workload;
                 })
                 .collect(Collectors.toList()));

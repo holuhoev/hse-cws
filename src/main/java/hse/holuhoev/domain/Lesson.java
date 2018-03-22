@@ -9,6 +9,8 @@ public class Lesson extends RuzObject {
     private String endLesson;
     private String building;
 
+    private Integer hours;
+
     public String getBeginLesson() {
         return beginLesson;
     }
@@ -42,5 +44,13 @@ public class Lesson extends RuzObject {
 
     public void setBuilding(String building) {
         this.building = building;
+    }
+
+    public Integer getHours() {
+        return hours;
+    }
+
+    public void setHours(Integer hours) {
+        this.hours = hours;
     }
 }
