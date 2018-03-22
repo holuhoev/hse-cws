@@ -22,6 +22,13 @@ public class Pair {
     @Column(name = "end")
     private LocalTime end;
 
+    public Pair(CityType cityType, Integer pair, LocalTime begin, LocalTime end) {
+        this.cityType = cityType;
+        this.pair = pair;
+        this.begin = begin;
+        this.end = end;
+    }
+
     public Pair() {
     }
 
