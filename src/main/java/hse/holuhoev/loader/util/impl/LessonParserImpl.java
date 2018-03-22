@@ -24,10 +24,8 @@ public class LessonParserImpl implements LessonParser {
 
     @Override
     public List<Lesson> parse(List<Lesson> lessons) {
-        List<Lesson> list = new LinkedList<>();
         QBuilding qBuilding = QBuilding.building;
         QPair qPair = QPair.pair1;
-
         if (lessons != null && lessons.size() > 0) {
             lessons.forEach(lesson -> {
                 CityType cityType = buildingRepository.findOne(qBuilding.name.eq(lesson.getBuilding() != null ? lesson.getBuilding() : ""))
@@ -46,6 +44,6 @@ public class LessonParserImpl implements LessonParser {
             // TODO: Добавить в Lesson день недели, так как в выходной день в Перми другое расписание. Добавить день недели в Pair
             // TODO: Test
         }
-        return list;
+        return lessons;
     }
 }
