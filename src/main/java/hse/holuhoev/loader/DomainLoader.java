@@ -149,6 +149,24 @@ public class DomainLoader {
         pairs.add(new Pair(CityType.MOSCOW, 7, LocalTime.of(18, 10), LocalTime.of(19, 30)));
         pairs.add(new Pair(CityType.MOSCOW, 8, LocalTime.of(19, 40), LocalTime.of(21, 0)));
 
+        pairs.add(new Pair(CityType.MOSCOW, 1, LocalTime.of(9, 0), LocalTime.of(10, 20), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.MOSCOW, 2, LocalTime.of(10, 30), LocalTime.of(11, 50), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.MOSCOW, 3, LocalTime.of(12, 10), LocalTime.of(13, 30), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.MOSCOW, 4, LocalTime.of(13, 40), LocalTime.of(15, 0), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.MOSCOW, 5, LocalTime.of(15, 10), LocalTime.of(16, 30), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.MOSCOW, 6, LocalTime.of(16, 40), LocalTime.of(18, 0), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.MOSCOW, 7, LocalTime.of(18, 10), LocalTime.of(19, 30), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.MOSCOW, 8, LocalTime.of(19, 40), LocalTime.of(21, 0), DayType.WEEKEND));
+
+        pairs.add(new Pair(CityType.SAINT_PETERBURG, 1, LocalTime.of(9, 0), LocalTime.of(10, 20), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.SAINT_PETERBURG, 2, LocalTime.of(10, 30), LocalTime.of(11, 50), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.SAINT_PETERBURG, 3, LocalTime.of(12, 10), LocalTime.of(13, 30), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.SAINT_PETERBURG, 4, LocalTime.of(13, 40), LocalTime.of(15, 0), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.SAINT_PETERBURG, 5, LocalTime.of(15, 20), LocalTime.of(16, 40), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.SAINT_PETERBURG, 6, LocalTime.of(16, 50), LocalTime.of(18, 10), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.SAINT_PETERBURG, 7, LocalTime.of(18, 20), LocalTime.of(19, 40), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.SAINT_PETERBURG, 8, LocalTime.of(19, 50), LocalTime.of(21, 10), DayType.WEEKEND));
+
         pairs.add(new Pair(CityType.SAINT_PETERBURG, 1, LocalTime.of(9, 0), LocalTime.of(10, 20)));
         pairs.add(new Pair(CityType.SAINT_PETERBURG, 2, LocalTime.of(10, 30), LocalTime.of(11, 50)));
         pairs.add(new Pair(CityType.SAINT_PETERBURG, 3, LocalTime.of(12, 10), LocalTime.of(13, 30)));
@@ -167,6 +185,15 @@ public class DomainLoader {
         pairs.add(new Pair(CityType.NIZHNIY_NOVGOROD, 7, LocalTime.of(17, 30), LocalTime.of(18, 50)));
         pairs.add(new Pair(CityType.NIZHNIY_NOVGOROD, 8, LocalTime.of(19, 0), LocalTime.of(19, 20)));
 
+        pairs.add(new Pair(CityType.NIZHNIY_NOVGOROD, 1, LocalTime.of(8, 0), LocalTime.of(9, 20), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.NIZHNIY_NOVGOROD, 2, LocalTime.of(9, 30), LocalTime.of(10, 50), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.NIZHNIY_NOVGOROD, 3, LocalTime.of(11, 10), LocalTime.of(12, 30), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.NIZHNIY_NOVGOROD, 4, LocalTime.of(12, 40), LocalTime.of(14, 0), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.NIZHNIY_NOVGOROD, 5, LocalTime.of(14, 20), LocalTime.of(15, 40), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.NIZHNIY_NOVGOROD, 6, LocalTime.of(15, 50), LocalTime.of(17, 10), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.NIZHNIY_NOVGOROD, 7, LocalTime.of(17, 30), LocalTime.of(18, 50), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.NIZHNIY_NOVGOROD, 8, LocalTime.of(19, 0), LocalTime.of(19, 20), DayType.WEEKEND));
+
         pairs.add(new Pair(CityType.PERM, 1, LocalTime.of(8, 10), LocalTime.of(9, 30)));
         pairs.add(new Pair(CityType.PERM, 2, LocalTime.of(9, 40), LocalTime.of(11, 0)));
         pairs.add(new Pair(CityType.PERM, 3, LocalTime.of(11, 30), LocalTime.of(12, 50)));
@@ -179,6 +206,24 @@ public class DomainLoader {
         pairs.add(new Pair(CityType.PERM, 1, LocalTime.of(9, 10), LocalTime.of(10, 30), DayType.WEEKEND));
         pairs.add(new Pair(CityType.PERM, 2, LocalTime.of(10, 40), LocalTime.of(12, 0), DayType.WEEKEND));
         pairs.add(new Pair(CityType.PERM, 3, LocalTime.of(12, 40), LocalTime.of(14, 0), DayType.WEEKEND));
+
+        pairs.add(new Pair(CityType.OTHER, 1, LocalTime.of(9, 0), LocalTime.of(10, 20)));
+        pairs.add(new Pair(CityType.OTHER, 2, LocalTime.of(10, 30), LocalTime.of(11, 50)));
+        pairs.add(new Pair(CityType.OTHER, 3, LocalTime.of(12, 10), LocalTime.of(13, 30)));
+        pairs.add(new Pair(CityType.OTHER, 4, LocalTime.of(13, 40), LocalTime.of(15, 0)));
+        pairs.add(new Pair(CityType.OTHER, 5, LocalTime.of(15, 10), LocalTime.of(16, 30)));
+        pairs.add(new Pair(CityType.OTHER, 6, LocalTime.of(16, 40), LocalTime.of(18, 0)));
+        pairs.add(new Pair(CityType.OTHER, 7, LocalTime.of(18, 10), LocalTime.of(19, 30)));
+        pairs.add(new Pair(CityType.OTHER, 8, LocalTime.of(19, 40), LocalTime.of(21, 0)));
+
+        pairs.add(new Pair(CityType.OTHER, 1, LocalTime.of(9, 0), LocalTime.of(10, 20), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.OTHER, 2, LocalTime.of(10, 30), LocalTime.of(11, 50), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.OTHER, 3, LocalTime.of(12, 10), LocalTime.of(13, 30), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.OTHER, 4, LocalTime.of(13, 40), LocalTime.of(15, 0), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.OTHER, 5, LocalTime.of(15, 10), LocalTime.of(16, 30), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.OTHER, 6, LocalTime.of(16, 40), LocalTime.of(18, 0), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.OTHER, 7, LocalTime.of(18, 10), LocalTime.of(19, 30), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.OTHER, 8, LocalTime.of(19, 40), LocalTime.of(21, 0), DayType.WEEKEND));
 
 
         pairRepository.saveAll(pairs);
