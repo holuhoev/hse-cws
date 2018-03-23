@@ -7,8 +7,8 @@ import hse.holuhoev.repo.PairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.LinkedList;
 import java.util.List;
 
 @Component
@@ -33,15 +33,19 @@ public class LessonParserImpl implements LessonParser {
                         .orElse(CityType.OTHER);
                 LocalTime begin = LocalTime.parse(lesson.getBeginLesson());
                 LocalTime end = LocalTime.parse(lesson.getEndLesson());
+                DayType dayType = DayType.of(lesson.getDayOfWeek());
 
-                pairRepository.findOne(qPair.begin.before(begin).and(qPair.end.after(begin)).and(qPair.cityType.eq(cityType)))
-                        .ifPresent(beginPair -> pairRepository.findOne(qPair.begin.before(end).and(qPair.end.after(end)).and(qPair.cityType.eq(cityType)))
+
+                pairRepository.findOne(qPair.begin.before(begin).and(qPair.end.after(begin)).and(qPair.cityType.eq(cityType)).and(qPair.dayType.eq(dayType)))
+                        .ifPresent(beginPair -> pairRepository.findOne(qPair.begin.before(end).and(qPair.end.after(end)).and(qPair.cityType.eq(cityType)).and(qPair.dayType.eq(dayType)))
                                 .ifPresent(endPair -> {
                                     int hours = endPair.getPair() - beginPair.getPair() + 1;
                                     lesson.setHours(hours);
                                 }));
+                if (lesson.getHours() == null) {
+                    lesson.getHours();
+                }
             });
-            // TODO: Добавить в Lesson день недели, так как в выходной день в Перми другое расписание. Добавить день недели в Pair
             // TODO: Test
         }
         return lessons;

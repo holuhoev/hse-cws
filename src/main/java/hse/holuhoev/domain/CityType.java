@@ -12,7 +12,7 @@ public enum CityType {
     private static final String PERM_STR = "Пермь";
     private static final String NIZHNIY_NOVGOROD_STR = "Нижний Новгород";
 
-    public static CityType getCityType(String address) {
+    public static CityType of(String address) {
         if (address == null || address.isEmpty())
             return OTHER;
         if (address.startsWith(MOSCOW_STR))

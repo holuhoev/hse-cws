@@ -1,5 +1,6 @@
 package hse.holuhoev.domain;
 
+
 /**
  * @author Evgeny Kholukhoev
  */
@@ -8,7 +9,7 @@ public class Lesson extends RuzObject {
     private String beginLesson;
     private String endLesson;
     private String building;
-
+    private Integer dayOfWeek;
     private Integer hours;
 
     public String getBeginLesson() {
@@ -52,5 +53,13 @@ public class Lesson extends RuzObject {
 
     public void setHours(Integer hours) {
         this.hours = hours;
+    }
+
+    public Integer getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(Integer dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 }

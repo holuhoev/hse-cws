@@ -22,11 +22,19 @@ public class Pair {
     @Column(name = "end")
     private LocalTime end;
 
+    @Column(name = "week_day")
+    private DayType dayType;
+
     public Pair(CityType cityType, Integer pair, LocalTime begin, LocalTime end) {
+        this(cityType, pair, begin, end, DayType.WORKING_DAY);
+    }
+
+    public Pair(CityType cityType, Integer pair, LocalTime begin, LocalTime end, DayType dayType) {
         this.cityType = cityType;
         this.pair = pair;
         this.begin = begin;
         this.end = end;
+        this.dayType = dayType;
     }
 
     public Pair() {
@@ -70,5 +78,13 @@ public class Pair {
 
     public void setEnd(LocalTime end) {
         this.end = end;
+    }
+
+    public DayType getDayType() {
+        return dayType;
+    }
+
+    public void setDayType(DayType dayType) {
+        this.dayType = dayType;
     }
 }

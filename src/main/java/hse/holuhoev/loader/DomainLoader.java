@@ -64,7 +64,7 @@ public class DomainLoader {
         buildingRepository.deleteAll();
         buildingRepository.saveAll(ruzApiService.getAllBuildings()
                 .stream()
-                .peek(building -> building.setCity(CityType.getCityType(building.getAddress())))
+                .peek(building -> building.setCity(CityType.of(building.getAddress())))
                 .collect(Collectors.toList()));
         logger.info("Buildings loader ends");
     }
@@ -175,6 +175,12 @@ public class DomainLoader {
         pairs.add(new Pair(CityType.PERM, 6, LocalTime.of(16, 0), LocalTime.of(17, 20)));
         pairs.add(new Pair(CityType.PERM, 7, LocalTime.of(17, 30), LocalTime.of(18, 50)));
         pairs.add(new Pair(CityType.PERM, 8, LocalTime.of(19, 0), LocalTime.of(20, 20)));
+
+        pairs.add(new Pair(CityType.PERM, 1, LocalTime.of(9, 10), LocalTime.of(10, 30), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.PERM, 2, LocalTime.of(10, 40), LocalTime.of(12, 0), DayType.WEEKEND));
+        pairs.add(new Pair(CityType.PERM, 3, LocalTime.of(12, 40), LocalTime.of(14, 0), DayType.WEEKEND));
+
+
         pairRepository.saveAll(pairs);
         logger.info("Pairs loader ends");
     }
