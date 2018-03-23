@@ -29,10 +29,20 @@ public class WorkloadController {
     }
 
     @RequestMapping("/studentWorkload")
-    public List<StudentSumWorkload> getStudentWorkload(@RequestParam(value = "groupId") Integer groupId,
-                                                       @RequestParam(value = "fromDate") String fromDate,
-                                                       @RequestParam(value = "toDate") String toDate) {
-        return workloadDatasource.getStudentWorkload(groupId, LocalDate.parse(fromDate, formatter), LocalDate.parse(toDate, formatter));
+    public List<StudentSumWorkload> getStudentWorkload(@RequestParam(value = "groupId", required = false) Integer groupId,
+                                                       @RequestParam(value = "studentId", required = false) Integer studentId,
+                                                       @RequestParam(value = "facultyId", required = false) Integer facultyId,
+                                                       @RequestParam(value = "instituteId", required = false) Integer instituteId,
+                                                       @RequestParam(value = "studentFio", required = false) String studentFio,
+                                                       @RequestParam(value = "fromDate", required = false) String fromDate,
+                                                       @RequestParam(value = "toDate", required = false) String toDate) {
+        return workloadDatasource.getStudentWorkload(groupId
+                , studentId
+                , facultyId
+                , instituteId
+                , studentFio
+                , LocalDate.parse(fromDate, formatter)
+                , LocalDate.parse(toDate, formatter));
     }
 
     @RequestMapping("/lecturerWorkload")

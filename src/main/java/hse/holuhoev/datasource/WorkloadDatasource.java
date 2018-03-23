@@ -1,5 +1,6 @@
 package hse.holuhoev.datasource;
 
+import com.querydsl.core.BooleanBuilder;
 import hse.holuhoev.domain.*;
 import hse.holuhoev.repo.StudentRepository;
 import hse.holuhoev.repo.StudentWorkloadRepository;
@@ -34,16 +35,50 @@ public class WorkloadDatasource {
     }
 
     public List<StudentSumWorkload> getStudentWorkload(final Integer groupId,
+                                                       final Integer studentId,
+                                                       final Integer facultyId,
+                                                       final Integer instituteId,
+                                                       final String studentFio,
                                                        final LocalDate fromDate,
                                                        final LocalDate toDate) {
-
         QStudent qStudent = QStudent.student;
         QStudentWorkload qStudentWorkload = QStudentWorkload.studentWorkload;
-        Stream<Student> studentStream = StreamSupport.stream(studentRepository.findAll(qStudent.groupID.eq(groupId)).spliterator(), false);
+
+        BooleanBuilder studentBuilder = new BooleanBuilder();
+        BooleanBuilder workloadBuilder = new BooleanBuilder();
+
+        if (groupId != null) {
+            studentBuilder.and(qStudent.groupID.eq(groupId));
+        }
+
+        if (studentId != null) {
+            studentBuilder.and(qStudent.studentOid.eq(studentId));
+        }
+
+        if (facultyId != null) {
+            studentBuilder.and(qStudent.facultyID.eq(facultyId));
+        }
+
+        if (instituteId != null) {
+            studentBuilder.and(qStudent.instituteID.eq(instituteId));
+        }
+
+        if (studentFio != null && !studentFio.isEmpty()) {
+            studentBuilder.and(qStudent.fio.containsIgnoreCase(studentFio));
+        }
+
+        if (fromDate != null) {
+            workloadBuilder.and(qStudentWorkload.date.after(fromDate));
+        }
+
+        if (toDate != null) {
+            workloadBuilder.and(qStudentWorkload.date.before(toDate));
+        }
+
+        Stream<Student> studentStream = StreamSupport.stream(studentRepository.findAll(studentBuilder).spliterator(), false);
         return studentStream.map(student -> {
             Integer workload =
-                    StreamSupport.stream(studentWorkloadRepository.findAll(qStudentWorkload.date.between(fromDate, toDate)
-                            .and(qStudentWorkload.studentId.eq(student.getStudentOid()))).spliterator(), false)
+                    StreamSupport.stream(studentWorkloadRepository.findAll(workloadBuilder.and(qStudentWorkload.studentId.eq(student.getStudentOid()))).spliterator(), false)
                             .mapToInt(StudentWorkload::getWorkload)
                             .sum();
             return new StudentSumWorkload(student.getFio(), workload, student.getStudentOid());
@@ -55,13 +90,10 @@ public class WorkloadDatasource {
     //    +добавить всех лекторов и студентов в бд.
     //    -добавляем пагинацию
     //    +делаем репозиторий PagingAndSorting
-    //    -берем данные из репозитория
+    //    +берем данные из репозитория
     //    -далее аналогично как по группе
 
     //    NOTE для пагинации: Добавить DataSourceResponse и его возвращать.
     //    - в него класть список возвр объектов - поле result
     //    - хинты для пагинации - поле Map<String,?>
-
-    //    NOTE для разбития сдвоенных/строенных пар:
-    //    - после того как получили List<RuzLessons> отдаем их в LessonParser и там разбиваем и возвращаем List<RuzLessons>
 }
