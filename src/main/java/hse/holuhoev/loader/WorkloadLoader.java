@@ -1,8 +1,6 @@
 package hse.holuhoev.loader;
 
-import hse.holuhoev.domain.Lesson;
-import hse.holuhoev.domain.Student;
-import hse.holuhoev.domain.StudentWorkload;
+import hse.holuhoev.domain.*;
 import hse.holuhoev.loader.util.LessonParser;
 import hse.holuhoev.repo.StudentRepository;
 import hse.holuhoev.repo.StudentWorkloadRepository;
@@ -43,9 +41,8 @@ public class WorkloadLoader {
         studentWorkloadRepository.deleteAll();
         LocalDate now = LocalDate.now();
         studentRepository.findAll().forEach(student -> {
+            createAndSaveWorkload(student, now.minusMonths(3), now);
             createAndSaveWorkload(student, now, now.plusMonths(3));
-            createAndSaveWorkload(student, now.plusMonths(3), now.plusMonths(6));
-            createAndSaveWorkload(student, now.plusMonths(6), now.plusMonths(9));
         });
         logger.info("Student workload loader ends.");
     }

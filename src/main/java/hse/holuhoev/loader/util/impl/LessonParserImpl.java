@@ -44,27 +44,27 @@ public class LessonParserImpl implements LessonParser {
         lessons.forEach(lesson -> {
             LocalTime begin = LocalTime.parse(lesson.getBeginLesson());
             LocalTime end = LocalTime.parse(lesson.getEndLesson());
-            DayType dayType = DayType.of(lesson.getDayOfWeek());
-            CityType cityType = buildingRepository.findOne(qBuilding.name.eq(lesson.getBuilding() != null ? lesson.getBuilding() : ""))
-                    .map(Building::getCity)
-                    .orElse(CityType.OTHER);
-
-            BooleanBuilder beginBuilder = new BooleanBuilder();
-            beginBuilder.and(qPair.cityType.eq(cityType));
-            beginBuilder.and(qPair.begin.eq(begin));
-            beginBuilder.and(qPair.dayType.eq(dayType));
-
-            BooleanBuilder endBuilder = new BooleanBuilder();
-            endBuilder.and(qPair.cityType.eq(cityType));
-            endBuilder.and(qPair.end.eq(end));
-            endBuilder.and(qPair.dayType.eq(dayType));
-
-            pairRepository.findOne(beginBuilder)
-                    .ifPresent(beginPair -> pairRepository.findOne(endBuilder)
-                            .ifPresent(endPair -> {
-                                int hours = endPair.getPair() - beginPair.getPair() + 1;
-                                lesson.setHours(hours);
-                            }));
+//            DayType dayType = DayType.of(lesson.getDayOfWeek());
+//            CityType cityType = buildingRepository.findOne(qBuilding.name.eq(lesson.getBuilding() != null ? lesson.getBuilding() : ""))
+//                    .map(Building::getCity)
+//                    .orElse(CityType.OTHER);
+//
+//            BooleanBuilder beginBuilder = new BooleanBuilder();
+//            beginBuilder.and(qPair.cityType.eq(cityType));
+//            beginBuilder.and(qPair.begin.eq(begin));
+//            beginBuilder.and(qPair.dayType.eq(dayType));
+//
+//            BooleanBuilder endBuilder = new BooleanBuilder();
+//            endBuilder.and(qPair.cityType.eq(cityType));
+//            endBuilder.and(qPair.end.eq(end));
+//            endBuilder.and(qPair.dayType.eq(dayType));
+//
+//            pairRepository.findOne(beginBuilder)
+//                    .ifPresent(beginPair -> pairRepository.findOne(endBuilder)
+//                            .ifPresent(endPair -> {
+//                                int hours = endPair.getPair() - beginPair.getPair() + 1;
+//                                lesson.setHours(hours);
+//                            }));
 
             if (lesson.getHours() == null) {
                 // If not find in pair map. Will count by hand.

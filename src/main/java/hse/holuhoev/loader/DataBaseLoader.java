@@ -21,7 +21,7 @@ public class DataBaseLoader implements CommandLineRunner {
 
     @Override
     public void run(String... strings) {
-        domainLoader.run();
+//        domainLoader.run();
         workloadLoader.run();
     }
 }
