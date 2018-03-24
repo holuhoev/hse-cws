@@ -1,9 +1,6 @@
 package hse.holuhoev.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Группа студентов.
@@ -17,8 +14,14 @@ public class Group extends RuzObject {
     @Column(name = "ID")
     private Integer groupOid;
 
-    @Column(name = "course")
+    /**
+     * Курс из RUZ API.
+     */
+    @Transient
     private Integer course;
+
+    @Column(name = "course")
+    private Course courseType;
 
     @Column(name = "institute_id")
     private Integer instituteId;
@@ -71,6 +74,14 @@ public class Group extends RuzObject {
 
     public void setInstituteId(Integer instituteId) {
         this.instituteId = instituteId;
+    }
+
+    public Course getCourseType() {
+        return courseType;
+    }
+
+    public void setCourseType(Course courseType) {
+        this.courseType = courseType;
     }
 }
 

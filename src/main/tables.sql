@@ -33,6 +33,7 @@ CREATE TABLE STUDENT
   faculty_id   INT          NULL,
   group_id     INT          NULL,
   institute_id INT          NULL,
+  course       INT          NULL,
   CONSTRAINT STUDENT_ID_uindex
   UNIQUE (ID)
 );

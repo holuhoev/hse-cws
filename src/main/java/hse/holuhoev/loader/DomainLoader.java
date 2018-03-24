@@ -96,6 +96,7 @@ public class DomainLoader {
                                     student.setGroupID(group.getGroupOid());
                                     student.setFacultyID(group.getFacultyOid());
                                     student.setInstituteID(group.getInstituteId());
+                                    student.setCourse(group.getCourseType());
                                 }
                         ).collect(Collectors.toList())));
         logger.info("Students loader ends");
@@ -109,6 +110,7 @@ public class DomainLoader {
                 .peek(group -> {
                     Optional<Faculty> faculty = facultyRepository.findOne(qFaculty.facultyOid.eq(group.getFacultyOid()));
                     faculty.ifPresent(faculty1 -> group.setInstituteId(faculty1.getInstituteId()));
+                    group.setCourseType(Course.of(group.getCourse()));
                 })
                 .collect(Collectors.toList()));
         logger.info("Groups loader ends");

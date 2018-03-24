@@ -27,6 +27,9 @@ public class Student {
     @Column(name = "institute_id")
     private Integer instituteID;
 
+    @Column(name = "course")
+    private Course course;
+
     public Integer getFacultyID() {
         return facultyID;
     }
@@ -68,5 +71,13 @@ public class Student {
 
     public void setStudentOid(Integer studentOid) {
         this.studentOid = studentOid;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }
