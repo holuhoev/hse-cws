@@ -34,6 +34,7 @@ public class WorkloadController {
                                                @RequestParam(value = "studentId", required = false) Integer studentId,
                                                @RequestParam(value = "facultyId", required = false) Integer facultyId,
                                                @RequestParam(value = "instituteId", required = false) Integer instituteId,
+                                               @RequestParam(value = "course", required = false) Integer course,
                                                @RequestParam(value = "studentFio", required = false) String studentFio,
                                                @RequestParam(value = "fromDate", required = false) String fromDate,
                                                @RequestParam(value = "toDate", required = false) String toDate,
@@ -45,6 +46,7 @@ public class WorkloadController {
                 , studentId
                 , facultyId
                 , instituteId
+                , course
                 , studentFio
                 , LocalDate.parse(fromDate, formatter)
                 , LocalDate.parse(toDate, formatter)

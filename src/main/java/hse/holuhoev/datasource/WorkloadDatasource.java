@@ -5,13 +5,14 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 import com.querydsl.core.BooleanBuilder;
 import hse.holuhoev.datasource.util.DataSourceResult;
 import hse.holuhoev.domain.*;
+import hse.holuhoev.loader.util.LessonParser;
 import hse.holuhoev.repo.StudentRepository;
 import hse.holuhoev.repo.StudentWorkloadRepository;
+import hse.holuhoev.ruz.api.RuzApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -47,6 +48,7 @@ public class WorkloadDatasource {
                                                final Integer studentId,
                                                final Integer facultyId,
                                                final Integer instituteId,
+                                               final Integer course,
                                                final String studentFio,
                                                final LocalDate fromDate,
                                                final LocalDate toDate,
@@ -98,10 +100,13 @@ public class WorkloadDatasource {
         }
 
         Stream<Student> studentStream = StreamSupport.stream(students.spliterator(), false);
-
         List<StudentSumWorkload> result = studentStream.map(student -> {
+            BooleanBuilder builder = new BooleanBuilder();
+            builder.and(workloadBuilder).and(qStudentWorkload.studentId.eq(student.getStudentOid()));
+            // Если запросили тот период, по которому нет инфы, то запрашивать из руза и добавлять в загруженность
+            // Еще надо смотреть, что есть такой date == toDate, если нет, то искать макисмальный, а остальное запросить
             Integer workload =
-                    StreamSupport.stream(studentWorkloadRepository.findAll(workloadBuilder.and(qStudentWorkload.studentId.eq(student.getStudentOid()))).spliterator(), false)
+                    StreamSupport.stream(studentWorkloadRepository.findAll(builder).spliterator(), false)
                             .mapToInt(StudentWorkload::getWorkload)
                             .sum();
             return new StudentSumWorkload(student.getFio(), workload, student.getStudentOid());
@@ -118,7 +123,4 @@ public class WorkloadDatasource {
 
     //    NOTE почему хранить: 1. Можем считать среднюю статистику по загруженности по факультетам/группам/образовательным программам
 
-    //    NOTE для пагинации: Добавить DataSourceResponse и его возвращать.
-    //    - в него класть список возвр объектов - поле result
-    //    - хинты для пагинации - поле Map<String,?>
 }

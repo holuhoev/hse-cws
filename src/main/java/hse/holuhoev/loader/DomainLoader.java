@@ -45,17 +45,19 @@ public class DomainLoader {
         this.pairRepository = pairRepository;
     }
 
-    public void run() {
-        logger.info("Domain loader starts.");
-        loadInstitutes();
-        loadFaculties();
-        loadGroups();
-        loadStudents();
-        loadChairs();
-        loadLecturers();
-        loadBuildings();
-        loadPairs();
-        logger.info("Domain loader ends.");
+    public void run(String... strings) {
+        if (strings != null && strings.length > 0 && Boolean.valueOf(strings[0])) {
+            logger.info("Domain loader starts.");
+            loadInstitutes();
+            loadFaculties();
+            loadGroups();
+            loadStudents();
+            loadChairs();
+            loadLecturers();
+            loadBuildings();
+            loadPairs();
+            logger.info("Domain loader ends.");
+        }
     }
 
 
