@@ -6,7 +6,7 @@ import hse.holuhoev.ruz.RuzEndpoint;
 import hse.holuhoev.ruz.RuzParam;
 import hse.holuhoev.ruz.RuzURL;
 import hse.holuhoev.ruz.api.RuzApiService;
-import hse.holuhoev.loader.util.LessonParser;
+import hse.holuhoev.ruz.util.LessonParser;
 import hse.holuhoev.ruz.util.RuzJsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,11 +93,10 @@ public class RuzApiServiceImpl implements RuzApiService {
     @Override
     public List<Group> getGroups() {
         return ruzJsonParser.parse(readRuz(RuzEndpoint.GROUPS, null), Group.class);
-
     }
 
     private List<Lesson> getLessons(Map<RuzParam, ?> params) {
-        return ruzJsonParser.parse(readRuz(RuzEndpoint.LESSONS, params), Lesson.class);
+        return lessonParser.parse(ruzJsonParser.parse(readRuz(RuzEndpoint.LESSONS, params), Lesson.class));
     }
 
     private String paramsToString(Map<RuzParam, ?> params) {

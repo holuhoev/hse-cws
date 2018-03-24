@@ -1,8 +1,7 @@
 package hse.holuhoev.loader;
 
-import com.querydsl.core.BooleanBuilder;
 import hse.holuhoev.domain.*;
-import hse.holuhoev.loader.util.LessonParser;
+import hse.holuhoev.ruz.util.LessonParser;
 import hse.holuhoev.repo.LecturerRepository;
 import hse.holuhoev.repo.LecturerWorkloadRepository;
 import hse.holuhoev.repo.StudentRepository;
@@ -25,16 +24,18 @@ public class WorkloadLoader {
     private final StudentRepository studentRepository;
     private final LecturerRepository lecturerRepository;
     private final RuzApiService ruzApiService;
-    private final LessonParser lessonParser;
 
     @Autowired
-    public WorkloadLoader(StudentWorkloadRepository studentWorkloadRepository, LecturerWorkloadRepository lecturerWorkloadRepository, StudentRepository studentRepository, LecturerRepository lecturerRepository, RuzApiService ruzApiService, LessonParser lessonParser) {
+    public WorkloadLoader(StudentWorkloadRepository studentWorkloadRepository
+            , LecturerWorkloadRepository lecturerWorkloadRepository
+            , StudentRepository studentRepository
+            , LecturerRepository lecturerRepository
+            , RuzApiService ruzApiService) {
         this.studentWorkloadRepository = studentWorkloadRepository;
         this.lecturerWorkloadRepository = lecturerWorkloadRepository;
         this.studentRepository = studentRepository;
         this.lecturerRepository = lecturerRepository;
         this.ruzApiService = ruzApiService;
-        this.lessonParser = lessonParser;
     }
 
     public void run(String... strings) {
@@ -63,7 +64,7 @@ public class WorkloadLoader {
 
     private void createAndSaveStudentWorkload(Student student, LocalDate fromDate, LocalDate toDate) {
         // TODO: (Delete dublicates)
-        studentWorkloadRepository.saveAll(lessonParser.parse(ruzApiService.getStudentLessons(student.getStudentOid(), fromDate, toDate))
+        studentWorkloadRepository.saveAll(ruzApiService.getStudentLessons(student.getStudentOid(), fromDate, toDate)
                 .stream()
                 .collect(Collectors.groupingBy(Lesson::getDate, Collectors.summingInt(Lesson::getHours)))
                 .entrySet()
@@ -90,7 +91,7 @@ public class WorkloadLoader {
     }
 
     private void createAndSaveLecturerWorkload(Lecturer lecturer, LocalDate fromDate, LocalDate toDate) {
-        lecturerWorkloadRepository.saveAll(lessonParser.parse(ruzApiService.getLecturerLessons(lecturer.getLecturerOid(), fromDate, toDate))
+        lecturerWorkloadRepository.saveAll(ruzApiService.getLecturerLessons(lecturer.getLecturerOid(), fromDate, toDate)
                 .stream()
                 .collect(Collectors.groupingBy(Lesson::getDate, Collectors.summingInt(Lesson::getHours)))
                 .entrySet()

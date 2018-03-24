@@ -1,7 +1,7 @@
 package hse.holuhoev.domain;
 
 public enum Course {
-    FISRT, SECOND, THIRD, FOURTH, FIFTH;
+    FIRST, SECOND, THIRD, FOURTH, FIFTH;
 
     public static Course of(int course) {
         if (course < 1 || course > 5) {

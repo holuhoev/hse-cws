@@ -31,6 +31,6 @@ public class LecturerWorkloadController {
                                                 @RequestParam(value = "toDate", required = false) String toDate)
 
     {
-        return lecturerWorkloadDatasource.getLecturerWorkload(chairId, isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate, formatter), isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate, formatter));
+        return lecturerWorkloadDatasource.getLecturerSumWorkload(chairId, isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate, formatter), isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate, formatter));
     }
 }

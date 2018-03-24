@@ -25,9 +25,9 @@ public class LecturerWorkloadDatasource {
         this.lecturerWorkloadRepository = lecturerWorkloadRepository;
     }
 
-    public DataSourceResult getLecturerWorkload(final Integer chairId,
-                                                final LocalDate fromDate,
-                                                final LocalDate toDate) {
+    public DataSourceResult getLecturerSumWorkload(final Integer chairId,
+                                                   final LocalDate fromDate,
+                                                   final LocalDate toDate) {
         QLecturer qLecturer = QLecturer.lecturer;
         QLecturerWorkload qLecturerWorkload = QLecturerWorkload.lecturerWorkload;
         BooleanBuilder lecturerBuilder = new BooleanBuilder();
@@ -62,5 +62,4 @@ public class LecturerWorkloadDatasource {
 
         return DataSourceResult.create(result, new HashMap<>());
     }
-
 }

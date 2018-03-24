@@ -41,7 +41,7 @@ public class StudentWorkloadDatasource {
                                                final Integer studentId,
                                                final Integer facultyId,
                                                final Integer instituteId,
-                                               final Integer course,
+                                               final Course course,
                                                final String studentFio,
                                                final LocalDate fromDate,
                                                final LocalDate toDate,
@@ -71,6 +71,9 @@ public class StudentWorkloadDatasource {
             studentBuilder.and(qStudent.instituteID.eq(instituteId));
         }
 
+        if (course != null) {
+           studentBuilder.and(qStudent.course.eq(course));
+        }
         if (studentFio != null && !studentFio.isEmpty()) {
             studentBuilder.and(qStudent.fio.containsIgnoreCase(studentFio));
         }
@@ -113,7 +116,5 @@ public class StudentWorkloadDatasource {
         }
         return DataSourceResult.create(result, hints);
     }
-
     //    NOTE почему хранить: 1. Можем считать среднюю статистику по загруженности по факультетам/группам/образовательным программам
-
 }
