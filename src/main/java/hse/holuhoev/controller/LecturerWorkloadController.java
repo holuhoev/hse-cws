@@ -1,8 +1,9 @@
 package hse.holuhoev.controller;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 import hse.holuhoev.datasource.LecturerWorkloadDatasource;
 import hse.holuhoev.datasource.util.DataSourceResult;
-import hse.holuhoev.domain.LecturerWorkload;
 import hse.holuhoev.ruz.api.RuzApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 
 @RestController
@@ -31,6 +31,6 @@ public class LecturerWorkloadController {
                                                 @RequestParam(value = "toDate", required = false) String toDate)
 
     {
-        return lecturerWorkloadDatasource.getLecturerWorkload(chairId, LocalDate.parse(fromDate, formatter), LocalDate.parse(toDate, formatter));
+        return lecturerWorkloadDatasource.getLecturerWorkload(chairId, isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate, formatter), isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate, formatter));
     }
 }
