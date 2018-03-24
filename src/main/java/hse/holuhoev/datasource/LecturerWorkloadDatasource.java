@@ -38,11 +38,11 @@ public class LecturerWorkloadDatasource {
         }
 
         if (fromDate != null) {
-            qLecturerWorkload.date.after(fromDate);
+            workloadBuilder.and(qLecturerWorkload.date.after(fromDate));
         }
 
         if (toDate != null) {
-            qLecturerWorkload.date.before(toDate);
+            workloadBuilder.and(qLecturerWorkload.date.before(toDate));
         }
 
         Iterable<Lecturer> lecturers;
