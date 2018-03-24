@@ -5,10 +5,8 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 import com.querydsl.core.BooleanBuilder;
 import hse.holuhoev.datasource.util.DataSourceResult;
 import hse.holuhoev.domain.*;
-import hse.holuhoev.loader.util.LessonParser;
 import hse.holuhoev.repo.StudentRepository;
 import hse.holuhoev.repo.StudentWorkloadRepository;
-import hse.holuhoev.ruz.api.RuzApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,22 +25,17 @@ import java.util.stream.StreamSupport;
  * @author Evgeny Kholukhoev
  */
 @Service
-public class WorkloadDatasource {
+public class StudentWorkloadDatasource {
 
     private final StudentWorkloadRepository studentWorkloadRepository;
     private final StudentRepository studentRepository;
 
     @Autowired
-    public WorkloadDatasource(StudentWorkloadRepository studentWorkloadRepository, StudentRepository studentRepository) {
+    public StudentWorkloadDatasource(StudentWorkloadRepository studentWorkloadRepository, StudentRepository studentRepository) {
         this.studentWorkloadRepository = studentWorkloadRepository;
         this.studentRepository = studentRepository;
     }
 
-    public List<LecturerWorkload> getLecturerWorkload(final Integer chairId,
-                                                      final String fromDate,
-                                                      final String toDate) {
-        return null;
-    }
 
     public DataSourceResult getStudentWorkload(final Integer groupId,
                                                final Integer studentId,

@@ -1,9 +1,8 @@
 package hse.holuhoev.controller;
 
-import hse.holuhoev.datasource.WorkloadDatasource;
+import hse.holuhoev.datasource.StudentWorkloadDatasource;
 import hse.holuhoev.datasource.util.DataSourceResult;
 import hse.holuhoev.domain.LecturerWorkload;
-import hse.holuhoev.domain.StudentSumWorkload;
 import hse.holuhoev.ruz.api.RuzApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,18 +17,18 @@ import java.util.List;
  * @author Evgeny Kholukhoev
  */
 @RestController
-@RequestMapping("**/api")
+@RequestMapping("**/api/student/")
 public class WorkloadController {
 
-    private final WorkloadDatasource workloadDatasource;
+    private final StudentWorkloadDatasource studentWorkloadDatasource;
     private final DateTimeFormatter formatter = RuzApiService.formatter;
 
     @Autowired
-    public WorkloadController(WorkloadDatasource workloadDatasource) {
-        this.workloadDatasource = workloadDatasource;
+    public WorkloadController(StudentWorkloadDatasource studentWorkloadDatasource) {
+        this.studentWorkloadDatasource = studentWorkloadDatasource;
     }
 
-    @RequestMapping("/studentWorkload")
+    @RequestMapping("/sumWorkload")
     public DataSourceResult getStudentWorkload(@RequestParam(value = "groupId", required = false) Integer groupId,
                                                @RequestParam(value = "studentId", required = false) Integer studentId,
                                                @RequestParam(value = "facultyId", required = false) Integer facultyId,
@@ -42,7 +41,7 @@ public class WorkloadController {
                                                @RequestParam(value = "$skip", required = false) Integer skip,
                                                @RequestParam(value = "$fetchTotal", required = false) Boolean fetchTotal,
                                                @RequestParam(value = "$orderBy", required = false) String orderBy) {
-        return workloadDatasource.getStudentWorkload(groupId
+        return studentWorkloadDatasource.getStudentWorkload(groupId
                 , studentId
                 , facultyId
                 , instituteId
@@ -54,14 +53,5 @@ public class WorkloadController {
                 , skip
                 , fetchTotal
                 , orderBy);
-    }
-
-    @RequestMapping("/lecturerWorkload")
-    public List<LecturerWorkload> getLecturerWorkload(@RequestParam(value = "chairId") Integer chairId,
-                                                      @RequestParam(value = "fromDate") String fromDate,
-                                                      @RequestParam(value = "toDate") String toDate)
-
-    {
-        return workloadDatasource.getLecturerWorkload(chairId, fromDate, toDate);
     }
 }
