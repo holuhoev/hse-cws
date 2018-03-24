@@ -8,9 +8,13 @@ public class Lesson extends RuzObject {
     private String date;
     private String beginLesson;
     private String endLesson;
-    private String building;
-    private Integer dayOfWeek;
     private Integer hours;
+
+    public Lesson(String date, String beginLesson, String endLesson) {
+        this.date = date;
+        this.beginLesson = beginLesson;
+        this.endLesson = endLesson;
+    }
 
     public String getBeginLesson() {
         return beginLesson;
@@ -39,14 +43,6 @@ public class Lesson extends RuzObject {
         this.date = date;
     }
 
-    public String getBuilding() {
-        return building;
-    }
-
-    public void setBuilding(String building) {
-        this.building = building;
-    }
-
     public Integer getHours() {
         return hours;
     }
@@ -55,11 +51,4 @@ public class Lesson extends RuzObject {
         this.hours = hours;
     }
 
-    public Integer getDayOfWeek() {
-        return dayOfWeek;
-    }
-
-    public void setDayOfWeek(Integer dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
-    }
 }
