@@ -1,6 +1,6 @@
 package hse.holuhoev.ruz;
 
-public enum RuzEndpoint {
+public enum Endpoint {
     GROUPS("groups"),
     LESSONS("personLessons"),
     LECTURERS("lecturers"),
@@ -11,7 +11,7 @@ public enum RuzEndpoint {
 
     private final String value;
 
-    RuzEndpoint(String value) {
+    Endpoint(String value) {
         this.value = value;
     }
 

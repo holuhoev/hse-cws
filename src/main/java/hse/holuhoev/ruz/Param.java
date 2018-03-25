@@ -1,6 +1,6 @@
 package hse.holuhoev.ruz;
 
-public enum RuzParam {
+public enum Param {
     GROUP_ID("groupOid"),
     STUDENT_ID("studentOid"),
     LECTURER_ID("lecturerOid"),
@@ -11,7 +11,7 @@ public enum RuzParam {
 
     private final String value;
 
-    RuzParam(String value) {
+    Param(String value) {
         this.value = value;
     }
 
