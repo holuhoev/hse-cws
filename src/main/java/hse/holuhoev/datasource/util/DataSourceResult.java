@@ -2,6 +2,8 @@ package hse.holuhoev.datasource.util;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class DataSourceResult<T> {
     private List<T> result;
@@ -14,6 +16,10 @@ public class DataSourceResult<T> {
 
     public static <T> DataSourceResult create(List<T> objects, Map<String, Object> hints) {
         return new DataSourceResult<>(objects, hints);
+    }
+
+    public static <T> DataSourceResult create(Iterable<T> objects, Map<String, Object> hints) {
+        return new DataSourceResult<>(StreamSupport.stream(objects.spliterator(), false).collect(Collectors.toList()), hints);
     }
 
     public List<T> getResult() {
