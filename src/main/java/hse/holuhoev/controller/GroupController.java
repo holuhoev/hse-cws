@@ -3,6 +3,7 @@ package hse.holuhoev.controller;
 import hse.holuhoev.datasource.GroupDatasource;
 import hse.holuhoev.datasource.util.DataSourceResult;
 import hse.holuhoev.domain.Course;
+import hse.holuhoev.domain.EducationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,8 @@ public class GroupController {
     @RequestMapping("/")
     public DataSourceResult getGroups(@RequestParam(value = "facultyId", required = false) Integer facultyId,
                                       @RequestParam(value = "instituteId", required = false) Integer instituteId,
-                                      @RequestParam(value = "course", required = false) Course course) {
-        return groupDatasource.getGroupFilter(facultyId, instituteId, course);
+                                      @RequestParam(value = "course", required = false) Course course,
+                                      @RequestParam(value = "educationType", required = false) EducationType educationType) {
+        return groupDatasource.getGroupFilter(facultyId, instituteId, course,educationType);
     }
 }

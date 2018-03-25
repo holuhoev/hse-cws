@@ -3,6 +3,7 @@ package hse.holuhoev.controller;
 import hse.holuhoev.datasource.StudentWorkloadDatasource;
 import hse.holuhoev.datasource.util.DataSourceResult;
 import hse.holuhoev.domain.Course;
+import hse.holuhoev.domain.EducationType;
 import hse.holuhoev.ruz.api.RuzApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,7 @@ public class StudentWorkloadController {
                                                @RequestParam(value = "instituteId", required = false) Integer instituteId,
                                                @RequestParam(value = "course", required = false) Course course,
                                                @RequestParam(value = "studentFio", required = false) String studentFio,
+                                               @RequestParam(value = "educationType", required = false) EducationType educationType,
                                                @RequestParam(value = "fromDate", required = false) String fromDate,
                                                @RequestParam(value = "toDate", required = false) String toDate,
                                                @RequestParam(value = "$top", required = false) Integer top,
@@ -46,6 +48,7 @@ public class StudentWorkloadController {
                 , instituteId
                 , course
                 , studentFio
+                , educationType
                 , LocalDate.parse(fromDate, formatter)
                 , LocalDate.parse(toDate, formatter)
                 , top

@@ -3,6 +3,7 @@ package hse.holuhoev.datasource;
 import com.querydsl.core.BooleanBuilder;
 import hse.holuhoev.datasource.util.DataSourceResult;
 import hse.holuhoev.domain.Course;
+import hse.holuhoev.domain.EducationType;
 import hse.holuhoev.domain.Group;
 import hse.holuhoev.domain.QGroup;
 import hse.holuhoev.repo.GroupRepository;
@@ -23,7 +24,8 @@ public class GroupDatasource {
 
     public DataSourceResult getGroupFilter(final Integer facultyId,
                                            final Integer instituteId,
-                                           final Course course) {
+                                           final Course course,
+                                           final EducationType educationType) {
         QGroup qGroup = QGroup.group;
 
         BooleanBuilder builder = new BooleanBuilder();
@@ -37,6 +39,10 @@ public class GroupDatasource {
 
         if (course != null) {
             builder.and(qGroup.course.eq(course));
+        }
+
+        if (educationType != null) {
+            builder.and(qGroup.educationType.eq(educationType));
         }
 
         Sort sort = new Sort(Sort.Direction.ASC, "course", "number");

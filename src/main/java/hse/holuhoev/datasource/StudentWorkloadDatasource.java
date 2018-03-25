@@ -43,6 +43,7 @@ public class StudentWorkloadDatasource {
                                                final Integer instituteId,
                                                final Course course,
                                                final String studentFio,
+                                               final EducationType educationType,
                                                final LocalDate fromDate,
                                                final LocalDate toDate,
                                                final Integer top,
@@ -72,10 +73,14 @@ public class StudentWorkloadDatasource {
         }
 
         if (course != null) {
-           studentBuilder.and(qStudent.course.eq(course));
+            studentBuilder.and(qStudent.course.eq(course));
         }
         if (studentFio != null && !studentFio.isEmpty()) {
             studentBuilder.and(qStudent.fio.containsIgnoreCase(studentFio));
+        }
+
+        if (educationType != null) {
+            studentBuilder.and(qStudent.educationType.eq(educationType));
         }
 
         if (fromDate != null) {
