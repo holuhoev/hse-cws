@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * Предоставляет интерфейс взаимодействия с http://ruz.hse.ru
+ * Для того, чтобы получать значение поля объекта, возвращаемого из RUZ API,
+ * необходимо использовать аннотацию {@link hse.holuhoev.ruz.RuzField}
  *
  * @author Evgeny Kholukhoev
  */

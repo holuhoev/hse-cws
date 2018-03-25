@@ -1,5 +1,8 @@
 package hse.holuhoev.ruz.util;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
+import hse.holuhoev.ruz.RuzField;
 import hse.holuhoev.ruz.converter.AttributeConverter;
 import hse.holuhoev.ruz.converter.Convert;
 import io.vertx.core.json.JsonArray;
@@ -29,15 +32,18 @@ public class RuzJsonParser {
                 T object = clazz.newInstance();
 
                 for (Field field : clazz.getDeclaredFields()) {
-                    field.setAccessible(true);
-                    Object value = jsonObject.getMap().get(field.getName());
-                    if (field.getAnnotation(Convert.class) != null) {
-                        Object converterInstance = field.getAnnotation(Convert.class).converter().newInstance();
-                        if (converterInstance instanceof AttributeConverter) {
-                            value = ((AttributeConverter) converterInstance).convertToEntityAttribute(value);
+                    RuzField ruzFieldAnnotation = field.getAnnotation(RuzField.class);
+                    if (ruzFieldAnnotation != null) {
+                        field.setAccessible(true);
+                        Object value = jsonObject.getMap().get(isNullOrEmpty(ruzFieldAnnotation.name()) ? field.getName() : ruzFieldAnnotation.name());
+                        if (field.getAnnotation(Convert.class) != null) {
+                            Object converterInstance = field.getAnnotation(Convert.class).converter().newInstance();
+                            if (converterInstance instanceof AttributeConverter) {
+                                value = ((AttributeConverter) converterInstance).convertToEntityAttribute(value);
+                            }
                         }
+                        field.set(object, value);
                     }
-                    field.set(object, value);
                 }
 
                 list.add(object);

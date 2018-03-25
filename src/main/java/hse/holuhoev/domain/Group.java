@@ -1,5 +1,6 @@
 package hse.holuhoev.domain;
 
+import hse.holuhoev.ruz.RuzField;
 import hse.holuhoev.ruz.converter.Convert;
 import hse.holuhoev.ruz.converter.CourseConverter;
 import hse.holuhoev.ruz.converter.EducationTypeConverter;
@@ -15,9 +16,11 @@ import javax.persistence.*;
 @Table(name = "STUDGROUP")
 public class Group extends RuzObject {
     @Id
+    @RuzField(name = "groupOid")
     @Column(name = "ID")
-    private Integer groupOid;
+    private Integer Id;
 
+    @RuzField
     @Column(name = "course")
     @Convert(converter = CourseConverter.class)
     private Course course;
@@ -25,30 +28,33 @@ public class Group extends RuzObject {
     @Column(name = "institute_id")
     private Integer instituteId;
 
+    @RuzField(name = "facultyOid")
     @Column(name = "faculty_id")
-    private Integer facultyOid;
+    private Integer facultyId;
 
+    @RuzField
     @Column(name = "group_number")
     private String number;
 
     @Column(name = "education_type")
+    @RuzField(name = "kindEducation")
     @Convert(converter = EducationTypeConverter.class)
-    private EducationType kindEducation;
+    private EducationType educationType;
 
-    public Integer getFacultyOid() {
-        return facultyOid;
+    public Integer getFacultyId() {
+        return facultyId;
     }
 
-    public void setFacultyOid(Integer facultyOid) {
-        this.facultyOid = facultyOid;
+    public void setFacultyId(Integer facultyId) {
+        this.facultyId = facultyId;
     }
 
-    public Integer getGroupOid() {
-        return groupOid;
+    public Integer getId() {
+        return Id;
     }
 
-    public void setGroupOid(Integer groupOid) {
-        this.groupOid = groupOid;
+    public void setId(Integer id) {
+        this.Id = id;
     }
 
     public Group() {
@@ -79,12 +85,12 @@ public class Group extends RuzObject {
         this.course = course;
     }
 
-    public EducationType getKindEducation() {
-        return kindEducation;
+    public EducationType getEducationType() {
+        return educationType;
     }
 
-    public void setKindEducation(EducationType kindEducation) {
-        this.kindEducation = kindEducation;
+    public void setEducationType(EducationType educationType) {
+        this.educationType = educationType;
     }
 }
 

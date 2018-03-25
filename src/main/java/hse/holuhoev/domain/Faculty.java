@@ -1,5 +1,7 @@
 package hse.holuhoev.domain;
 
+import hse.holuhoev.ruz.RuzField;
+
 import javax.persistence.*;
 
 /**
@@ -11,28 +13,30 @@ import javax.persistence.*;
 @Table(name = "FACULTY")
 public class Faculty {
     @Id
+    @RuzField(name = "facultyOid")
     @Column(name = "ID")
-    private Integer facultyOid;
+    private Integer Id;
 
     @Column(name = "institute_id")
-    private Integer instituteId; // факультет
+    private Integer instituteId;
 
+    @RuzField
     @Column(name = "faculty_name")
-    private String name;  // сама программа образовательная
+    private String name;
 
-    // Можно заполнять в service
     @Transient
+    @RuzField
     private String institute;
 
     public Faculty() {
     }
 
-    public Integer getFacultyOid() {
-        return facultyOid;
+    public Integer getId() {
+        return Id;
     }
 
-    public void setFacultyOid(Integer facultyOid) {
-        this.facultyOid = facultyOid;
+    public void setId(Integer id) {
+        this.Id = id;
     }
 
     public Integer getInstituteId() {

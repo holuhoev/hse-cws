@@ -1,7 +1,6 @@
 package hse.holuhoev.loader;
 
 import hse.holuhoev.domain.*;
-import hse.holuhoev.ruz.util.LessonParser;
 import hse.holuhoev.repo.LecturerRepository;
 import hse.holuhoev.repo.LecturerWorkloadRepository;
 import hse.holuhoev.repo.StudentRepository;
@@ -64,7 +63,7 @@ public class WorkloadLoader {
 
     private void createAndSaveStudentWorkload(Student student, LocalDate fromDate, LocalDate toDate) {
         // TODO: (Delete dublicates)
-        studentWorkloadRepository.saveAll(ruzApiService.getStudentLessons(student.getStudentOid(), fromDate, toDate)
+        studentWorkloadRepository.saveAll(ruzApiService.getStudentLessons(student.getId(), fromDate, toDate)
                 .stream()
                 .collect(Collectors.groupingBy(Lesson::getDate, Collectors.summingInt(Lesson::getHours)))
                 .entrySet()
@@ -72,7 +71,7 @@ public class WorkloadLoader {
                 .map(entry -> {
                     StudentWorkload workload = new StudentWorkload();
                     workload.setDate(LocalDate.parse(entry.getKey(), RuzApiService.formatter));
-                    workload.setStudentId(student.getStudentOid());
+                    workload.setStudentId(student.getId());
                     workload.setWorkload(entry.getValue());
                     return workload;
                 })
@@ -91,7 +90,7 @@ public class WorkloadLoader {
     }
 
     private void createAndSaveLecturerWorkload(Lecturer lecturer, LocalDate fromDate, LocalDate toDate) {
-        lecturerWorkloadRepository.saveAll(ruzApiService.getLecturerLessons(lecturer.getLecturerOid(), fromDate, toDate)
+        lecturerWorkloadRepository.saveAll(ruzApiService.getLecturerLessons(lecturer.getId(), fromDate, toDate)
                 .stream()
                 .collect(Collectors.groupingBy(Lesson::getDate, Collectors.summingInt(Lesson::getHours)))
                 .entrySet()
@@ -99,7 +98,7 @@ public class WorkloadLoader {
                 .map(entry -> {
                     LecturerWorkload workload = new LecturerWorkload();
                     workload.setDate(LocalDate.parse(entry.getKey(), RuzApiService.formatter));
-                    workload.setLecturerId(lecturer.getLecturerOid());
+                    workload.setLecturerId(lecturer.getId());
                     workload.setWorkload(entry.getValue());
                     return workload;
                 })

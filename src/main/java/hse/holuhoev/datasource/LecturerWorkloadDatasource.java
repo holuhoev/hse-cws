@@ -34,7 +34,7 @@ public class LecturerWorkloadDatasource {
         BooleanBuilder workloadBuilder = new BooleanBuilder();
 
         if (chairId != null) {
-            lecturerBuilder.and(qLecturer.chairOid.eq(chairId));
+            lecturerBuilder.and(qLecturer.chairId.eq(chairId));
         }
 
         if (fromDate != null) {
@@ -51,12 +51,12 @@ public class LecturerWorkloadDatasource {
         List<LecturerSumWorkload> result = StreamSupport.stream(lecturers.spliterator(), false)
                 .map(lecturer -> {
                     BooleanBuilder builder = new BooleanBuilder();
-                    builder.and(workloadBuilder).and(qLecturerWorkload.lecturerId.eq(lecturer.getLecturerOid()));
+                    builder.and(workloadBuilder).and(qLecturerWorkload.lecturerId.eq(lecturer.getId()));
                     Integer workload =
                             StreamSupport.stream(lecturerWorkloadRepository.findAll(builder).spliterator(), false)
                                     .mapToInt(LecturerWorkload::getWorkload)
                                     .sum();
-                    return new LecturerSumWorkload(lecturer.getFio(), workload, lecturer.getLecturerOid());
+                    return new LecturerSumWorkload(lecturer.getFio(), workload, lecturer.getId());
 
                 }).collect(Collectors.toList());
 

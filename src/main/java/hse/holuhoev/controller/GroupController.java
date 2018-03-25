@@ -19,7 +19,7 @@ public class GroupController {
         this.groupDatasource = groupDatasource;
     }
 
-    @RequestMapping("")
+    @RequestMapping("/")
     public DataSourceResult getGroups(@RequestParam(value = "facultyId", required = false) Integer facultyId,
                                       @RequestParam(value = "instituteId", required = false) Integer instituteId,
                                       @RequestParam(value = "course", required = false) Course course) {

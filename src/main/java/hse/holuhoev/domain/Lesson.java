@@ -1,13 +1,21 @@
 package hse.holuhoev.domain;
 
 
+import hse.holuhoev.ruz.RuzField;
+
 /**
  * @author Evgeny Kholukhoev
  */
 public class Lesson extends RuzObject {
+    @RuzField
     private String date;
+
+    @RuzField
     private String beginLesson;
+
+    @RuzField
     private String endLesson;
+
     private Integer hours;
 
     public Lesson(String date, String beginLesson, String endLesson) {

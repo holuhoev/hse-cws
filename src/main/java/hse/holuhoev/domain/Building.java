@@ -1,5 +1,7 @@
 package hse.holuhoev.domain;
 
+import hse.holuhoev.ruz.RuzField;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,12 +11,15 @@ import javax.persistence.Table;
 @Table(name = "BUILDING")
 public class Building {
     @Id
+    @RuzField(name = "buildingOid")
     @Column(name = "ID")
-    private Integer buildingOid;
+    private Integer Id;
 
+    @RuzField()
     @Column(name = "address")
     private String address;
 
+    @RuzField()
     @Column(name = "building_name")
     private String name;
 
@@ -32,12 +37,12 @@ public class Building {
         this.address = address;
     }
 
-    public Integer getBuildingOid() {
-        return buildingOid;
+    public Integer getId() {
+        return Id;
     }
 
-    public void setBuildingOid(Integer buildingOid) {
-        this.buildingOid = buildingOid;
+    public void setId(Integer id) {
+        this.Id = id;
     }
 
     public String getName() {

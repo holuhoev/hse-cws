@@ -90,14 +90,14 @@ public class DomainLoader {
         logger.info("Students loader starts");
         studentRepository.deleteAll();
         groupRepository.findAll()
-                .forEach(group -> studentRepository.saveAll(ruzApiService.getStudents(group.getGroupOid())
+                .forEach(group -> studentRepository.saveAll(ruzApiService.getStudents(group.getId())
                         .stream()
                         .peek(student -> {
-                                    student.setGroupID(group.getGroupOid());
-                                    student.setFacultyID(group.getFacultyOid());
+                                    student.setGroupID(group.getId());
+                                    student.setFacultyID(group.getFacultyId());
                                     student.setInstituteID(group.getInstituteId());
                                     student.setCourse(group.getCourse());
-                                    student.setEducationType(group.getKindEducation());
+                                    student.setEducationType(group.getEducationType());
                                 }
                         ).collect(Collectors.toList())));
         logger.info("Students loader ends");
@@ -109,7 +109,7 @@ public class DomainLoader {
         QFaculty qFaculty = QFaculty.faculty;
         groupRepository.saveAll(ruzApiService.getGroups().stream()
                 .peek(group -> {
-                    Optional<Faculty> faculty = facultyRepository.findOne(qFaculty.facultyOid.eq(group.getFacultyOid()));
+                    Optional<Faculty> faculty = facultyRepository.findOne(qFaculty.Id.eq(group.getFacultyId()));
                     faculty.ifPresent(faculty1 -> group.setInstituteId(faculty1.getInstituteId()));
                 })
                 .collect(Collectors.toList()));
@@ -228,8 +228,6 @@ public class DomainLoader {
         pairs.add(new Pair(CityType.OTHER, 6, LocalTime.of(16, 40), LocalTime.of(18, 0), DayType.WEEKEND));
         pairs.add(new Pair(CityType.OTHER, 7, LocalTime.of(18, 10), LocalTime.of(19, 30), DayType.WEEKEND));
         pairs.add(new Pair(CityType.OTHER, 8, LocalTime.of(19, 40), LocalTime.of(21, 0), DayType.WEEKEND));
-
-
         pairRepository.saveAll(pairs);
         logger.info("Pairs loader ends");
     }

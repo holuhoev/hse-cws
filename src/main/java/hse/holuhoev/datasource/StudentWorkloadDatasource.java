@@ -60,7 +60,7 @@ public class StudentWorkloadDatasource {
         }
 
         if (studentId != null) {
-            studentBuilder.and(qStudent.studentOid.eq(studentId));
+            studentBuilder.and(qStudent.Id.eq(studentId));
         }
 
         if (facultyId != null) {
@@ -98,14 +98,14 @@ public class StudentWorkloadDatasource {
         Stream<Student> studentStream = StreamSupport.stream(students.spliterator(), false);
         List<StudentSumWorkload> result = studentStream.map(student -> {
             BooleanBuilder builder = new BooleanBuilder();
-            builder.and(workloadBuilder).and(qStudentWorkload.studentId.eq(student.getStudentOid()));
+            builder.and(workloadBuilder).and(qStudentWorkload.studentId.eq(student.getId()));
             // Если запросили тот период, по которому нет инфы, то запрашивать из руза и добавлять в загруженность
             // Еще надо смотреть, что есть такой date == toDate, если нет, то искать макисмальный, а остальное запросить
             Integer workload =
                     StreamSupport.stream(studentWorkloadRepository.findAll(builder).spliterator(), false)
                             .mapToInt(StudentWorkload::getWorkload)
                             .sum();
-            return new StudentSumWorkload(student.getFio(), workload, student.getStudentOid());
+            return new StudentSumWorkload(student.getFio(), workload, student.getId());
         }).collect(Collectors.toList());
 
         Map<String, Object> hints = new HashMap<>();

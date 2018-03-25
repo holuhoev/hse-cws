@@ -1,6 +1,8 @@
 package hse.holuhoev.domain;
 
 
+import hse.holuhoev.ruz.RuzField;
+
 import javax.persistence.*;
 
 /**
@@ -12,39 +14,39 @@ import javax.persistence.*;
 @Table(name = "LECTURER")
 public class Lecturer extends RuzObject {
     @Id
+    @RuzField(name = "lecturerOid")
     @Column(name = "ID")
-    private Integer lecturerOid;
+    private Integer Id;
 
+    @RuzField(name = "chairOid")
     @Column(name = "chair_id")
-    private Integer chairOid;
+    private Integer chairId;
 
+    @RuzField
     @Column(name = "fio")
     private String fio;
 
+    @RuzField
     @Column(name = "short_fio")
     private String shortFIO;
 
-    @Transient
-    private String chair;
-
-
-    public Integer getLecturerOid() {
-        return lecturerOid;
+    public Integer getId() {
+        return Id;
     }
 
-    public void setLecturerOid(Integer lecturerOid) {
-        this.lecturerOid = lecturerOid;
+    public void setId(Integer id) {
+        this.Id = id;
     }
 
     public Lecturer() {
     }
 
-    public Integer getChairOid() {
-        return chairOid;
+    public Integer getChairId() {
+        return chairId;
     }
 
-    public void setChairOid(Integer chairOid) {
-        this.chairOid = chairOid;
+    public void setChairId(Integer chairId) {
+        this.chairId = chairId;
     }
 
     public String getFio() {

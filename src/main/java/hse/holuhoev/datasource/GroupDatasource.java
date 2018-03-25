@@ -28,7 +28,7 @@ public class GroupDatasource {
 
         BooleanBuilder builder = new BooleanBuilder();
         if (facultyId != null) {
-            builder.and(qGroup.facultyOid.eq(facultyId));
+            builder.and(qGroup.facultyId.eq(facultyId));
         }
 
         if (instituteId != null) {
