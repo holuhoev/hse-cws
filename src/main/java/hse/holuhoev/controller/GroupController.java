@@ -24,7 +24,8 @@ public class GroupController {
     public DataSourceResult getGroups(@RequestParam(value = "facultyId", required = false) Integer facultyId,
                                       @RequestParam(value = "instituteId", required = false) Integer instituteId,
                                       @RequestParam(value = "course", required = false) Course course,
+                                      @RequestParam(value = "number", required = false) String number,
                                       @RequestParam(value = "educationType", required = false) EducationType educationType) {
-        return groupDatasource.getGroupFilter(facultyId, instituteId, course,educationType);
+        return groupDatasource.getGroupFilter(facultyId, instituteId, course, number, educationType);
     }
 }

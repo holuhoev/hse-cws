@@ -25,6 +25,7 @@ public class GroupDatasource {
     public DataSourceResult getGroupFilter(final Integer facultyId,
                                            final Integer instituteId,
                                            final Course course,
+                                           final String number,
                                            final EducationType educationType) {
         QGroup qGroup = QGroup.group;
 
@@ -39,6 +40,10 @@ public class GroupDatasource {
 
         if (course != null) {
             builder.and(qGroup.course.eq(course));
+        }
+
+        if (number != null) {
+            builder.and(qGroup.number.containsIgnoreCase(number));
         }
 
         if (educationType != null) {

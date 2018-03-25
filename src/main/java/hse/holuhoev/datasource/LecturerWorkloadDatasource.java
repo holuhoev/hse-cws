@@ -64,6 +64,6 @@ public class LecturerWorkloadDatasource {
 
                 }).collect(Collectors.toList());
 
-        return DataSourceResult.create(result, new HashMap<>());
+        return DataSourceResult.create(result);
     }
 }
