@@ -18,6 +18,7 @@ public class Student {
     @Column(name = "ID")
     private Integer Id;
 
+    @JsonAttribute
     @Column(name = "fio")
     private String fio;
 

@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 /**
  * @author Evgeny Kholukhoev
  */
 @RestController
 @RequestMapping("**/api/student/")
 public class StudentWorkloadController {
-
     private final StudentWorkloadDatasource studentWorkloadDatasource;
-    private final DateTimeFormatter formatter = RuzApiService.formatter;
 
     @Autowired
     public StudentWorkloadController(StudentWorkloadDatasource studentWorkloadDatasource) {
@@ -33,8 +33,8 @@ public class StudentWorkloadController {
                                                @RequestParam(value = "fromDate", required = false) String fromDate,
                                                @RequestParam(value = "toDate", required = false) String toDate) {
         return studentWorkloadDatasource.getStudentWorkload(studentId,
-                LocalDate.parse(fromDate, formatter),
-                LocalDate.parse(toDate, formatter));
+                isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate),
+                isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate));
     }
 
     @RequestMapping("/sumWorkload")
@@ -58,8 +58,8 @@ public class StudentWorkloadController {
                 , course
                 , studentFio
                 , educationType
-                , LocalDate.parse(fromDate, formatter)
-                , LocalDate.parse(toDate, formatter)
+                , isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate)
+                , isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate)
                 , top
                 , skip
                 , fetchTotal

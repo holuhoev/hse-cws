@@ -18,21 +18,21 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("**/api/lecturer/")
 public class LecturerWorkloadController {
     private final LecturerWorkloadDatasource lecturerWorkloadDatasource;
-    private final DateTimeFormatter formatter = RuzApiService.formatter;
 
     @Autowired
     public LecturerWorkloadController(LecturerWorkloadDatasource lecturerWorkloadDatasource) {
         this.lecturerWorkloadDatasource = lecturerWorkloadDatasource;
     }
 
+
     @RequestMapping("/sumWorkload")
-    public DataSourceResult getLecturerWorkload(@RequestParam(value = "chairId", required = false) Integer chairId,
-                                                @RequestParam(value = "fromDate", required = false) String fromDate,
-                                                @RequestParam(value = "toDate", required = false) String toDate,
-                                                @RequestParam(value = "fio", required = false) String fio) {
+    public DataSourceResult getLecturerSumWorkload(@RequestParam(value = "chairId", required = false) Integer chairId,
+                                                   @RequestParam(value = "fromDate", required = false) String fromDate,
+                                                   @RequestParam(value = "toDate", required = false) String toDate,
+                                                   @RequestParam(value = "fio", required = false) String fio) {
         return lecturerWorkloadDatasource.getLecturerSumWorkload(chairId
                 ,fio
-                , isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate, formatter)
-                , isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate, formatter));
+                , isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate)
+                , isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate));
     }
 }
