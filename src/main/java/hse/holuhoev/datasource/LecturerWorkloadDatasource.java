@@ -26,6 +26,7 @@ public class LecturerWorkloadDatasource {
     }
 
     public DataSourceResult getLecturerSumWorkload(final Integer chairId,
+                                                   final String fio,
                                                    final LocalDate fromDate,
                                                    final LocalDate toDate) {
         QLecturer qLecturer = QLecturer.lecturer;
@@ -37,6 +38,9 @@ public class LecturerWorkloadDatasource {
             lecturerBuilder.and(qLecturer.chairId.eq(chairId));
         }
 
+        if (fio != null && !fio.isEmpty()) {
+            lecturerBuilder.and(qLecturer.fio.containsIgnoreCase(fio));
+        }
         if (fromDate != null) {
             workloadBuilder.and(qLecturerWorkload.date.after(fromDate));
         }

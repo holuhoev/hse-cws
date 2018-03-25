@@ -28,8 +28,10 @@ public class LecturerWorkloadController {
     @RequestMapping("/sumWorkload")
     public DataSourceResult getLecturerWorkload(@RequestParam(value = "chairId", required = false) Integer chairId,
                                                 @RequestParam(value = "fromDate", required = false) String fromDate,
-                                                @RequestParam(value = "toDate", required = false) String toDate) {
+                                                @RequestParam(value = "toDate", required = false) String toDate,
+                                                @RequestParam(value = "fio", required = false) String fio) {
         return lecturerWorkloadDatasource.getLecturerSumWorkload(chairId
+                ,fio
                 , isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate, formatter)
                 , isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate, formatter));
     }
