@@ -27,13 +27,14 @@ CREATE TABLE INSTITUTE
 DROP TABLE IF EXISTS STUDENT;
 CREATE TABLE STUDENT
 (
-  ID           INT          NOT NULL
+  ID             INT          NOT NULL
     PRIMARY KEY,
-  fio          VARCHAR(255) NULL,
-  faculty_id   INT          NULL,
-  group_id     INT          NULL,
-  institute_id INT          NULL,
-  course       INT          NULL,
+  fio            VARCHAR(255) NULL,
+  faculty_id     INT          NULL,
+  group_id       INT          NULL,
+  institute_id   INT          NULL,
+  course         INT          NULL,
+  education_type INT          NULL,
   CONSTRAINT STUDENT_ID_uindex
   UNIQUE (ID)
 );
@@ -41,12 +42,13 @@ CREATE TABLE STUDENT
 DROP TABLE IF EXISTS STUDGROUP;
 CREATE TABLE STUDGROUP
 (
-  ID           INT          NOT NULL
+  ID             INT          NOT NULL
     PRIMARY KEY,
-  faculty_id   INT          NULL,
-  institute_id INT          NULL,
-  course       INT          NULL,
-  group_number VARCHAR(255) NULL,
+  faculty_id     INT          NULL,
+  institute_id   INT          NULL,
+  course         INT          NULL,
+  group_number   VARCHAR(255) NULL,
+  education_type INT          NULL,
   CONSTRAINT GROUP_ID_uindex
   UNIQUE (ID)
 );

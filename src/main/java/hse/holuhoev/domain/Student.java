@@ -30,6 +30,9 @@ public class Student {
     @Column(name = "course")
     private Course course;
 
+    @Column(name = "education_type")
+    private EducationType educationType;
+
     public Integer getFacultyID() {
         return facultyID;
     }
@@ -79,5 +82,13 @@ public class Student {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public EducationType getEducationType() {
+        return educationType;
+    }
+
+    public void setEducationType(EducationType educationType) {
+        this.educationType = educationType;
     }
 }

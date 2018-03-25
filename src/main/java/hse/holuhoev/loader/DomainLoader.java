@@ -97,6 +97,7 @@ public class DomainLoader {
                                     student.setFacultyID(group.getFacultyOid());
                                     student.setInstituteID(group.getInstituteId());
                                     student.setCourse(group.getCourse());
+                                    student.setEducationType(group.getKindEducation());
                                 }
                         ).collect(Collectors.toList())));
         logger.info("Students loader ends");

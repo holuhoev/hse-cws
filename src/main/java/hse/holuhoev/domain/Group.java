@@ -2,6 +2,7 @@ package hse.holuhoev.domain;
 
 import hse.holuhoev.ruz.converter.Convert;
 import hse.holuhoev.ruz.converter.CourseConverter;
+import hse.holuhoev.ruz.converter.EducationTypeConverter;
 
 import javax.persistence.*;
 
@@ -30,6 +31,9 @@ public class Group extends RuzObject {
     @Column(name = "group_number")
     private String number;
 
+    @Column(name = "education_type")
+    @Convert(converter = EducationTypeConverter.class)
+    private EducationType kindEducation;
 
     public Integer getFacultyOid() {
         return facultyOid;
@@ -73,6 +77,14 @@ public class Group extends RuzObject {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public EducationType getKindEducation() {
+        return kindEducation;
+    }
+
+    public void setKindEducation(EducationType kindEducation) {
+        this.kindEducation = kindEducation;
     }
 }
 
