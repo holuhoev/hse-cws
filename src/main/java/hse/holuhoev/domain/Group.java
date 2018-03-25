@@ -1,5 +1,8 @@
 package hse.holuhoev.domain;
 
+import hse.holuhoev.ruz.converter.Convert;
+import hse.holuhoev.ruz.converter.CourseConverter;
+
 import javax.persistence.*;
 
 /**
@@ -14,14 +17,9 @@ public class Group extends RuzObject {
     @Column(name = "ID")
     private Integer groupOid;
 
-    /**
-     * Курс из RUZ API.
-     */
-    @Transient
-    private Integer course;
-
     @Column(name = "course")
-    private Course courseType;
+    @Convert(converter = CourseConverter.class)
+    private Course course;
 
     @Column(name = "institute_id")
     private Integer instituteId;
@@ -32,13 +30,6 @@ public class Group extends RuzObject {
     @Column(name = "group_number")
     private String number;
 
-    public Integer getCourse() {
-        return course;
-    }
-
-    public void setCourse(Integer course) {
-        this.course = course;
-    }
 
     public Integer getFacultyOid() {
         return facultyOid;
@@ -76,12 +67,12 @@ public class Group extends RuzObject {
         this.instituteId = instituteId;
     }
 
-    public Course getCourseType() {
-        return courseType;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseType(Course courseType) {
-        this.courseType = courseType;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }
 

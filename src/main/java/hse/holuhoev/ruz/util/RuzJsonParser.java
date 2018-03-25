@@ -1,5 +1,7 @@
 package hse.holuhoev.ruz.util;
 
+import hse.holuhoev.ruz.converter.AttributeConverter;
+import hse.holuhoev.ruz.converter.Convert;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
@@ -28,7 +30,14 @@ public class RuzJsonParser {
 
                 for (Field field : clazz.getDeclaredFields()) {
                     field.setAccessible(true);
-                    field.set(object, jsonObject.getMap().get(field.getName()));
+                    Object value = jsonObject.getMap().get(field.getName());
+                    if (field.getAnnotation(Convert.class) != null) {
+                        Object converterInstance = field.getAnnotation(Convert.class).converter().newInstance();
+                        if (converterInstance instanceof AttributeConverter) {
+                            value = ((AttributeConverter) converterInstance).convertToEntityAttribute(value);
+                        }
+                    }
+                    field.set(object, value);
                 }
 
                 list.add(object);
