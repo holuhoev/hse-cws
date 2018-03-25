@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -23,6 +23,33 @@ public class LecturerWorkloadDatasource {
     public LecturerWorkloadDatasource(LecturerRepository lecturerRepository, LecturerWorkloadRepository lecturerWorkloadRepository) {
         this.lecturerRepository = lecturerRepository;
         this.lecturerWorkloadRepository = lecturerWorkloadRepository;
+    }
+
+    public DataSourceResult getLecturerWorkload(final Integer lecturerId,
+                                                final LocalDate fromDate,
+                                                final LocalDate toDate) {
+
+        if (lecturerId == null) {
+            return DataSourceResult.createEmpty();
+        }
+        Optional<Lecturer> optionalLecturer = lecturerRepository.findById(lecturerId);
+        if (optionalLecturer.isPresent()) {
+            Lecturer lecturer = optionalLecturer.get();
+            QLecturerWorkload qLecturerWorkload = QLecturerWorkload.lecturerWorkload;
+            BooleanBuilder builder = new BooleanBuilder();
+            builder.and(qLecturerWorkload.lecturerId.eq(lecturer.getId()));
+            if (fromDate != null) {
+                builder.and(qLecturerWorkload.date.after(fromDate).or(qLecturerWorkload.date.eq(fromDate)));
+            }
+
+            if (toDate != null) {
+                builder.and(qLecturerWorkload.date.before(toDate).or(qLecturerWorkload.date.before(toDate)));
+            }
+            Iterable<LecturerWorkload> lecturerWorkloads = lecturerWorkloadRepository.findAll(builder);
+            lecturerWorkloads.forEach(lecturerWorkload -> lecturerWorkload.setLecturerFio(lecturer.getFio()));
+            return DataSourceResult.create(lecturerWorkloads);
+        }
+        return DataSourceResult.createEmpty();
     }
 
     public DataSourceResult getLecturerSumWorkload(final Integer chairId,

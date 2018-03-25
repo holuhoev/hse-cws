@@ -24,6 +24,14 @@ public class LecturerWorkloadController {
         this.lecturerWorkloadDatasource = lecturerWorkloadDatasource;
     }
 
+    @RequestMapping("/workload")
+    public DataSourceResult getLecturerWorkload(@RequestParam(value = "lecturerId") Integer lecturerId,
+                                                @RequestParam(value = "fromDate", required = false) String fromDate,
+                                                @RequestParam(value = "toDate", required = false) String toDate) {
+        return lecturerWorkloadDatasource.getLecturerWorkload(lecturerId,
+                isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate),
+                isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate));
+    }
 
     @RequestMapping("/sumWorkload")
     public DataSourceResult getLecturerSumWorkload(@RequestParam(value = "chairId", required = false) Integer chairId,
@@ -31,7 +39,7 @@ public class LecturerWorkloadController {
                                                    @RequestParam(value = "toDate", required = false) String toDate,
                                                    @RequestParam(value = "fio", required = false) String fio) {
         return lecturerWorkloadDatasource.getLecturerSumWorkload(chairId
-                ,fio
+                , fio
                 , isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate)
                 , isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate));
     }
