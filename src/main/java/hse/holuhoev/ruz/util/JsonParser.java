@@ -2,7 +2,6 @@ package hse.holuhoev.ruz.util;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 
-import hse.holuhoev.ruz.RuzField;
 import hse.holuhoev.ruz.converter.AttributeConverter;
 import hse.holuhoev.ruz.converter.Convert;
 import io.vertx.core.json.JsonArray;
@@ -17,8 +16,8 @@ import java.util.List;
 /**
  * @author Evgeny Kholukhoev
  */
-public class RuzJsonParser {
-    private final Logger logger = LoggerFactory.getLogger(RuzJsonParser.class);
+public class JsonParser {
+    private final Logger logger = LoggerFactory.getLogger(JsonParser.class);
 
     public <T> List<T> parse(String str, Class<T> clazz) {
         if (str == null)
@@ -32,10 +31,10 @@ public class RuzJsonParser {
                 T object = clazz.newInstance();
 
                 for (Field field : clazz.getDeclaredFields()) {
-                    RuzField ruzFieldAnnotation = field.getAnnotation(RuzField.class);
-                    if (ruzFieldAnnotation != null) {
+                    JsonAttribute jsonAttributeAnnotation = field.getAnnotation(JsonAttribute.class);
+                    if (jsonAttributeAnnotation != null) {
                         field.setAccessible(true);
-                        Object value = jsonObject.getMap().get(isNullOrEmpty(ruzFieldAnnotation.name()) ? field.getName() : ruzFieldAnnotation.name());
+                        Object value = jsonObject.getMap().get(isNullOrEmpty(jsonAttributeAnnotation.name()) ? field.getName() : jsonAttributeAnnotation.name());
                         if (field.getAnnotation(Convert.class) != null) {
                             Object converterInstance = field.getAnnotation(Convert.class).converter().newInstance();
                             if (converterInstance instanceof AttributeConverter) {
@@ -55,14 +54,14 @@ public class RuzJsonParser {
         return null;
     }
 
-    private RuzJsonParser() {
+    private JsonParser() {
     }
 
-    private static RuzJsonParser instance;
+    private static JsonParser instance;
 
-    public static RuzJsonParser getInstance() {
+    public static JsonParser getInstance() {
         if (instance == null) {
-            instance = new RuzJsonParser();
+            instance = new JsonParser();
         }
         return instance;
     }

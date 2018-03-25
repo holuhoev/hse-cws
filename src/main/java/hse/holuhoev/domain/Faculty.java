@@ -1,6 +1,6 @@
 package hse.holuhoev.domain;
 
-import hse.holuhoev.ruz.RuzField;
+import hse.holuhoev.ruz.util.JsonAttribute;
 
 import javax.persistence.*;
 
@@ -13,19 +13,19 @@ import javax.persistence.*;
 @Table(name = "FACULTY")
 public class Faculty {
     @Id
-    @RuzField(name = "facultyOid")
+    @JsonAttribute(name = "facultyOid")
     @Column(name = "ID")
     private Integer Id;
 
     @Column(name = "institute_id")
     private Integer instituteId;
 
-    @RuzField
+    @JsonAttribute
     @Column(name = "faculty_name")
     private String name;
 
     @Transient
-    @RuzField
+    @JsonAttribute
     private String institute;
 
     public Faculty() {

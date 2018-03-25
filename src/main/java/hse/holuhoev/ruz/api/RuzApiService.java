@@ -2,6 +2,7 @@ package hse.holuhoev.ruz.api;
 
 
 import hse.holuhoev.domain.*;
+import hse.holuhoev.ruz.util.JsonAttribute;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Предоставляет интерфейс взаимодействия с http://ruz.hse.ru
  * Для того, чтобы получать значение поля объекта, возвращаемого из RUZ API,
- * необходимо использовать аннотацию {@link hse.holuhoev.ruz.RuzField}
+ * необходимо использовать аннотацию {@link JsonAttribute}
  *
  * @author Evgeny Kholukhoev
  */

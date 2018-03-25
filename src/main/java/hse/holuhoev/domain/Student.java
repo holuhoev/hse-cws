@@ -1,6 +1,6 @@
 package hse.holuhoev.domain;
 
-import hse.holuhoev.ruz.RuzField;
+import hse.holuhoev.ruz.util.JsonAttribute;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "STUDENT")
 public class Student {
     @Id
-    @RuzField(name = "studentOid")
+    @JsonAttribute(name = "studentOid")
     @Column(name = "ID")
     private Integer Id;
 

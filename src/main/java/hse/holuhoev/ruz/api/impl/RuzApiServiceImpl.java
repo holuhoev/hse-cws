@@ -7,7 +7,7 @@ import hse.holuhoev.ruz.RuzParam;
 import hse.holuhoev.ruz.RuzURL;
 import hse.holuhoev.ruz.api.RuzApiService;
 import hse.holuhoev.ruz.util.LessonParser;
-import hse.holuhoev.ruz.util.RuzJsonParser;
+import hse.holuhoev.ruz.util.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,18 +26,18 @@ import java.util.Map;
  */
 @Service
 public class RuzApiServiceImpl implements RuzApiService {
-    private final RuzJsonParser ruzJsonParser;
+    private final JsonParser jsonParser;
     private final LessonParser lessonParser;
 
     @Override
     public List<Building> getAllBuildings() {
-        return ruzJsonParser.parse(readRuz(RuzEndpoint.BUILDINGS, null), Building.class);
+        return jsonParser.parse(readRuz(RuzEndpoint.BUILDINGS, null), Building.class);
     }
 
     @Autowired
     public RuzApiServiceImpl(LessonParser lessonParser) {
         this.lessonParser = lessonParser;
-        this.ruzJsonParser = RuzJsonParser.getInstance();
+        this.jsonParser = JsonParser.getInstance();
     }
 
     @Override
@@ -45,22 +45,22 @@ public class RuzApiServiceImpl implements RuzApiService {
         Map<RuzParam, Object> params = new HashMap<>();
         params.put(RuzParam.CHAIR_ID, chairId);
         String lecturersInString = readRuz(RuzEndpoint.LECTURERS, params);
-        return ruzJsonParser.parse(lecturersInString, Lecturer.class);
+        return jsonParser.parse(lecturersInString, Lecturer.class);
     }
 
     @Override
     public List<Lecturer> getAllLecturers() {
-        return ruzJsonParser.parse(readRuz(RuzEndpoint.LECTURERS, null), Lecturer.class);
+        return jsonParser.parse(readRuz(RuzEndpoint.LECTURERS, null), Lecturer.class);
     }
 
     @Override
     public List<Chair> getAllChairs() {
-        return ruzJsonParser.parse(readRuz(RuzEndpoint.CHAIRS, null), Chair.class);
+        return jsonParser.parse(readRuz(RuzEndpoint.CHAIRS, null), Chair.class);
     }
 
     @Override
     public List<Faculty> getAllFaculties() {
-        return ruzJsonParser.parse(readRuz(RuzEndpoint.FACULTIES, null), Faculty.class);
+        return jsonParser.parse(readRuz(RuzEndpoint.FACULTIES, null), Faculty.class);
     }
 
     @Override
@@ -87,16 +87,16 @@ public class RuzApiServiceImpl implements RuzApiService {
         Map<RuzParam, Object> params = new HashMap<>();
         params.put(RuzParam.GROUP_ID, groupId);
         String studentsInString = readRuz(RuzEndpoint.STAFF_OF_GROUP, params);
-        return ruzJsonParser.parse(studentsInString, Student.class);
+        return jsonParser.parse(studentsInString, Student.class);
     }
 
     @Override
     public List<Group> getGroups() {
-        return ruzJsonParser.parse(readRuz(RuzEndpoint.GROUPS, null), Group.class);
+        return jsonParser.parse(readRuz(RuzEndpoint.GROUPS, null), Group.class);
     }
 
     private List<Lesson> getLessons(Map<RuzParam, ?> params) {
-        return lessonParser.parse(ruzJsonParser.parse(readRuz(RuzEndpoint.LESSONS, params), Lesson.class));
+        return lessonParser.parse(jsonParser.parse(readRuz(RuzEndpoint.LESSONS, params), Lesson.class));
     }
 
     private String paramsToString(Map<RuzParam, ?> params) {

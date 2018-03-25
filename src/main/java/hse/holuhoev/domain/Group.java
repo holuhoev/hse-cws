@@ -1,6 +1,6 @@
 package hse.holuhoev.domain;
 
-import hse.holuhoev.ruz.RuzField;
+import hse.holuhoev.ruz.util.JsonAttribute;
 import hse.holuhoev.ruz.converter.Convert;
 import hse.holuhoev.ruz.converter.CourseConverter;
 import hse.holuhoev.ruz.converter.EducationTypeConverter;
@@ -16,11 +16,11 @@ import javax.persistence.*;
 @Table(name = "STUDGROUP")
 public class Group extends RuzObject {
     @Id
-    @RuzField(name = "groupOid")
+    @JsonAttribute(name = "groupOid")
     @Column(name = "ID")
     private Integer Id;
 
-    @RuzField
+    @JsonAttribute
     @Column(name = "course")
     @Convert(converter = CourseConverter.class)
     private Course course;
@@ -28,16 +28,16 @@ public class Group extends RuzObject {
     @Column(name = "institute_id")
     private Integer instituteId;
 
-    @RuzField(name = "facultyOid")
+    @JsonAttribute(name = "facultyOid")
     @Column(name = "faculty_id")
     private Integer facultyId;
 
-    @RuzField
+    @JsonAttribute
     @Column(name = "group_number")
     private String number;
 
     @Column(name = "education_type")
-    @RuzField(name = "kindEducation")
+    @JsonAttribute(name = "kindEducation")
     @Convert(converter = EducationTypeConverter.class)
     private EducationType educationType;
 

@@ -1,4 +1,4 @@
-package hse.holuhoev.ruz;
+package hse.holuhoev.ruz.util;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -12,7 +12,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target({METHOD, FIELD})
 @Retention(RUNTIME)
-public @interface RuzField {
+public @interface JsonAttribute {
     /**
      * (Optional) The name of the ruz-api-field. Defaults to
      * the property or field name.

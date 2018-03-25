@@ -1,19 +1,19 @@
 package hse.holuhoev.domain;
 
 
-import hse.holuhoev.ruz.RuzField;
+import hse.holuhoev.ruz.util.JsonAttribute;
 
 /**
  * @author Evgeny Kholukhoev
  */
 public class Lesson extends RuzObject {
-    @RuzField
+    @JsonAttribute
     private String date;
 
-    @RuzField
+    @JsonAttribute
     private String beginLesson;
 
-    @RuzField
+    @JsonAttribute
     private String endLesson;
 
     private Integer hours;
