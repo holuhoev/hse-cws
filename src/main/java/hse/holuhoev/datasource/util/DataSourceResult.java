@@ -1,6 +1,7 @@
 package hse.holuhoev.datasource.util;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,6 +26,10 @@ public class DataSourceResult<T> {
 
     public static <T> DataSourceResult create(Iterable<T> objects, Map<String, Object> hints) {
         return new DataSourceResult<>(StreamSupport.stream(objects.spliterator(), false).collect(Collectors.toList()), hints);
+    }
+
+    public static <T> DataSourceResult createEmpty() {
+        return create(new LinkedList<>());
     }
 
     public static <T> DataSourceResult create(Iterable<T> objects) {

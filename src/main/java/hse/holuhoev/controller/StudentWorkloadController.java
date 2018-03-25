@@ -28,21 +28,30 @@ public class StudentWorkloadController {
         this.studentWorkloadDatasource = studentWorkloadDatasource;
     }
 
-    @RequestMapping("/sumWorkload")
-    public DataSourceResult getStudentWorkload(@RequestParam(value = "groupId", required = false) Integer groupId,
-                                               @RequestParam(value = "studentId", required = false) Integer studentId,
-                                               @RequestParam(value = "facultyId", required = false) Integer facultyId,
-                                               @RequestParam(value = "instituteId", required = false) Integer instituteId,
-                                               @RequestParam(value = "course", required = false) Course course,
-                                               @RequestParam(value = "studentFio", required = false) String studentFio,
-                                               @RequestParam(value = "educationType", required = false) EducationType educationType,
+    @RequestMapping("/workload")
+    public DataSourceResult getStudentWorkload(@RequestParam(value = "studentId") Integer studentId,
                                                @RequestParam(value = "fromDate", required = false) String fromDate,
-                                               @RequestParam(value = "toDate", required = false) String toDate,
-                                               @RequestParam(value = "$top", required = false) Integer top,
-                                               @RequestParam(value = "$skip", required = false) Integer skip,
-                                               @RequestParam(value = "$fetchTotal", required = false) Boolean fetchTotal,
-                                               @RequestParam(value = "$orderBy", required = false) String orderBy) {
-        return studentWorkloadDatasource.getStudentWorkload(groupId
+                                               @RequestParam(value = "toDate", required = false) String toDate) {
+        return studentWorkloadDatasource.getStudentWorkload(studentId,
+                LocalDate.parse(fromDate, formatter),
+                LocalDate.parse(toDate, formatter));
+    }
+
+    @RequestMapping("/sumWorkload")
+    public DataSourceResult getStudentSumWorkload(@RequestParam(value = "groupId", required = false) Integer groupId,
+                                                  @RequestParam(value = "studentId", required = false) Integer studentId,
+                                                  @RequestParam(value = "facultyId", required = false) Integer facultyId,
+                                                  @RequestParam(value = "instituteId", required = false) Integer instituteId,
+                                                  @RequestParam(value = "course", required = false) Course course,
+                                                  @RequestParam(value = "studentFio", required = false) String studentFio,
+                                                  @RequestParam(value = "educationType", required = false) EducationType educationType,
+                                                  @RequestParam(value = "fromDate", required = false) String fromDate,
+                                                  @RequestParam(value = "toDate", required = false) String toDate,
+                                                  @RequestParam(value = "$top", required = false) Integer top,
+                                                  @RequestParam(value = "$skip", required = false) Integer skip,
+                                                  @RequestParam(value = "$fetchTotal", required = false) Boolean fetchTotal,
+                                                  @RequestParam(value = "$orderBy", required = false) String orderBy) {
+        return studentWorkloadDatasource.getStudentSumWorkload(groupId
                 , studentId
                 , facultyId
                 , instituteId

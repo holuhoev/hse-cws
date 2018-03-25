@@ -1,6 +1,7 @@
 package hse.holuhoev.datasource;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static com.google.common.base.Strings.repeat;
 
 import com.querydsl.core.BooleanBuilder;
 import hse.holuhoev.datasource.util.DataSourceResult;
@@ -13,10 +14,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -36,20 +39,45 @@ public class StudentWorkloadDatasource {
         this.studentRepository = studentRepository;
     }
 
-
-    public DataSourceResult getStudentWorkload(final Integer groupId,
-                                               final Integer studentId,
-                                               final Integer facultyId,
-                                               final Integer instituteId,
-                                               final Course course,
-                                               final String studentFio,
-                                               final EducationType educationType,
+    public DataSourceResult getStudentWorkload(final Integer studentId,
                                                final LocalDate fromDate,
-                                               final LocalDate toDate,
-                                               final Integer top,
-                                               final Integer skip,
-                                               final Boolean fetchTotal,
-                                               final String orderBy) {
+                                               final LocalDate toDate) {
+
+        if (studentId == null) {
+            return DataSourceResult.createEmpty();
+        }
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+        if (optionalStudent.isPresent()) {
+            Student student = optionalStudent.get();
+            QStudentWorkload qStudentWorkload = QStudentWorkload.studentWorkload;
+            BooleanBuilder builder = new BooleanBuilder();
+            builder.and(qStudentWorkload.studentId.eq(student.getId()));
+            if (fromDate != null) {
+                builder.and(qStudentWorkload.date.after(fromDate).or(qStudentWorkload.date.eq(fromDate)));
+            }
+
+            if (toDate != null) {
+                builder.and(qStudentWorkload.date.before(toDate).or(qStudentWorkload.date.before(toDate)));
+            }
+            Iterable<StudentWorkload> studentWorkloads = studentWorkloadRepository.findAll(builder);
+            return DataSourceResult.create(studentWorkloads);
+        }
+        return DataSourceResult.createEmpty();
+    }
+
+    public DataSourceResult getStudentSumWorkload(final Integer groupId,
+                                                  final Integer studentId,
+                                                  final Integer facultyId,
+                                                  final Integer instituteId,
+                                                  final Course course,
+                                                  final String studentFio,
+                                                  final EducationType educationType,
+                                                  final LocalDate fromDate,
+                                                  final LocalDate toDate,
+                                                  final Integer top,
+                                                  final Integer skip,
+                                                  final Boolean fetchTotal,
+                                                  final String orderBy) {
         QStudent qStudent = QStudent.student;
         QStudentWorkload qStudentWorkload = QStudentWorkload.studentWorkload;
 
@@ -84,11 +112,11 @@ public class StudentWorkloadDatasource {
         }
 
         if (fromDate != null) {
-            workloadBuilder.and(qStudentWorkload.date.after(fromDate));
+            workloadBuilder.and(qStudentWorkload.date.after(fromDate).or(qStudentWorkload.date.eq(fromDate)));
         }
 
         if (toDate != null) {
-            workloadBuilder.and(qStudentWorkload.date.before(toDate));
+            workloadBuilder.and(qStudentWorkload.date.before(toDate).or(qStudentWorkload.date.before(toDate)));
         }
 
         Iterable<Student> students;
