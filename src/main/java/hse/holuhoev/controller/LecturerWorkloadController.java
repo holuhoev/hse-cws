@@ -37,10 +37,16 @@ public class LecturerWorkloadController {
     public DataSourceResult getLecturerSumWorkload(@RequestParam(value = "chairId", required = false) Integer chairId,
                                                    @RequestParam(value = "fromDate", required = false) String fromDate,
                                                    @RequestParam(value = "toDate", required = false) String toDate,
-                                                   @RequestParam(value = "fio", required = false) String fio) {
+                                                   @RequestParam(value = "fio", required = false) String fio,
+                                                   @RequestParam(value = "$top", required = false) Integer top,
+                                                   @RequestParam(value = "$skip", required = false) Integer skip,
+                                                   @RequestParam(value = "$fetchTotal", required = false) Boolean fetchTotal) {
         return lecturerWorkloadDatasource.getLecturerSumWorkload(chairId
                 , fio
                 , isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate)
-                , isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate));
+                , isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate),
+                top,
+                skip,
+                fetchTotal);
     }
 }
