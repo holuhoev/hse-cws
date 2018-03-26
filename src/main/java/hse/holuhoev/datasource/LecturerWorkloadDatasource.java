@@ -6,13 +6,20 @@ import hse.holuhoev.domain.*;
 import hse.holuhoev.repo.LecturerRepository;
 import hse.holuhoev.repo.LecturerWorkloadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import static com.google.common.base.Strings.isNullOrEmpty;
 
 @Service
 public class LecturerWorkloadDatasource {
@@ -55,7 +62,10 @@ public class LecturerWorkloadDatasource {
     public DataSourceResult getLecturerSumWorkload(final Integer chairId,
                                                    final String fio,
                                                    final LocalDate fromDate,
-                                                   final LocalDate toDate) {
+                                                   final LocalDate toDate,
+                                                   final Integer top,
+                                                   final Integer skip,
+                                                   final Boolean fetchTotal) {
         QLecturer qLecturer = QLecturer.lecturer;
         QLecturerWorkload qLecturerWorkload = QLecturerWorkload.lecturerWorkload;
         BooleanBuilder lecturerBuilder = new BooleanBuilder();
@@ -77,7 +87,14 @@ public class LecturerWorkloadDatasource {
         }
 
         Iterable<Lecturer> lecturers;
-        lecturers = lecturerRepository.findAll(lecturerBuilder);
+        if (top != null) {
+            String orderByString = "fio";
+            Pageable limit = PageRequest.of(skip, top, Sort.Direction.ASC, orderByString);
+            lecturers = lecturerRepository.findAll(lecturerBuilder, limit);
+        } else {
+            lecturers = lecturerRepository.findAll(lecturerBuilder);
+        }
+
 
         List<LecturerSumWorkload> result = StreamSupport.stream(lecturers.spliterator(), false)
                 .map(lecturer -> {
@@ -91,6 +108,12 @@ public class LecturerWorkloadDatasource {
 
                 }).collect(Collectors.toList());
 
-        return DataSourceResult.create(result);
+        Map<String, Object> hints = new HashMap<>();
+        hints.put("paging", true);
+        if (fetchTotal != null && fetchTotal) {
+            Long count = lecturerWorkloadRepository.count(lecturerBuilder);
+            hints.put("total", count);
+        }
+        return DataSourceResult.create(result, hints);
     }
 }
