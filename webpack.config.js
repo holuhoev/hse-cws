@@ -5,7 +5,7 @@ module.exports = {
     entry: ["./src/main/js/app.js"],
     output: {
         path: path.resolve(__dirname, "src"),
-        filename: "main/resources/static/built/[name].js"
+        filename: "main/resources/static/built/bundle.js"
     },
     plugins: [
         new CleanWebpackPlugin(['src/main/resources/static/built'])
