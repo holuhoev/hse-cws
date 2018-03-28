@@ -16,3 +16,5 @@ node_modules/*
 *.iws
 *.iml
 *.ipr
+/src/main/resources/static/built/*
+etc/

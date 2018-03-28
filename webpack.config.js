@@ -1,5 +1,5 @@
 const path = require("path");
-
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: ["./src/main/js/app.js"],
@@ -7,6 +7,9 @@ module.exports = {
         path: path.resolve(__dirname, "src"),
         filename: "main/resources/static/built/[name].js"
     },
+    plugins: [
+        new CleanWebpackPlugin(['src/main/resources/static/built'])
+    ],
     module: {
         rules: [
             {
