@@ -7,6 +7,7 @@ module.exports = {
         path: path.resolve(__dirname, "src"),
         filename: "main/resources/static/built/bundle.js"
     },
+    devtool: 'inline-source-map',
     plugins: [
         new CleanWebpackPlugin(['src/main/resources/static/built'])
     ],
