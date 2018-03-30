@@ -27,7 +27,12 @@
     "clean-webpack-plugin": "^0.1.19",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "redux-devtools": "^3.4.1",
     "webpack": "^4.3.0",
     "webpack-cli": "^2.0.13"
+  },
+  "dependencies": {
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2"
   }
 }
