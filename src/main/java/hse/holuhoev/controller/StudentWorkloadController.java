@@ -59,7 +59,7 @@ public class StudentWorkloadController {
                 , studentFio
                 , educationType
                 , isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate)
-                , isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate)
+                , isNullOrEmpty(toDate) ? null : LocalDate.parse(toDate)
                 , top
                 , skip
                 , fetchTotal

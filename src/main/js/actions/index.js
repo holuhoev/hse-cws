@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch'
+
 // Тип действия, отвечающий за выбор группы студентов пользователем.
 export const SELECT_GROUP = 'SELECT GROUP';
 // Тип действия, который отвечает за обновление данных в группе.
@@ -41,7 +43,20 @@ export function studentsSumWorkloadReceive(group, json) {
     return {
         type: STUDENTS_SUM_WORKLOAD_RECEIVE,
         group,
-        students: json.data,
+        students: json.result,
         receivedAt: Date.now()
     }
+}
+
+export function fetchStudents(group) {
+    return function (dispatch) {
+        // Первая отправка: состояние приложения обновлено,
+        // чтобы сообщить, что запускается вызов API.
+        dispatch(requestStudentsSumWorkload(group));
+
+        return fetch('http://localhost:8080/api/student/sumWorkload?groupId=' + group.id + '&fromDate=2018-03-01&toDate=2018-03-28')
+            .then(response => response.json())
+            .then(json => dispatch(studentsSumWorkloadReceive(group,json)));
+
+    };
 }
