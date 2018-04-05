@@ -19,6 +19,9 @@ public class Lesson extends RuzObject {
     @JsonAttribute
     private String discipline;
 
+    @JsonAttribute
+    private String kindOfWork;
+
     private Integer hours;
 
     public Lesson(String date, String beginLesson, String endLesson) {
@@ -68,5 +71,13 @@ public class Lesson extends RuzObject {
 
     public void setDiscipline(String discipline) {
         this.discipline = discipline;
+    }
+
+    public String getKindOfWork() {
+        return kindOfWork;
+    }
+
+    public void setKindOfWork(String kindOfWork) {
+        this.kindOfWork = kindOfWork;
     }
 }
