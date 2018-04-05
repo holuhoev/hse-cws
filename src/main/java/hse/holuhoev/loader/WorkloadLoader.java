@@ -39,14 +39,12 @@ public class WorkloadLoader {
 
     public void run(String... strings) {
         if (strings != null && strings.length > 2) {
-            logger.info("Workload loader starts.");
             if (Boolean.valueOf(strings[1])) {
                 loadStudentWorkload();
             }
             if (Boolean.valueOf(strings[2])) {
                 loadLecturerWorkload();
             }
-            logger.info("Workload loader ends.");
         }
     }
 
