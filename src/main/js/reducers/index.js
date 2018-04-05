@@ -41,7 +41,9 @@ function students(state = {
     }
 }
 
-function studentsByGroup(state = {}, action) {
+let studentsByGroupState= {};
+
+function studentsByGroup(state = studentsByGroupState, action) {
     switch (action.type) {
         case INVALIDATE_GROUP:
         case STUDENTS_SUM_WORKLOAD_REQUEST:

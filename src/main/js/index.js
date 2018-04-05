@@ -15,8 +15,8 @@ const store = createStore(
     )
 );
 
-store.dispatch(selectGroup({id: 6390, name: "БПИ153"}));
-store.dispatch(fetchStudents({id: 6390, name: "БПИ153"}))
+store.dispatch(selectGroup({id: 6395, name: "БПИ154"}));
+store.dispatch(fetchStudents({id: 6395, name: "БПИ154"}))
     .then(() =>
         console.log(store.getState())
     );
