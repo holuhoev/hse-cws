@@ -8,8 +8,10 @@ public class StudentDisciplineWorkload {
     private Integer lecture;
     private Integer seminar;
     private Integer science;
+    private Integer practice;
     private Integer exam;
     private Integer workShow;
+    private Integer other;
 
     public String getName() {
         return name;
@@ -57,5 +59,21 @@ public class StudentDisciplineWorkload {
 
     public void setWorkShow(Integer workShow) {
         this.workShow = workShow;
+    }
+
+    public Integer getPractice() {
+        return practice;
+    }
+
+    public void setPractice(Integer practice) {
+        this.practice = practice;
+    }
+
+    public Integer getOther() {
+        return other;
+    }
+
+    public void setOther(Integer other) {
+        this.other = other;
     }
 }
