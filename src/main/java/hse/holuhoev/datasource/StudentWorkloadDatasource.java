@@ -1,25 +1,18 @@
 package hse.holuhoev.datasource;
 
-import static com.google.common.base.Strings.isNullOrEmpty;
-
 import com.querydsl.core.BooleanBuilder;
 import hse.holuhoev.datasource.util.DataSourceResult;
 import hse.holuhoev.domain.*;
 import hse.holuhoev.repo.StudentRepository;
 import hse.holuhoev.repo.StudentWorkloadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 /**
@@ -29,12 +22,13 @@ import java.util.stream.StreamSupport;
 public class StudentWorkloadDatasource {
 
     private final StudentWorkloadRepository studentWorkloadRepository;
+    private final StudentDataSource studentDataSource;
     private final StudentRepository studentRepository;
-
     @Autowired
-    public StudentWorkloadDatasource(StudentWorkloadRepository studentWorkloadRepository, StudentRepository studentRepository) {
+    public StudentWorkloadDatasource(StudentWorkloadRepository studentWorkloadRepository, StudentDataSource studentRepository, StudentRepository studentRepository1) {
         this.studentWorkloadRepository = studentWorkloadRepository;
-        this.studentRepository = studentRepository;
+        this.studentDataSource = studentRepository;
+        this.studentRepository = studentRepository1;
     }
 
     public DataSourceResult getStudentWorkload(final Integer studentId,
@@ -77,38 +71,21 @@ public class StudentWorkloadDatasource {
                                                   final Integer skip,
                                                   final Boolean fetchTotal,
                                                   final String orderBy) {
-        QStudent qStudent = QStudent.student;
+        DataSourceResult<Student> studentDataSourceResult =
+                studentDataSource.getStudentFilter(groupId,
+                        studentId,
+                        facultyId,
+                        instituteId,
+                        course,
+                        studentFio,
+                        educationType,
+                        top,
+                        skip,
+                        fetchTotal,
+                        orderBy);
+
         QStudentWorkload qStudentWorkload = QStudentWorkload.studentWorkload;
-
-        BooleanBuilder studentBuilder = new BooleanBuilder();
         BooleanBuilder workloadBuilder = new BooleanBuilder();
-
-        if (groupId != null) {
-            studentBuilder.and(qStudent.groupID.eq(groupId));
-        }
-
-        if (studentId != null) {
-            studentBuilder.and(qStudent.Id.eq(studentId));
-        }
-
-        if (facultyId != null) {
-            studentBuilder.and(qStudent.facultyID.eq(facultyId));
-        }
-
-        if (instituteId != null) {
-            studentBuilder.and(qStudent.instituteID.eq(instituteId));
-        }
-
-        if (course != null) {
-            studentBuilder.and(qStudent.course.eq(course));
-        }
-        if (studentFio != null && !studentFio.isEmpty()) {
-            studentBuilder.and(qStudent.fio.containsIgnoreCase(studentFio));
-        }
-
-        if (educationType != null) {
-            studentBuilder.and(qStudent.educationType.eq(educationType));
-        }
 
         if (fromDate != null) {
             workloadBuilder.and(qStudentWorkload.date.after(fromDate).or(qStudentWorkload.date.eq(fromDate)));
@@ -118,17 +95,8 @@ public class StudentWorkloadDatasource {
             workloadBuilder.and(qStudentWorkload.date.before(toDate).or(qStudentWorkload.date.before(toDate)));
         }
 
-        Iterable<Student> students;
-        if (top != null) {
-            String orderByString = isNullOrEmpty(orderBy) ? "fio" : orderBy;
-            Pageable limit = PageRequest.of(skip, top, Sort.Direction.ASC, orderByString);
-            students = studentRepository.findAll(studentBuilder, limit);
-        } else {
-            students = studentRepository.findAll(studentBuilder);
-        }
 
-        Stream<Student> studentStream = StreamSupport.stream(students.spliterator(), false);
-        List<StudentSumWorkload> result = studentStream.map(student -> {
+        List<StudentSumWorkload> result = studentDataSourceResult.getResult().stream().map(student -> {
             BooleanBuilder builder = new BooleanBuilder();
             builder.and(workloadBuilder).and(qStudentWorkload.studentId.eq(student.getId()));
             // Если запросили тот период, по которому нет инфы, то запрашивать из руза и добавлять в загруженность
@@ -140,12 +108,7 @@ public class StudentWorkloadDatasource {
             return new StudentSumWorkload(student.getFio(), workload, student.getId());
         }).collect(Collectors.toList());
 
-        Map<String, Object> hints = new HashMap<>();
-        hints.put("paging", true);
-        if (fetchTotal != null && fetchTotal) {
-            Long count = studentRepository.count(studentBuilder);
-            hints.put("total", count);
-        }
+        Map<String, Object> hints = studentDataSourceResult.getHints();
         return DataSourceResult.create(result, hints);
     }
     //    NOTE почему хранить: 1. Можем считать среднюю статистику по загруженности по факультетам/группам/образовательным программам
