@@ -1,6 +1,8 @@
 package hse.holuhoev.domain;
 
 
+import hse.holuhoev.ruz.converter.Convert;
+import hse.holuhoev.ruz.converter.KindOfWorkConverter;
 import hse.holuhoev.ruz.util.JsonAttribute;
 
 /**
@@ -20,7 +22,8 @@ public class Lesson extends RuzObject {
     private String discipline;
 
     @JsonAttribute
-    private String kindOfWork;
+    @Convert(converter = KindOfWorkConverter.class)
+    private KindOfWork kindOfWork;
 
     private Integer hours;
 
@@ -73,11 +76,11 @@ public class Lesson extends RuzObject {
         this.discipline = discipline;
     }
 
-    public String getKindOfWork() {
+    public KindOfWork getKindOfWork() {
         return kindOfWork;
     }
 
-    public void setKindOfWork(String kindOfWork) {
+    public void setKindOfWork(KindOfWork kindOfWork) {
         this.kindOfWork = kindOfWork;
     }
 }
