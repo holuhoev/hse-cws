@@ -1,5 +1,6 @@
 package hse.holuhoev.datasource;
 
+import hse.holuhoev.domain.KindOfWork;
 import hse.holuhoev.domain.Lesson;
 import hse.holuhoev.domain.StudentDisciplineWorkload;
 import hse.holuhoev.ruz.api.RuzApiService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,11 +37,14 @@ public class StudentDisciplineWorkloadDatasource {
                     StudentDisciplineWorkload workload = new StudentDisciplineWorkload();
                     workload.setName(e.getKey());
 
-                    e.getValue().stream()
-                            .collect(
-                                    Collectors.groupingBy(
-                                            Lesson::getKindOfWork,
-                                            Collectors.summingInt(Lesson::getHours)));
+                    Map<KindOfWork, Integer> map = e.getValue().stream()
+                            .collect(Collectors.groupingBy(Lesson::getKindOfWork,
+                                    Collectors.summingInt(Lesson::getHours)));
+                    workload.setLecture(map.get(KindOfWork.LECTURE));
+                    workload.setExam(map.get(KindOfWork.EXAM));
+                    workload.setSeminar(map.get(KindOfWork.SEMINAR));
+                    workload.setWorkShow(map.get(KindOfWork.WORK_SHOW));
+                    workload.setScience(map.get(KindOfWork.SCIENCE));
                     return workload;
                 }).collect(Collectors.toList());
     }

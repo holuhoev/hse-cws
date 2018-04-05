@@ -1,17 +1,18 @@
 package hse.holuhoev.controller;
 
+import hse.holuhoev.datasource.StudentDisciplineWorkloadDatasource;
 import hse.holuhoev.datasource.StudentWorkloadDatasource;
 import hse.holuhoev.datasource.util.DataSourceResult;
 import hse.holuhoev.domain.Course;
 import hse.holuhoev.domain.EducationType;
-import hse.holuhoev.ruz.api.RuzApiService;
+import hse.holuhoev.domain.StudentDisciplineWorkload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 
@@ -22,10 +23,21 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 @RequestMapping("**/api/student/")
 public class StudentWorkloadController {
     private final StudentWorkloadDatasource studentWorkloadDatasource;
+    private final StudentDisciplineWorkloadDatasource studentDisciplineWorkloadDatasource;
 
     @Autowired
-    public StudentWorkloadController(StudentWorkloadDatasource studentWorkloadDatasource) {
+    public StudentWorkloadController(StudentWorkloadDatasource studentWorkloadDatasource, StudentDisciplineWorkloadDatasource studentDisciplineWorkloadDatasource) {
         this.studentWorkloadDatasource = studentWorkloadDatasource;
+        this.studentDisciplineWorkloadDatasource = studentDisciplineWorkloadDatasource;
+    }
+
+    @RequestMapping("/disciplineWorkload")
+    public List<StudentDisciplineWorkload> getStudentDisciplineWorkload(@RequestParam(value = "studentId") Integer studentId,
+                                                                        @RequestParam(value = "fromDate", required = false) String fromDate,
+                                                                        @RequestParam(value = "toDate", required = false) String toDate) {
+        return studentDisciplineWorkloadDatasource.getData(studentId,
+                isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate),
+                isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate));
     }
 
     @RequestMapping("/workload")
