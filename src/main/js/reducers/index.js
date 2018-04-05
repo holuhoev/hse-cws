@@ -3,8 +3,8 @@ import {combineReducers} from "redux";
 import {
     SELECT_GROUP,
     INVALIDATE_GROUP,
-    STUDENTS_SUM_WORKLOAD_REQUEST,
-    STUDENTS_SUM_WORKLOAD_RECEIVE
+    STUDENTS_REQUEST,
+    STUDENTS_RECEIVE
 } from '../actions'
 
 function selectedGroup(state = {}, action) {
@@ -24,12 +24,12 @@ function students(state = {
     switch (action.type) {
         case INVALIDATE_GROUP:
             return Object.assign({}, state, {didInvalidate: true});
-        case STUDENTS_SUM_WORKLOAD_REQUEST:
+        case STUDENTS_REQUEST:
             return Object.assign({}, state, {
                 isFetching: true,
                 didInvalidate: false,
             });
-        case STUDENTS_SUM_WORKLOAD_RECEIVE:
+        case STUDENTS_RECEIVE:
             return Object.assign({}, state, {
                 isFetching: false,
                 didInvalidate: false,
@@ -46,8 +46,8 @@ let studentsByGroupState= {};
 function studentsByGroup(state = studentsByGroupState, action) {
     switch (action.type) {
         case INVALIDATE_GROUP:
-        case STUDENTS_SUM_WORKLOAD_REQUEST:
-        case STUDENTS_SUM_WORKLOAD_RECEIVE:
+        case STUDENTS_REQUEST:
+        case STUDENTS_RECEIVE:
             return Object.assign({}, state, {
                 [action.group]: students(state[action.group], action)
             });
