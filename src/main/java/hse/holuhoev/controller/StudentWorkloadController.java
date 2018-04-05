@@ -32,7 +32,7 @@ public class StudentWorkloadController {
     }
 
     @RequestMapping("/disciplineWorkload")
-    public List<StudentDisciplineWorkload> getStudentDisciplineWorkload(@RequestParam(value = "studentId") Integer studentId,
+    public DataSourceResult getStudentDisciplineWorkload(@RequestParam(value = "studentId") Integer studentId,
                                                                         @RequestParam(value = "fromDate", required = false) String fromDate,
                                                                         @RequestParam(value = "toDate", required = false) String toDate) {
         return studentDisciplineWorkloadDatasource.getData(studentId,
