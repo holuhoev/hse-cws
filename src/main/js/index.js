@@ -1,7 +1,7 @@
 import thunkMiddleware from 'redux-thunk'
 import {createLogger} from 'redux-logger'
 import {createStore, applyMiddleware} from 'redux'
-import {selectGroup, fetchStudents} from './actions'
+import {selectGroup, fetchStudents, selectStudent, fetchStudentDisciplineWorkload} from './actions'
 
 import rootReducer from './reducers'
 
@@ -10,13 +10,15 @@ const loggerMiddleware = createLogger();
 const store = createStore(
     rootReducer,
     applyMiddleware(
-        thunkMiddleware, // позволяет нам отправлять функции
-        loggerMiddleware // аккуратно логируем действия
+        thunkMiddleware,
+        loggerMiddleware
     )
 );
 
-store.dispatch(selectGroup({id: 6395, name: "БПИ154"}));
-store.dispatch(fetchStudents({id: 6395, name: "БПИ154"}))
+store.dispatch(selectGroup(6395));
+store.dispatch(fetchStudents())
     .then(() =>
         console.log(store.getState())
     );
+store.dispatch(selectStudent(83967));
+store.dispatch(fetchStudentDisciplineWorkload(83967));
