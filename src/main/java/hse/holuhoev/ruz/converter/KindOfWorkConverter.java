@@ -10,6 +10,7 @@ public class KindOfWorkConverter implements AttributeConverter<KindOfWork, Strin
     private final static String WORK_SHOW = "Показ работ";
     private final static String EXAM = "Экзамен";
     private final static String PRACTICE = "Практическое занятие";
+    private final static String CONSULTATION = "Аудиторная консультация";
 
     @Override
     public KindOfWork convertToEntityAttribute(String ruzAttribute) {
@@ -28,6 +29,8 @@ public class KindOfWorkConverter implements AttributeConverter<KindOfWork, Strin
                 return KindOfWork.EXAM;
             case PRACTICE:
                 return KindOfWork.PRACTICE;
+            case CONSULTATION:
+                return KindOfWork.CONSULTATION;
             default:
                 throw new IllegalArgumentException(String.format("Value \'%s\' is not supported!", ruzAttribute));
         }
