@@ -1,34 +1,57 @@
 import {
-    SELECT_GROUP,
     SELECT_STUDENT,
-    STUDENT_DISCIPLINE_WORKLOAD_REQUEST,
-    STUDENT_DISCIPLINE_WORKLOAD_RECEIVE,
     STUDENTS_REQUEST,
-    STUDENTS_RECEIVE
+    STUDENTS_RECEIVE,
+    STUDENT_DISCIPLINE_WORKLOAD_REQUEST,
+    STUDENT_DISCIPLINE_WORKLOAD_RECEIVE
 } from "../actions";
+import {combineReducers} from "redux";
 
-import {students} from "./student";
 
-let studentDisciplineWorkloadState = {
-    group: undefined,
-    student: undefined,
-    groups: {},
-    students: {},
-    lastUpdate: undefined,
-    items: [],
-    isFetching: false
+let filterInitState = {
+    selectedStudent: undefined,
 };
 
-export function studentDisciplineWorkload(state = studentDisciplineWorkloadState, action) {
+function filter(state = filterInitState, action) {
     switch (action.type) {
-        case SELECT_GROUP:
-            return Object.assign({}, state, {
-                group: action.group
-            });
         case SELECT_STUDENT:
             return Object.assign({}, state, {
-                student: action.student
+                selectedStudent: action.student
             });
+        default:
+            return state;
+    }
+}
+
+let studentsInitState = {
+    isFetching: false,
+    items: []
+};
+
+function students(state = studentsInitState, action) {
+    switch (action.type) {
+        case STUDENTS_REQUEST:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
+        case STUDENTS_RECEIVE:
+            return Object.assign({}, state, {
+                isFetching: false,
+                items: action.data
+            });
+        default:
+            return state;
+    }
+}
+
+
+let workloadsInitState = {
+    isFetching: false,
+    items: []
+};
+
+function workloads(state = workloadsInitState, action) {
+    switch (action.type) {
         case STUDENT_DISCIPLINE_WORKLOAD_REQUEST:
             return Object.assign({}, state, {
                 isFetching: true
@@ -36,16 +59,17 @@ export function studentDisciplineWorkload(state = studentDisciplineWorkloadState
         case STUDENT_DISCIPLINE_WORKLOAD_RECEIVE:
             return Object.assign({}, state, {
                 isFetching: false,
-                items: action.data,
-                lastUpdate: action.receivedAt
-            });
-        case STUDENTS_RECEIVE:
-        case STUDENTS_REQUEST:
-            return Object.assign({}, state, {
-                students: students(state.students, action)
+                items: action.data
             });
         default:
             return state;
     }
 }
+
+const studentDisciplineWorkload = combineReducers({
+    filter,
+    students,
+    workloads
+});
+export default studentDisciplineWorkload;
 

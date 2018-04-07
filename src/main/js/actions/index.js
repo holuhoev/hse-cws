@@ -22,26 +22,28 @@ function normalize(data = []) {
     }));
 }
 
-export function studentsRequest() {
+export function studentsRequest(group) {
     return {
-        type: STUDENTS_REQUEST
+        type: STUDENTS_REQUEST,
+        group
     }
 }
 
-export function studentsReceive(json) {
+export function studentsReceive(json, group) {
     return {
         type: STUDENTS_RECEIVE,
         data: json.result,
-        receivedAt: Date.now()
+        receivedAt: Date.now(),
+        group
     }
 }
 
-export function fetchStudents() {
+export function fetchStudents(group) {
     return function (dispatch) {
-        dispatch(studentsRequest());
-        return fetch('http://localhost:8080/api/student/getAll')
+        dispatch(studentsRequest(group));
+        return fetch('http://localhost:8080/api/student/getAll' + (group ? '?groupId=' + group : ''))
             .then(response => response.json())
-            .then(json => dispatch(studentsReceive(json)));
+            .then(json => dispatch(studentsReceive(json, group)));
 
     };
 }

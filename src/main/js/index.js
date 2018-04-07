@@ -1,10 +1,12 @@
+import 'semantic-ui-css/semantic.min.css';
 import thunkMiddleware from 'redux-thunk'
 import {createLogger} from 'redux-logger'
 import {createStore, applyMiddleware} from 'redux'
-import {selectGroup, fetchStudents, selectStudent, fetchStudentDisciplineWorkload} from './actions'
-
+import { Provider } from 'react-redux'
 import rootReducer from './reducers'
-
+import App from "./containers/App";
+import React from "react";
+import { render } from 'react-dom'
 const loggerMiddleware = createLogger();
 
 const store = createStore(
@@ -15,10 +17,9 @@ const store = createStore(
     )
 );
 
-store.dispatch(selectGroup(6395));
-store.dispatch(fetchStudents())
-    .then(() =>
-        console.log(store.getState())
-    );
-store.dispatch(selectStudent(83967));
-store.dispatch(fetchStudentDisciplineWorkload(83967));
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
+);

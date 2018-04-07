@@ -25,7 +25,7 @@ public class StudentDisciplineWorkloadDatasource {
         this.ruzApiService = ruzApiService;
     }
 
-    public DataSourceResult<StudentDisciplineWorkload> getData(final Integer studentId,
+    public DataSourceResult getData(final Integer studentId,
                                                    final LocalDate fromDate,
                                                    final LocalDate toDate) {
         if (studentId == null || fromDate == null || toDate == null)
