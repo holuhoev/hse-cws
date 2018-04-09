@@ -22,10 +22,10 @@ function normalize(data = []) {
     }));
 }
 
-export function studentsRequest(group) {
+export function studentsRequest(params) {
     return {
         type: STUDENTS_REQUEST,
-        group
+        params
     }
 }
 
@@ -38,12 +38,14 @@ export function studentsReceive(json, group) {
     }
 }
 
-export function fetchStudents(group) {
+export function fetchStudents(params) {
     return function (dispatch) {
-        dispatch(studentsRequest(group));
-        return fetch('http://localhost:8080/api/student/getAll' + (group ? '?groupId=' + group : ''))
+        dispatch(studentsRequest(params));
+        let url = new URL('http://localhost:8080/api/student/getAll');
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+        return fetch(url)
             .then(response => response.json())
-            .then(json => dispatch(studentsReceive(json, group)));
+            .then(json => dispatch(studentsReceive(json, params)));
 
     };
 }
