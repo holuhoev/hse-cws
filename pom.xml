@@ -25,6 +25,7 @@
         <frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
         <frontend-maven-plugin.nodeVersion>v8.9.0</frontend-maven-plugin.nodeVersion>
         <frontend-maven-plugin.npmVersion>5.5.1</frontend-maven-plugin.npmVersion>
+        <webpackBuildType>prod</webpackBuildType>
     </properties>
 
     <dependencies>
@@ -39,9 +40,9 @@
             <optional>true</optional>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-            <!--<scope>provided</scope>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+        <!--<scope>provided</scope>-->
         <!--</dependency>-->
 
         <dependency>
@@ -147,12 +148,12 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>npm build</id>
+                        <id>webpack build</id>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>webpack</goal>
                         </goals>
                         <configuration>
-                            <arguments>run build</arguments>
+                            <arguments>--config webpack/webpack.${webpackBuildType}.js</arguments>
                         </configuration>
                     </execution>
                 </executions>
