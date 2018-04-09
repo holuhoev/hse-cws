@@ -26,8 +26,8 @@ public class StudentDisciplineWorkloadDatasource {
     }
 
     public DataSourceResult getData(final Integer studentId,
-                                                   final LocalDate fromDate,
-                                                   final LocalDate toDate) {
+                                    final LocalDate fromDate,
+                                    final LocalDate toDate) {
         if (studentId == null || fromDate == null || toDate == null)
             return null;
         // TODO: parse long date period
@@ -49,6 +49,7 @@ public class StudentDisciplineWorkloadDatasource {
                     workload.setWorkShow(map.getOrDefault(WORK_SHOW, 0));
                     workload.setScience(map.getOrDefault(SCIENCE, 0));
                     workload.setPractice(map.getOrDefault(PRACTICE, 0));
+                    workload.setConsultation(map.getOrDefault(CONSULTATION, 0));
                     workload.setOther(map.getOrDefault(NULL, 0));
                     return workload;
                 }).collect(Collectors.toList());

@@ -12,6 +12,10 @@ public class StudentDisciplineWorkload {
     private Integer exam;
     private Integer workShow;
     private Integer other;
+    private Integer consultation;
+
+    public StudentDisciplineWorkload() {
+    }
 
     public String getName() {
         return name;
@@ -75,5 +79,13 @@ public class StudentDisciplineWorkload {
 
     public void setOther(Integer other) {
         this.other = other;
+    }
+
+    public Integer getConsultation() {
+        return consultation;
+    }
+
+    public void setConsultation(Integer consultation) {
+        this.consultation = consultation;
     }
 }

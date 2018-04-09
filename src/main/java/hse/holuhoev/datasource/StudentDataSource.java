@@ -61,7 +61,7 @@ public class StudentDataSource {
             studentBuilder.and(qStudent.course.eq(course));
         }
         if (studentFio != null && !studentFio.isEmpty()) {
-            studentBuilder.and(qStudent.fio.containsIgnoreCase(studentFio));
+            studentBuilder.and(qStudent.fio.containsIgnoreCase(studentFio.trim()));
         }
 
         if (educationType != null) {
