@@ -32,9 +32,9 @@ public class StudentWorkloadController {
     }
 
     @RequestMapping("/disciplineWorkload")
-    public DataSourceResult getStudentDisciplineWorkload(@RequestParam(value = "studentId") Integer studentId,
-                                                                        @RequestParam(value = "fromDate", required = false) String fromDate,
-                                                                        @RequestParam(value = "toDate", required = false) String toDate) {
+    public DataSourceResult getStudentDisciplineWorkload(@RequestParam(value = "studentId", required = false) Integer studentId,
+                                                         @RequestParam(value = "fromDate", required = false) String fromDate,
+                                                         @RequestParam(value = "toDate", required = false) String toDate) {
         return studentDisciplineWorkloadDatasource.getData(studentId,
                 isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate),
                 isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate));

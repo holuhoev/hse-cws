@@ -58,6 +58,8 @@ class StudentTable extends React.Component {
                     renderBodyRow={renderBodyRow}
                 >
                 </Table>
+                {data && data.length > 0 ? <p></p>
+                     : <p>Нет данных</p>}
             </Segment>
         )
     }
