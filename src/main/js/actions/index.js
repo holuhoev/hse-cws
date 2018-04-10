@@ -1,59 +1,13 @@
 import fetch from 'isomorphic-fetch'
 
-// TODO: other entities & decompose
+export const GROUPS_REQUEST = 'GROUPS_REQUEST';
+export const GROUPS_RECEIVE = 'GROUPS_RECEIVE';
 export const SELECT_GROUP = 'SELECT GROUP';
 
 export function selectGroup(group) {
     return {
         type: SELECT_GROUP,
         group
-    }
-}
-
-export const STUDENTS_REQUEST = 'STUDENTS_REQUEST';
-export const STUDENTS_RECEIVE = 'STUDENTS_RECEIVE';
-export const SELECT_STUDENT = 'SELECT_STUDENT';
-
-
-function normalize(data = []) {
-    let result = {};
-    data.forEach((value => {
-        result[value.id] = value;
-    }));
-}
-
-export function studentsRequest(params) {
-    return {
-        type: STUDENTS_REQUEST,
-        params
-    }
-}
-
-export function studentsReceive(json, group) {
-    return {
-        type: STUDENTS_RECEIVE,
-        data: json.result,
-        receivedAt: Date.now(),
-        group
-    }
-}
-
-export function fetchStudents(params) {
-    return function (dispatch) {
-        dispatch(studentsRequest(params));
-        let url = new URL('http://localhost:8080/api/student/getAll');
-        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-        return fetch(url)
-            .then(response => response.json())
-            .then(json => dispatch(studentsReceive(json, params)));
-
-    };
-}
-
-export function selectStudent(student) {
-    return {
-        type: SELECT_STUDENT,
-        student
     }
 }
 

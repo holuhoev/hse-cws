@@ -1,15 +1,16 @@
 import {
-    SELECT_STUDENT,
-    STUDENTS_REQUEST,
-    STUDENTS_RECEIVE,
     STUDENT_DISCIPLINE_WORKLOAD_REQUEST,
-    STUDENT_DISCIPLINE_WORKLOAD_RECEIVE
+    STUDENT_DISCIPLINE_WORKLOAD_RECEIVE,
+    SELECT_GROUP
 } from "../actions";
 import {combineReducers} from "redux";
+import {CHANGE_SEARCH_STRING, STUDENTS_RECEIVE, STUDENTS_REQUEST,SELECT_STUDENT} from "../actions/students";
 
 
 let filterInitState = {
     selectedStudent: undefined,
+    selectedGroup: undefined,
+    searchString: ''
 };
 
 function filter(state = filterInitState, action) {
@@ -17,6 +18,14 @@ function filter(state = filterInitState, action) {
         case SELECT_STUDENT:
             return Object.assign({}, state, {
                 selectedStudent: action.student
+            });
+        case SELECT_GROUP:
+            return Object.assign({}, state, {
+                selectedGroup: action.group
+            });
+        case CHANGE_SEARCH_STRING:
+            return Object.assign({}, state, {
+                searchString: action.searchString
             });
         default:
             return state;

@@ -7,7 +7,7 @@ import rootReducer from './reducers'
 import App from "./components/App";
 import React from "react";
 import {render} from 'react-dom'
-import {fetchStudents} from "./actions";
+import {fetchStudents, selectGroup} from "./actions";
 
 const loggerMiddleware = createLogger();
 
@@ -25,5 +25,3 @@ render(
     </Provider>,
     document.getElementById('root')
 );
-
-store.dispatch(fetchStudents({groupId: 6826}));
