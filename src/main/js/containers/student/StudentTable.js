@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import React from 'react'
-import {Dimmer, Loader, Segment, Table} from 'semantic-ui-react'
+import {Dimmer, Loader, Segment, Table, Divider, Message} from 'semantic-ui-react'
 import {fetchStudentDisciplineWorkload} from "../../actions/index";
 
 class StudentTable extends React.Component {
@@ -47,7 +47,7 @@ class StudentTable extends React.Component {
         return (
             <Segment>
                 {loading &&
-                <Dimmer active>
+                <Dimmer active inverted>
                     <Loader size='big'/>
                 </Dimmer>
                 }
@@ -59,7 +59,11 @@ class StudentTable extends React.Component {
                 >
                 </Table>
                 {data && data.length > 0 ? <p></p>
-                     : <p>Нет данных</p>}
+                    :
+                    <Divider horizontal>
+                        <Message positive><p>Выберите студента</p></Message>
+                    </Divider>
+                }
             </Segment>
         )
     }
