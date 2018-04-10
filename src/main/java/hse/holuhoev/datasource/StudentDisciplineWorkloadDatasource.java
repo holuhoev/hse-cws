@@ -29,7 +29,7 @@ public class StudentDisciplineWorkloadDatasource {
                                     final LocalDate fromDate,
                                     final LocalDate toDate) {
         if (studentId == null || fromDate == null || toDate == null)
-            return null;
+            return DataSourceResult.createEmpty();
         // TODO: parse long date period
 
         List<StudentDisciplineWorkload> result = ruzApiService.getStudentLessons(studentId, fromDate, toDate).stream()

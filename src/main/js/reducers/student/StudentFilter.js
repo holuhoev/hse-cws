@@ -3,6 +3,7 @@ import {CHANGE_SEARCH_STRING} from "../../actions/students";
 
 
 const initState = {
+    faculty: undefined,
     group: undefined,
     searchQuery: ''
 };

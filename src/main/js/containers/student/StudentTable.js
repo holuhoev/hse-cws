@@ -76,9 +76,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     loadData: (student) => {
-        if (student) {
-            dispatch(fetchStudentDisciplineWorkload(student))
-        }
+        dispatch(fetchStudentDisciplineWorkload(student))
     }
 });
 

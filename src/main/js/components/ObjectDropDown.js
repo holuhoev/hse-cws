@@ -8,6 +8,7 @@ class ObjectDropDown extends Component {
         return (<Dropdown
             options={options}
             placeholder={'Выберите значение...'}
+            noResultsMessage={'Нет данных...'}
             selection
             search
             value={initialValue}
@@ -27,7 +28,7 @@ class ObjectDropDown extends Component {
 
     componentWillReceiveProps(nextProps) {
         const {filter, updateOnFilterChange} = this.props;
-        if (updateOnFilterChange && this.notEqual(filter, nextProps.filter)) {
+        if (filter && updateOnFilterChange && this.notEqual(filter, nextProps.filter)) {
             const {loadData} = nextProps;
             loadData(nextProps.filter)
         }
