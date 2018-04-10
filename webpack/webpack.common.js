@@ -9,7 +9,7 @@ const babelSettings = {
 module.exports = {
     entry: ['babel-polyfill', path.join(__dirname, webAppPath + 'index.js')],
     output: {
-        path: path.join(__dirname, '../src/main/resources/static/build/'),
+        path: path.join(__dirname, '../target/classes/static/built/'),
         filename: 'bundle.js'
     },
     resolve: {

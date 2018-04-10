@@ -7,7 +7,7 @@ const webAppPath = '../src/main/js/';
 
 
 module.exports = merge(common, {
-    devtool: 'eval',
+    devtool: 'source-map',
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new WriteFilePlugin({
