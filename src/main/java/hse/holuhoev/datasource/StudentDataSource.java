@@ -28,16 +28,16 @@ public class StudentDataSource {
     }
 
     public DataSourceResult<Student> getStudentFilter(final Integer groupId,
-                                             final Integer studentId,
-                                             final Integer facultyId,
-                                             final Integer instituteId,
-                                             final Course course,
-                                             final String studentFio,
-                                             final EducationType educationType,
-                                             final Integer top,
-                                             final Integer skip,
-                                             final Boolean fetchTotal,
-                                             final String orderBy) {
+                                                      final Integer studentId,
+                                                      final Integer facultyId,
+                                                      final Integer instituteId,
+                                                      final Course course,
+                                                      final String studentFio,
+                                                      final EducationType educationType,
+                                                      final Integer top,
+                                                      final Integer skip,
+                                                      final Boolean fetchTotal,
+                                                      final String orderBy) {
         QStudent qStudent = QStudent.student;
         BooleanBuilder studentBuilder = new BooleanBuilder();
 
@@ -74,7 +74,9 @@ public class StudentDataSource {
             Pageable limit = PageRequest.of(skip, top, Sort.Direction.ASC, orderByString);
             students = studentRepository.findAll(studentBuilder, limit);
         } else {
-            students = studentRepository.findAll(studentBuilder);
+            String orderByString = isNullOrEmpty(orderBy) ? "fio" : orderBy;
+            Pageable limit = PageRequest.of(0, 300, Sort.Direction.ASC, orderByString);
+            students = studentRepository.findAll(studentBuilder, limit);
         }
 
         Map<String, Object> hints = new HashMap<>();
