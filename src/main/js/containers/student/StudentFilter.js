@@ -25,6 +25,7 @@ const mapStateToProps = state => {
         options: getOptions(filterGroups(groups.items, faculty), "number"),
         isLoading: groups.isFetching,
         updateOnFilterChange: false,
+        placeHolder: 'Выбрать группу'
     }
 };
 

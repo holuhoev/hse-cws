@@ -21,7 +21,8 @@ const mapStateToProps = state => {
         options: getOptions(items, "fio"),
         isLoading: isFetching,
         updateOnFilterChange: true,
-        filter: studentFilter
+        filter: studentFilter,
+        placeHolder: 'Выбрать студента'
     }
 };
 

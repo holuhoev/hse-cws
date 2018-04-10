@@ -4,10 +4,10 @@ import {Dropdown} from 'semantic-ui-react'
 
 class ObjectDropDown extends Component {
     render() {
-        const {initialValue, options, isLoading, onChange, onSearchChange} = this.props;
+        const {initialValue, options, isLoading, onChange, onSearchChange, placeHolder} = this.props;
         return (<Dropdown
             options={options}
-            placeholder={'Выберите значение...'}
+            placeholder={placeHolder}
             noResultsMessage={'Нет данных...'}
             selection
             search

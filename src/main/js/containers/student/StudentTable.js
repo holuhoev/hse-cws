@@ -17,7 +17,7 @@ class StudentTable extends React.Component {
     }
 
     render() {
-        const {data, loading} = this.props;
+        const {data, loading, selectedStudent} = this.props;
         const headerRow = [
             'Наименование дисциплины',
             'Семинары',
@@ -48,7 +48,7 @@ class StudentTable extends React.Component {
             <Segment>
                 {loading &&
                 <Dimmer active inverted>
-                    <Loader size='big'/>
+                    <Loader size='big' content='Загрузка данных...'/>
                 </Dimmer>
                 }
                 <Table
@@ -61,7 +61,7 @@ class StudentTable extends React.Component {
                 {data && data.length > 0 ? <p></p>
                     :
                     <Divider horizontal>
-                        <Message positive><p>Выберите студента</p></Message>
+                        <Message size='small' positive><p> {selectedStudent ? 'По данному студенту нет данных.' : 'Выберите студента'}</p></Message>
                     </Divider>
                 }
             </Segment>
