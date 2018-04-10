@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
-import ObjectDropDown from "../components/ObjectDropDown";
-import {changeSearchString, fetchStudents, selectStudent} from "../actions/students";
+import ObjectDropDown from "../../components/ObjectDropDown";
+import {changeSearchString, fetchStudents, selectStudent} from "../../actions/students";
 
 const getOptions = (items, renderFieldName) => {
     let options = [];
@@ -13,15 +13,15 @@ const getOptions = (items, renderFieldName) => {
 };
 
 const mapStateToProps = state => {
-    const {filter, students} = state.studentDisciplineWorkload;
-    const {selectedStudent} = filter;
+    const {studentFilter, workloadFilter, students} = state.studentDisciplineWorkload;
+    const {student} = workloadFilter;
     const {isFetching, items} = students;
     return {
-        initialValue: selectedStudent,
+        initialValue: student,
         options: getOptions(items, "fio"),
         isLoading: isFetching,
         updateOnFilterChange: true,
-        filter
+        filter: studentFilter
     }
 };
 
@@ -31,8 +31,8 @@ const mapDispatchToProps = dispatch => ({
         dispatch(selectStudent(value));
     },
     loadData: function (filter) {
-        const {selectedGroup, searchString} = filter;
-        dispatch(fetchStudents({groupId: selectedGroup, studentFio: searchString}))
+        const {group, searchQuery} = filter;
+        dispatch(fetchStudents({groupId: group, studentFio: searchQuery}))
     },
     onSearchChange: function (e, {searchQuery}) {
         dispatch(changeSearchString(searchQuery))

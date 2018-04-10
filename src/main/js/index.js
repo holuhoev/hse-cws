@@ -7,7 +7,6 @@ import rootReducer from './reducers'
 import App from "./components/App";
 import React from "react";
 import {render} from 'react-dom'
-import {fetchStudents, selectGroup} from "./actions";
 
 const loggerMiddleware = createLogger();
 

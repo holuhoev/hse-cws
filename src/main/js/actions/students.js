@@ -12,10 +12,10 @@ function normalize(data = []) {
     }));
 }
 
-export function changeSearchString(searchString) {
+export function changeSearchString(searchQuery) {
     return {
         type: CHANGE_SEARCH_STRING,
-        searchString
+        searchQuery
     }
 }
 

@@ -27,16 +27,16 @@ class ObjectDropDown extends Component {
 
     componentWillReceiveProps(nextProps) {
         const {filter, updateOnFilterChange} = this.props;
-        if (updateOnFilterChange && this.isFilterNotEqual(filter, nextProps.filter)) {
+        if (updateOnFilterChange && this.notEqual(filter, nextProps.filter)) {
             const {loadData} = nextProps;
             loadData(nextProps.filter)
         }
     }
 
-    isFilterNotEqual(filter, nextFilter) {
+    notEqual(obj1, obj2) {
         let isEqual = false;
-        Object.keys(filter).forEach(key => {
-            if (filter[key] !== nextFilter[key]) {
+        Object.keys(obj1).forEach(key => {
+            if (obj1[key] !== obj2[key]) {
                 isEqual = true;
             }
         });

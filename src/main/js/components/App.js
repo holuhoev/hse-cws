@@ -1,6 +1,6 @@
 import React from 'react';
-import StudentFilter from '../containers/StudentFitler'
-import StudentTable from "../containers/StudentTable";
+import StudentFilter from '../containers/student/WorkloadFilter'
+import StudentTable from "../containers/student/StudentTable";
 
 const App = () => (
     <div>

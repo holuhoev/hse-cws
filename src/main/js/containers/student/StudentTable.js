@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import React from 'react'
 import {Dimmer, Loader, Segment, Table} from 'semantic-ui-react'
-import {fetchStudentDisciplineWorkload} from "../actions";
+import {fetchStudentDisciplineWorkload} from "../../actions/index";
 
 class StudentTable extends React.Component {
     componentDidMount() {
@@ -65,11 +65,11 @@ class StudentTable extends React.Component {
 
 const mapStateToProps = state => {
     const {studentDisciplineWorkload} = state;
-    const {filter, workloads} = studentDisciplineWorkload;
+    const {workloadFilter, workloads} = studentDisciplineWorkload;
 
     return {
         loading: workloads.isFetching,
-        selectedStudent: filter.selectedStudent,
+        selectedStudent: workloadFilter.student,
         data: workloads.items
     }
 };
