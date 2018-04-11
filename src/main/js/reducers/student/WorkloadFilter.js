@@ -3,7 +3,7 @@ import {SELECT_STUDENT_FROMDATE} from "../../actions/student/dates";
 import moment from 'moment';
 
 const initState = {
-    student: undefined,
+    studentId: undefined,
     fromDate: moment(),
     toDate: undefined
 };
@@ -12,7 +12,7 @@ export function workloadFilter(state = initState, action) {
     switch (action.type) {
         case SELECT_STUDENT:
             return Object.assign({}, state, {
-                student: action.student
+                studentId: action.student
             });
         case SELECT_STUDENT_FROMDATE:
             return Object.assign({}, state, {
