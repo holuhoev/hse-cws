@@ -37,7 +37,7 @@ public class StudentWorkloadController {
                                                          @RequestParam(value = "toDate", required = false) String toDate) {
         return studentDisciplineWorkloadDatasource.getData(studentId,
                 isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate),
-                isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate));
+                isNullOrEmpty(toDate) ? null : LocalDate.parse(toDate));
     }
 
     @RequestMapping("/workload")
@@ -46,7 +46,7 @@ public class StudentWorkloadController {
                                                @RequestParam(value = "toDate", required = false) String toDate) {
         return studentWorkloadDatasource.getStudentWorkload(studentId,
                 isNullOrEmpty(fromDate) ? null : LocalDate.parse(fromDate),
-                isNullOrEmpty(fromDate) ? null : LocalDate.parse(toDate));
+                isNullOrEmpty(toDate) ? null : LocalDate.parse(toDate));
     }
 
     @RequestMapping("/sumWorkload")

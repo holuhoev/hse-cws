@@ -5,8 +5,8 @@ import {fetchStudentDisciplineWorkload} from "../../actions/index";
 
 class StudentTable extends React.Component {
     componentDidMount() {
-        const {loadData, selectedStudent} = this.props;
-        loadData(selectedStudent);
+        const {loadData, filter} = this.props;
+        loadData(filter);
     }
 
     componentWillReceiveProps(nextProps) {

@@ -1,5 +1,5 @@
 import {SELECT_STUDENT} from "../../actions/student/students";
-import {SELECT_STUDENT_FROMDATE} from "../../actions/student/dates";
+import {SELECT_STUDENT_FROMDATE, SELECT_STUDENT_TODATE} from "../../actions/student/dates";
 import moment from 'moment';
 
 const initState = {
@@ -17,6 +17,10 @@ export function workloadFilter(state = initState, action) {
         case SELECT_STUDENT_FROMDATE:
             return Object.assign({}, state, {
                 fromDate: action.fromDate
+            });
+        case SELECT_STUDENT_TODATE:
+            return Object.assign({}, state, {
+                toDate: action.toDate
             });
         default:
             return state;
