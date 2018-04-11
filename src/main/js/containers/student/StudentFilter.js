@@ -33,7 +33,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     onChange: (e, {value}) => {
         dispatch(selectGroup(value));
-        dispatch(selectStudent(undefined))
+        dispatch(selectStudent(undefined));
         dispatch(changeSearchString(''))
     },
     loadData: () => {

@@ -10,14 +10,25 @@ class StudentTable extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.selectedStudent !== this.props.selectedStudent) {
-            const {loadData, selectedStudent} = nextProps;
-            loadData(selectedStudent);
+        const {filter} = this.props;
+        if (filter && this.notEqual(filter, nextProps.filter)) {
+            const {loadData} = nextProps;
+            loadData(nextProps.filter)
         }
     }
 
+    notEqual(obj1, obj2) {
+        let isEqual = false;
+        Object.keys(obj1).forEach(key => {
+            if (obj1[key] !== obj2[key]) {
+                isEqual = true;
+            }
+        });
+        return isEqual;
+    }
+
     render() {
-        const {data, loading, selectedStudent} = this.props;
+        const {data, loading, filter} = this.props;
         const headerRow = [
             'Наименование дисциплины',
             'Семинары',
@@ -61,7 +72,9 @@ class StudentTable extends React.Component {
                 {data && data.length > 0 ? <p></p>
                     :
                     <Divider horizontal>
-                        <Message size='small' positive><p> {selectedStudent ? 'По данному студенту нет данных.' : 'Выберите студента'}</p></Message>
+                        <Message size='small' positive>
+                            <p> {filter["selectedStudent"] ? 'По данному студенту нет данных.' : 'Выберите студента'}</p>
+                        </Message>
                     </Divider>
                 }
             </Segment>
@@ -72,17 +85,16 @@ class StudentTable extends React.Component {
 const mapStateToProps = state => {
     const {studentDisciplineWorkload} = state;
     const {workloadFilter, workloads} = studentDisciplineWorkload;
-
     return {
         loading: workloads.isFetching,
-        selectedStudent: workloadFilter.student,
-        data: workloads.items
+        data: workloads.items,
+        filter: workloadFilter
     }
 };
 
 const mapDispatchToProps = dispatch => ({
-    loadData: (student) => {
-        dispatch(fetchStudentDisciplineWorkload(student))
+    loadData: (filter) => {
+        dispatch(fetchStudentDisciplineWorkload(filter))
     }
 });
 
