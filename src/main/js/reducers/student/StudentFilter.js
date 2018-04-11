@@ -1,5 +1,5 @@
 import {SELECT_GROUP} from "../../actions";
-import {CHANGE_SEARCH_STRING} from "../../actions/students";
+import {CHANGE_SEARCH_STRING} from "../../actions/student/students";
 
 
 const initState = {

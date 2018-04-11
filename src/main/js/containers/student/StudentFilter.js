@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import ObjectDropDown from "../../components/ObjectDropDown";
 import {fetchGroupsIfNeeded, selectGroup} from "../../actions";
-import {changeSearchString, selectStudent} from "../../actions/students";
+import {changeSearchString, selectStudent} from "../../actions/student/students";
 
 const getOptions = (items, renderFieldName) => {
     let options = [];

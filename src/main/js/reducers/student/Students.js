@@ -1,4 +1,4 @@
-import {STUDENTS_RECEIVE, STUDENTS_REQUEST} from "../../actions/students";
+import {STUDENTS_RECEIVE, STUDENTS_REQUEST} from "../../actions/student/students";
 
 let studentsInitState = {
     isFetching: false,
