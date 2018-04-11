@@ -40,9 +40,9 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-const WorkloadFilter = connect(
+const StudentDropDown = connect(
     mapStateToProps,
     mapDispatchToProps
 )(ObjectDropDown);
 
-export default WorkloadFilter;
+export default StudentDropDown;
