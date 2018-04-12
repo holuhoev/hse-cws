@@ -4,6 +4,7 @@ import hse.holuhoev.datasource.util.DataSourceResult;
 import hse.holuhoev.domain.Chair;
 import hse.holuhoev.repo.ChairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,8 @@ public class ChairDatasource {
     }
 
     public DataSourceResult getChairFilter() {
-        Iterable<Chair> chairs = chairRepository.findAll();
+        Sort sort = new Sort(Sort.Direction.ASC, "name");
+        Iterable<Chair> chairs = chairRepository.findAll(sort);
         return DataSourceResult.create(chairs);
     }
 }

@@ -20,17 +20,17 @@ public class StudentController {
     }
 
     @RequestMapping("/getAll")
-    public DataSourceResult getStudents(@RequestParam(value = "groupId", required = false) Integer groupId,
-                                        @RequestParam(value = "studentId", required = false) Integer studentId,
-                                        @RequestParam(value = "facultyId", required = false) Integer facultyId,
-                                        @RequestParam(value = "instituteId", required = false) Integer instituteId,
-                                        @RequestParam(value = "course", required = false) Course course,
-                                        @RequestParam(value = "studentFio", required = false) String studentFio,
-                                        @RequestParam(value = "educationType", required = false) EducationType educationType,
-                                        @RequestParam(value = "$top", required = false) Integer top,
-                                        @RequestParam(value = "$skip", required = false) Integer skip,
-                                        @RequestParam(value = "$fetchTotal", required = false) Boolean fetchTotal,
-                                        @RequestParam(value = "$orderBy", required = false) String orderBy) {
+    public DataSourceResult getAll(@RequestParam(value = "groupId", required = false) Integer groupId,
+                                   @RequestParam(value = "studentId", required = false) Integer studentId,
+                                   @RequestParam(value = "facultyId", required = false) Integer facultyId,
+                                   @RequestParam(value = "instituteId", required = false) Integer instituteId,
+                                   @RequestParam(value = "course", required = false) Course course,
+                                   @RequestParam(value = "studentFio", required = false) String studentFio,
+                                   @RequestParam(value = "educationType", required = false) EducationType educationType,
+                                   @RequestParam(value = "$top", required = false) Integer top,
+                                   @RequestParam(value = "$skip", required = false) Integer skip,
+                                   @RequestParam(value = "$fetchTotal", required = false) Boolean fetchTotal,
+                                   @RequestParam(value = "$orderBy", required = false) String orderBy) {
         return studentDataSource.getStudentFilter(groupId
                 , studentId
                 , facultyId
