@@ -3,7 +3,7 @@ package hse.holuhoev.datasource;
 import hse.holuhoev.datasource.util.DataSourceResult;
 import hse.holuhoev.domain.KindOfWork;
 import hse.holuhoev.domain.Lesson;
-import hse.holuhoev.domain.StudentDisciplineWorkload;
+import hse.holuhoev.domain.DisciplineWorkload;
 import hse.holuhoev.ruz.api.RuzApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,27 +17,45 @@ import java.util.stream.Collectors;
 import static hse.holuhoev.domain.KindOfWork.*;
 
 @Service
-public class StudentDisciplineWorkloadDatasource {
+public class DisciplineWorkloadDatasource {
     private final RuzApiService ruzApiService;
 
     @Autowired
-    public StudentDisciplineWorkloadDatasource(RuzApiService ruzApiService) {
+    public DisciplineWorkloadDatasource(RuzApiService ruzApiService) {
         this.ruzApiService = ruzApiService;
     }
 
-    public DataSourceResult getData(final Integer studentId,
-                                    final LocalDate fromDate,
-                                    final LocalDate toDate) {
+    public DataSourceResult getStudentData(final Integer studentId,
+                                           final LocalDate fromDate,
+                                           final LocalDate toDate) {
         if (studentId == null || fromDate == null || toDate == null)
             return DataSourceResult.createEmpty();
-        // TODO: parse long date period
+        Iterable<DisciplineWorkload> result = createWorkloads(
+                ruzApiService.getStudentLessons(studentId, fromDate, toDate));
 
-        List<StudentDisciplineWorkload> result = ruzApiService.getStudentLessons(studentId, fromDate, toDate).stream()
+        return DataSourceResult.create(result);
+    }
+
+    public DataSourceResult getLecturerData(final Integer lecturerId,
+                                            final LocalDate fromDate,
+                                            final LocalDate toDate) {
+        if (lecturerId == null || fromDate == null || toDate == null)
+            return DataSourceResult.createEmpty();
+        Iterable<DisciplineWorkload> result = createWorkloads(
+                ruzApiService.getLecturerLessons(lecturerId, fromDate, toDate));
+
+        return DataSourceResult.create(result);
+    }
+
+
+    private Iterable<DisciplineWorkload> createWorkloads(List<Lesson> lessons) {
+        // TODO: parse long date period
+        return lessons.stream()
                 .collect(Collectors.groupingBy(Lesson::getDiscipline))
                 .entrySet()
                 .stream()
                 .map(e -> {
-                    StudentDisciplineWorkload workload = new StudentDisciplineWorkload();
+                    DisciplineWorkload workload = new DisciplineWorkload();
                     workload.setName(e.getKey());
 
                     Map<KindOfWork, Integer> map = e.getValue().stream()
@@ -53,7 +71,5 @@ public class StudentDisciplineWorkloadDatasource {
                     workload.setOther(map.getOrDefault(NULL, 0));
                     return workload;
                 }).collect(Collectors.toList());
-
-        return DataSourceResult.create(result);
     }
 }

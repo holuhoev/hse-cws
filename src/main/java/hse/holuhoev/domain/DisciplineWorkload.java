@@ -3,7 +3,7 @@ package hse.holuhoev.domain;
 /**
  * Класс представляющий часовую загруженность по дисциплинам НИУ ВШЭ.
  */
-public class StudentDisciplineWorkload {
+public class DisciplineWorkload {
     private String name;
     private Integer lecture;
     private Integer seminar;
@@ -14,7 +14,7 @@ public class StudentDisciplineWorkload {
     private Integer other;
     private Integer consultation;
 
-    public StudentDisciplineWorkload() {
+    public DisciplineWorkload() {
     }
 
     public String getName() {
