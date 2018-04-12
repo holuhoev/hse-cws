@@ -1,13 +1,17 @@
 import React from 'react';
 import StudentTable from "../containers/student/StudentTable";
 import StudentFilter from '../containers/student/StudentFilter'
-import WorkloadFilter from "./WorkloadFilter";
+import StudentWorkloadFilter from "./StudentWorkloadFilter";
+import LecturerWorkloadFilter from "./LecturerWorkloadFilter";
+import LecturerTable from "../containers/lecturer/LecturerTable";
 
 const App = () => (
     <div>
         <StudentFilter/>
-        <WorkloadFilter/>
+        <StudentWorkloadFilter/>
         <StudentTable/>
+        <LecturerWorkloadFilter/>
+        <LecturerTable/>
     </div>
 );
 

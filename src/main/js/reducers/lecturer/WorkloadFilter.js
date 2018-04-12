@@ -11,7 +11,7 @@ export function workloadFilter(state = initState, action) {
     switch (action.type) {
         case SELECT_LECTURER:
             return Object.assign({}, state, {
-                lecturerId: action.student
+                lecturerId: action.lecturer
             });
         case SELECT_LECTURER_FROMDATE:
             return Object.assign({}, state, {

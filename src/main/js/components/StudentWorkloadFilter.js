@@ -4,7 +4,7 @@ import FromDatePicker from "../containers/student/FromDatePicker";
 import ToDatePicker from "../containers/student/ToDatePicker";
 
 
-const WorkloadFilter = () => (
+const StudentWorkloadFilter = () => (
     <div>
         <StudentDropDown/>
         <FromDatePicker/>
@@ -12,4 +12,4 @@ const WorkloadFilter = () => (
     </div>
 );
 
-export default WorkloadFilter;
+export default StudentWorkloadFilter;

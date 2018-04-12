@@ -1,11 +1,10 @@
 import {connect} from 'react-redux'
-import React from 'react'
-import {fetchStudentDisciplineWorkload} from "../../actions/index";
 import WorkloadTable from "../../components/WorkloadTable";
+import {fetchLecturerDisciplineWorkload} from "../../actions/lecturer/workloads";
 
 const mapStateToProps = state => {
-    const {studentDisciplineWorkload} = state;
-    const {workloadFilter, workloads} = studentDisciplineWorkload;
+    const {lecturerDisciplineWorkload} = state;
+    const {workloadFilter, workloads} = lecturerDisciplineWorkload;
     return {
         loading: workloads.isFetching,
         data: workloads.items,
@@ -15,7 +14,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     loadData: (filter) => {
-        dispatch(fetchStudentDisciplineWorkload(filter))
+        dispatch(fetchLecturerDisciplineWorkload(filter))
     }
 });
 
