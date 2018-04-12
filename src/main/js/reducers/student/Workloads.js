@@ -1,4 +1,4 @@
-import {STUDENT_DISCIPLINE_WORKLOAD_RECEIVE, STUDENT_DISCIPLINE_WORKLOAD_REQUEST} from "../../actions";
+import {STUDENT_DISCIPLINE_WORKLOAD_RECEIVE, STUDENT_DISCIPLINE_WORKLOAD_REQUEST} from "../../actions/actionConsts";
 
 let workloadsInitState = {
     isFetching: false,

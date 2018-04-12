@@ -1,24 +1,23 @@
-
-import moment from 'moment';
-import {SELECT_STUDENT, SELECT_STUDENT_FROMDATE, SELECT_STUDENT_TODATE} from "../../actions/actionConsts";
+import moment from "moment/moment";
+import {SELECT_LECTURER, SELECT_LECTURER_FROMDATE, SELECT_LECTURER_TODATE} from "../../actions/actionConsts";
 
 const initState = {
-    studentId: undefined,
+    lecturerId: undefined,
     fromDate: moment(),
     toDate: undefined
 };
 
 export function workloadFilter(state = initState, action) {
     switch (action.type) {
-        case SELECT_STUDENT:
+        case SELECT_LECTURER:
             return Object.assign({}, state, {
-                studentId: action.student
+                lecturerId: action.student
             });
-        case SELECT_STUDENT_FROMDATE:
+        case SELECT_LECTURER_FROMDATE:
             return Object.assign({}, state, {
                 fromDate: action.fromDate
             });
-        case SELECT_STUDENT_TODATE:
+        case SELECT_LECTURER_TODATE:
             return Object.assign({}, state, {
                 toDate: action.toDate
             });

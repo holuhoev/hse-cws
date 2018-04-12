@@ -1,19 +1,18 @@
-import {CHANGE_SEARCH_STRING, SELECT_GROUP} from "../../actions/actionConsts";
-
+import {CHANGE_LECTURER_SEARCH_QUERY, SELECT_CHAIR} from "../../actions/actionConsts";
 
 const initState = {
-    faculty: undefined,
-    group: undefined,
+    chair: undefined,
     searchQuery: ''
 };
 
-export function studentFilter(state = initState, action) {
+
+export function lecturerFilter(state = initState, action) {
     switch (action.type) {
-        case SELECT_GROUP:
+        case SELECT_CHAIR:
             return Object.assign({}, state, {
-                group: action.group
+                chair: action.chair
             });
-        case CHANGE_SEARCH_STRING:
+        case CHANGE_LECTURER_SEARCH_QUERY:
             return Object.assign({}, state, {
                 searchQuery: action.searchQuery
             });

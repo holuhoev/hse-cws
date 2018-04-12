@@ -1,9 +1,5 @@
 import fetch from "isomorphic-fetch";
-
-export const STUDENTS_REQUEST = 'STUDENTS_REQUEST';
-export const STUDENTS_RECEIVE = 'STUDENTS_RECEIVE';
-export const SELECT_STUDENT = 'SELECT_STUDENT';
-export const CHANGE_SEARCH_STRING = 'CHANGE_SEARCH_STRING';
+import {CHANGE_SEARCH_STRING, SELECT_STUDENT, STUDENTS_RECEIVE, STUDENTS_REQUEST} from "../actionConsts";
 
 function normalize(data = []) {
     let result = {};

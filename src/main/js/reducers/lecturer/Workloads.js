@@ -1,18 +1,17 @@
-import {STUDENTS_RECEIVE, STUDENTS_REQUEST} from "../../actions/actionConsts";
+import {LECTURER_DISCIPLINE_WORKLOAD_RECEIVE, LECTURER_DISCIPLINE_WORKLOAD_REQUEST} from "../../actions/actionConsts";
 
-
-let studentsInitState = {
+let initState = {
     isFetching: false,
     items: []
 };
 
-export function students(state = studentsInitState, action) {
+export function workloads(state = initState, action) {
     switch (action.type) {
-        case STUDENTS_REQUEST:
+        case LECTURER_DISCIPLINE_WORKLOAD_REQUEST:
             return Object.assign({}, state, {
                 isFetching: true
             });
-        case STUDENTS_RECEIVE:
+        case LECTURER_DISCIPLINE_WORKLOAD_RECEIVE:
             return Object.assign({}, state, {
                 isFetching: false,
                 items: action.data

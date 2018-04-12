@@ -1,4 +1,5 @@
-import {GROUPS_RECEIVE, GROUPS_REQUEST} from "../../actions";
+import {GROUPS_RECEIVE, GROUPS_REQUEST} from "../../actions/actionConsts";
+
 
 const initState = {
     isFetching: false,

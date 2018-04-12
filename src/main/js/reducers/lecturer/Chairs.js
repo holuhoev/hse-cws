@@ -1,18 +1,17 @@
-import {STUDENTS_RECEIVE, STUDENTS_REQUEST} from "../../actions/actionConsts";
+import {CHAIRS_RECEIVE, CHAIRS_REQUEST} from "../../actions/actionConsts";
 
-
-let studentsInitState = {
+const initState = {
     isFetching: false,
     items: []
 };
 
-export function students(state = studentsInitState, action) {
+export function chairs(state = initState, action) {
     switch (action.type) {
-        case STUDENTS_REQUEST:
+        case CHAIRS_REQUEST:
             return Object.assign({}, state, {
                 isFetching: true
             });
-        case STUDENTS_RECEIVE:
+        case CHAIRS_RECEIVE:
             return Object.assign({}, state, {
                 isFetching: false,
                 items: action.data

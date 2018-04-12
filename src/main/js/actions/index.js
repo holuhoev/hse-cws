@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch'
-
-export const GROUPS_REQUEST = 'GROUPS_REQUEST';
-export const GROUPS_RECEIVE = 'GROUPS_RECEIVE';
-export const SELECT_GROUP = 'SELECT GROUP';
+import {
+    GROUPS_RECEIVE, GROUPS_REQUEST, SELECT_GROUP, STUDENT_DISCIPLINE_WORKLOAD_RECEIVE,
+    STUDENT_DISCIPLINE_WORKLOAD_REQUEST
+} from "./actionConsts";
 
 export function selectGroup(group) {
     return {
@@ -49,8 +49,6 @@ export function fetchGroupsIfNeeded() {
 }
 
 
-export const STUDENT_DISCIPLINE_WORKLOAD_REQUEST = 'STUDENT_DISCIPLINE_WORKLOAD_REQUEST';
-export const STUDENT_DISCIPLINE_WORKLOAD_RECEIVE = 'STUDENT_DISCIPLINE_WORKLOAD_RECEIVE';
 const format = 'YYYY-MM-DD';
 
 export function studentDisciplineWorkloadRequest(params) {
