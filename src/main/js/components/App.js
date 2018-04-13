@@ -1,17 +1,13 @@
 import React from 'react';
-import StudentTable from "../containers/student/StudentTable";
-import StudentFilter from '../containers/student/StudentFilter'
-import StudentWorkloadFilter from "./StudentWorkloadFilter";
-import LecturerWorkloadFilter from "./LecturerWorkloadFilter";
-import LecturerTable from "../containers/lecturer/LecturerTable";
+import StudentPage from "./StudentPage";
+import LecturerPage from "./LecturerPage";
+import NavigationBarContainer from "../containers/NavigationBarContainer"
 
 const App = () => (
     <div>
-        <StudentFilter/>
-        <StudentWorkloadFilter/>
-        <StudentTable/>
-        <LecturerWorkloadFilter/>
-        <LecturerTable/>
+        <NavigationBarContainer/>
+        <StudentPage/>
+        <LecturerPage/>
     </div>
 );
 
