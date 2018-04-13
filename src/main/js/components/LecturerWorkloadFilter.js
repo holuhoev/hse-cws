@@ -13,14 +13,6 @@ const LecturerWorkloadFilter = () => (
                     <FromDatePicker/>
                     <ToDatePicker/>
                 </Grid.Column>
-                <Grid.Column>
-                    <Button animated='vertical' primary>
-                        <Button.Content visible>Экспортировать</Button.Content>
-                        <Button.Content hidden>
-                            <Icon name='download' />
-                        </Button.Content>
-                    </Button>
-                </Grid.Column>
             </Grid.Row>
         </Grid>
     </div>
