@@ -43,7 +43,7 @@ public class LessonParserImplTest {
         Assert.assertTrue(result.size() == 2);
         Assert.assertTrue(result.get(0) == lesson5);
         Assert.assertTrue(result.get(1) == lesson7);
-        Assert.assertTrue(result.get(0).getHours() == 2);
-        Assert.assertTrue(result.get(1).getHours() == 3);
+        Assert.assertTrue(result.get(0).getHours() == 3);
+        Assert.assertTrue(result.get(1).getHours() == 6);
     }
 }
