@@ -21,7 +21,7 @@ public class LessonParserImpl implements LessonParser {
     /**
      * Minutes per pair.
      */
-    private static final int MINUTES_PER_PAIR = 80;
+    private static final int MINUTES_PER_PAIR = 40;
 
     @Override
     public List<Lesson> parse(List<Lesson> lessons) {
