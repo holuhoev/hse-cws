@@ -1,22 +1,32 @@
 import React, {Component} from 'react'
-import {Dropdown} from 'semantic-ui-react'
+import {Dropdown, Button, Grid} from 'semantic-ui-react'
 
 
 class ObjectDropDown extends Component {
     render() {
-        const {initialValue, options, isLoading, onChange, onSearchChange, placeHolder} = this.props;
-        return (<Dropdown
-            options={options}
-            placeholder={placeHolder}
-            noResultsMessage={'Нет данных...'}
-            selection
-            search
-            value={initialValue}
-            loading={isLoading}
-            disabled={isLoading}
-            onChange={onChange}
-            onSearchChange={onSearchChange}
-        />)
+        const {initialValue, label, options, isLoading, onChange, onSearchChange, onRemoveButtonClick, placeHolder} = this.props;
+        return (
+            <Grid>
+                <Grid.Column textAlign='left'>
+                    {label ? label + ': ' : ''}
+                    <Dropdown
+                        button
+                        options={options}
+                        placeholder={placeHolder}
+                        noResultsMessage={'Нет данных...'}
+                        selection
+                        search
+                        value={initialValue}
+                        loading={isLoading}
+                        disabled={isLoading}
+                        onChange={onChange}
+                        onSearchChange={onSearchChange}
+                    />
+                    <Button icon='remove' onClick={onRemoveButtonClick}/>
+                </Grid.Column>
+            </Grid>
+
+        )
     }
 
     componentDidMount() {

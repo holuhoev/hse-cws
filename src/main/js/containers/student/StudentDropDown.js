@@ -14,14 +14,15 @@ const getOptions = (items, renderFieldName) => {
 
 const mapStateToProps = state => {
     const {studentFilter, workloadFilter, students} = state.studentDisciplineWorkload;
-    const {student} = workloadFilter;
+    const {studentId} = workloadFilter;
     const {isFetching, items} = students;
     return {
-        initialValue: student,
+        initialValue: studentId,
         options: getOptions(items, "fio"),
         isLoading: isFetching,
         updateOnFilterChange: true,
         filter: studentFilter,
+        label: 'Студент',
         placeHolder: 'Выбрать студента'
     }
 };
@@ -37,6 +38,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onSearchChange: function (e, {searchQuery}) {
         dispatch(changeSearchString(searchQuery))
+    },
+    onRemoveButtonClick: (e) => {
+        dispatch(selectStudent(undefined))
     }
 });
 
