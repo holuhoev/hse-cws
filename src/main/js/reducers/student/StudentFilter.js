@@ -1,4 +1,4 @@
-import {CHANGE_SEARCH_STRING, SELECT_GROUP} from "../../actions/actionConsts";
+import {CHANGE_STUDENT_FILTER} from "../../actions/actionConsts";
 
 
 const initState = {
@@ -9,14 +9,11 @@ const initState = {
 
 export function studentFilter(state = initState, action) {
     switch (action.type) {
-        case SELECT_GROUP:
-            return Object.assign({}, state, {
-                group: action.group
-            });
-        case CHANGE_SEARCH_STRING:
-            return Object.assign({}, state, {
-                searchQuery: action.searchQuery
-            });
+        case CHANGE_STUDENT_FILTER:
+            return {
+                ...state,
+                ...action.value
+            };
         default:
             return state;
     }

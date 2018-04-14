@@ -1,15 +1,8 @@
 import fetch from 'isomorphic-fetch'
 import {
-    GROUPS_RECEIVE, GROUPS_REQUEST, SELECT_GROUP, STUDENT_DISCIPLINE_WORKLOAD_RECEIVE,
+    GROUPS_RECEIVE, GROUPS_REQUEST, STUDENT_DISCIPLINE_WORKLOAD_RECEIVE,
     STUDENT_DISCIPLINE_WORKLOAD_REQUEST
 } from "./actionConsts";
-
-export function selectGroup(group) {
-    return {
-        type: SELECT_GROUP,
-        group
-    }
-}
 
 export function groupsRequest() {
     return {

@@ -1,6 +1,7 @@
 import {connect} from 'react-redux'
 import ObjectDropDown from "../../components/ObjectDropDown";
 import {changeSearchString, fetchStudents, selectStudent} from "../../actions/student/students";
+import {changeStudentFilter} from "../../actions/student/studentFilter";
 
 const getOptions = (items, renderFieldName) => {
     let options = [];
@@ -37,7 +38,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(fetchStudents({groupId: group, studentFio: searchQuery}))
     },
     onSearchChange: function (e, {searchQuery}) {
-        dispatch(changeSearchString(searchQuery))
+        dispatch(changeStudentFilter({searchQuery}))
     },
     onRemoveButtonClick: (e) => {
         dispatch(selectStudent(undefined))

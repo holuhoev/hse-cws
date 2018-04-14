@@ -1,5 +1,5 @@
 import fetch from "isomorphic-fetch";
-import {CHANGE_SEARCH_STRING, SELECT_STUDENT, STUDENTS_RECEIVE, STUDENTS_REQUEST} from "../actionConsts";
+import {SELECT_STUDENT, STUDENTS_RECEIVE, STUDENTS_REQUEST} from "../actionConsts";
 
 function normalize(data = []) {
     let result = {};
@@ -8,12 +8,6 @@ function normalize(data = []) {
     }));
 }
 
-export function changeSearchString(searchQuery) {
-    return {
-        type: CHANGE_SEARCH_STRING,
-        searchQuery
-    }
-}
 
 export function studentsRequest(params) {
     return {

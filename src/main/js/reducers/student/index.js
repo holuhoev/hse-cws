@@ -4,6 +4,7 @@ import {workloadFilter} from "./WorkloadFilter";
 import {students} from "./Students";
 import {workloads} from "./Workloads";
 import {groups} from "./Groups";
+import {faculties} from "./Faculties";
 
 
 const studentDisciplineWorkload = combineReducers({
@@ -11,6 +12,7 @@ const studentDisciplineWorkload = combineReducers({
     workloadFilter,
     students,
     groups,
+    faculties,
     workloads
 });
 

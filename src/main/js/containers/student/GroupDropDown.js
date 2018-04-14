@@ -1,7 +1,8 @@
 import {connect} from "react-redux";
 import ObjectDropDown from "../../components/ObjectDropDown";
-import {fetchGroupsIfNeeded, selectGroup} from "../../actions";
-import {changeSearchString, selectStudent} from "../../actions/student/students";
+import {fetchGroupsIfNeeded} from "../../actions";
+import {selectStudent} from "../../actions/student/students";
+import {changeStudentFilter} from "../../actions/student/studentFilter";
 
 const getOptions = (items, renderFieldName) => {
     let options = [];
@@ -33,15 +34,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     onChange: (e, {value}) => {
-        dispatch(selectGroup(value));
+        dispatch(changeStudentFilter({group: value, searchQuery: ''}));
         dispatch(selectStudent(undefined));
-        dispatch(changeSearchString(''))
     },
     loadData: () => {
         dispatch(fetchGroupsIfNeeded())
     },
     onRemoveButtonClick: (e) => {
-        dispatch(selectGroup(undefined))
+        dispatch(changeStudentFilter({group: undefined}))
     }
 });
 
