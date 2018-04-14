@@ -51,26 +51,24 @@ export function fetchGroupsIfNeeded() {
 
 const format = 'YYYY-MM-DD';
 
-export function studentDisciplineWorkloadRequest(params) {
+export function studentDisciplineWorkloadRequest(value) {
     return {
         type: STUDENT_DISCIPLINE_WORKLOAD_REQUEST,
-        params
+        value
     }
 }
 
 
-export function studentDisciplineWorkloadReceive(params, json) {
+export function studentDisciplineWorkloadReceive(value) {
     return {
         type: STUDENT_DISCIPLINE_WORKLOAD_RECEIVE,
-        params,
-        data: json.result,
-        receivedAt: Date.now()
+        value
     }
 }
 
 export function fetchStudentDisciplineWorkload({studentId, fromDate, toDate}) {
     return function (dispatch) {
-        dispatch(studentDisciplineWorkloadRequest({studentId, fromDate, toDate}));
+        dispatch(studentDisciplineWorkloadRequest({isFetching: true}));
         let url = new URL('http://localhost:8080/api/student/disciplineWorkload');
         if (studentId) {
             url.searchParams.append("studentId", studentId);
@@ -83,7 +81,7 @@ export function fetchStudentDisciplineWorkload({studentId, fromDate, toDate}) {
         }
         return fetch(url)
             .then(response => response.json())
-            .then(json => dispatch(studentDisciplineWorkloadReceive({studentId, fromDate, toDate}, json)));
+            .then(json => dispatch(studentDisciplineWorkloadReceive({isFetching: false, items: json.result})));
 
     };
 }

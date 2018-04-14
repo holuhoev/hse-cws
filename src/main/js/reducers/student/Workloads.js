@@ -1,4 +1,7 @@
-import {STUDENT_DISCIPLINE_WORKLOAD_RECEIVE, STUDENT_DISCIPLINE_WORKLOAD_REQUEST} from "../../actions/actionConsts";
+import {
+    STUDENT_DISCIPLINE_WORKLOAD_RECEIVE,
+    STUDENT_DISCIPLINE_WORKLOAD_REQUEST
+} from "../../actions/actionConsts";
 
 let workloadsInitState = {
     isFetching: false,
@@ -8,14 +11,11 @@ let workloadsInitState = {
 export function workloads(state = workloadsInitState, action) {
     switch (action.type) {
         case STUDENT_DISCIPLINE_WORKLOAD_REQUEST:
-            return Object.assign({}, state, {
-                isFetching: true
-            });
         case STUDENT_DISCIPLINE_WORKLOAD_RECEIVE:
-            return Object.assign({}, state, {
-                isFetching: false,
-                items: action.data
-            });
+            return {
+                ...state,
+                ...action.value
+            };
         default:
             return state;
     }
