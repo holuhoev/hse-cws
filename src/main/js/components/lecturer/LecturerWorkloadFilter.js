@@ -1,7 +1,7 @@
 import React from 'react'
-import FromDatePicker from "../containers/lecturer/FromDatePicker";
-import ToDatePicker from "../containers/lecturer/ToDatePicker";
-import LecturerDropDown from "../containers/lecturer/LecturerDropDown";
+import FromDatePicker from "../../containers/lecturer/FromDatePicker";
+import ToDatePicker from "../../containers/lecturer/ToDatePicker";
+import LecturerDropDown from "../../containers/lecturer/LecturerDropDown";
 import {Button, Grid, Icon} from 'semantic-ui-react'
 
 const LecturerWorkloadFilter = () => (

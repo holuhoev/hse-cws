@@ -29,7 +29,7 @@ class WorkloadTable extends React.Component {
         const {data, loading} = this.props;
         let index = 0;
         return (
-            <Segment color='blue'>
+            <Segment>
                 {loading &&
                 <Dimmer active inverted>
                     <Loader size='big' content='Загрузка данных...'/>

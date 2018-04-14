@@ -25,7 +25,8 @@ const mapStateToProps = state => {
         options: getOptions(filterGroups(groups.items, faculty), "number"),
         isLoading: groups.isFetching,
         updateOnFilterChange: false,
-        placeHolder: 'Выбрать группу'
+        placeHolder: 'Выбрать группу',
+        label: 'Группа'
     }
 };
 
@@ -38,12 +39,15 @@ const mapDispatchToProps = dispatch => ({
     },
     loadData: () => {
         dispatch(fetchGroupsIfNeeded())
+    },
+    onRemoveButtonClick: (e) => {
+        dispatch(selectGroup(undefined))
     }
 });
 
-const StudentFilter = connect(
+const GroupDropDown = connect(
     mapStateToProps,
     mapDispatchToProps
 )(ObjectDropDown);
 
-export default StudentFilter;
+export default GroupDropDown;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Dropdown, Button, Grid} from 'semantic-ui-react'
+import {Dropdown, Button, Grid,Segment} from 'semantic-ui-react'
 
 
 class ObjectDropDown extends Component {
@@ -7,7 +7,7 @@ class ObjectDropDown extends Component {
         const {initialValue, label, options, isLoading, onChange, onSearchChange, onRemoveButtonClick, placeHolder} = this.props;
         return (
             <Grid>
-                <Grid.Column textAlign='left'>
+                <Grid.Column >
                     {label ? label + ': ' : ''}
                     <Dropdown
                         button

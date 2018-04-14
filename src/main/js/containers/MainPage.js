@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import StudentPage from "../components/StudentPage";
-import LecturerPage from "../components/LecturerPage";
+import StudentPage from "../components/student/StudentPage";
+import LecturerPage from "../components/lecturer/LecturerPage";
 
 const MainPage = ({activeItem}) => (
     <div>
