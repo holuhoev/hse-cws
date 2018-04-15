@@ -20,10 +20,10 @@ const filterGroups = (groups, facultyId) => {
 
 const mapStateToProps = state => {
     const {studentFilter, groups} = state.studentDisciplineWorkload;
-    const {group, faculty} = studentFilter;
+    const {groupId, facultyId} = studentFilter;
     return {
-        initialValue: group,
-        options: getOptions(filterGroups(groups.items, faculty), "number"),
+        initialValue: groupId,
+        options: getOptions(filterGroups(groups.items, facultyId), "number"),
         isLoading: groups.isFetching,
         updateOnFilterChange: false,
         placeHolder: 'Выбрать группу',

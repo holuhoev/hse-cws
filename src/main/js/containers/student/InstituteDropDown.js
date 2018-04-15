@@ -17,9 +17,9 @@ const getOptions = (items, renderFieldName) => {
 
 const mapStateToProps = state => {
     const {studentFilter, institutes} = state.studentDisciplineWorkload;
-    const {institute} = studentFilter;
+    const {instituteId} = studentFilter;
     return {
-        initialValue: institute,
+        initialValue: instituteId,
         options: getOptions(institutes.items, "name"),
         isLoading: institutes.isFetching,
         updateOnFilterChange: false,

@@ -21,10 +21,10 @@ const filterFaculties = (items, instituteId) => {
 
 const mapStateToProps = state => {
     const {studentFilter, faculties} = state.studentDisciplineWorkload;
-    const {faculty, institute} = studentFilter;
+    const {facultyId, instituteId} = studentFilter;
     return {
-        initialValue: faculty,
-        options: getOptions(filterFaculties(faculties.items, institute), "name"),
+        initialValue: facultyId,
+        options: getOptions(filterFaculties(faculties.items, instituteId), "name"),
         isLoading: faculties.isFetching,
         updateOnFilterChange: false,
         placeHolder: 'Выбрать программу',

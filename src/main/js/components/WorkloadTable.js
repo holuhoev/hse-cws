@@ -51,23 +51,25 @@ class WorkloadTable extends React.Component {
                     </Table.Header>
                     <Table.Body>
                         {
-                            data.map(({name, seminar, lecture, science, practice, exam, workShow, other, consultation}) => {
-                                return <Table.Row key={index++}>
-                                    <Table.Cell>{name}</Table.Cell>
-                                    <Table.Cell>{seminar}</Table.Cell>
-                                    <Table.Cell>{lecture}</Table.Cell>
-                                    <Table.Cell>{science}</Table.Cell>
-                                    <Table.Cell>{practice}</Table.Cell>
-                                    <Table.Cell>{workShow}</Table.Cell>
-                                    <Table.Cell>{consultation}</Table.Cell>
-                                    <Table.Cell>{exam}</Table.Cell>
-                                    <Table.Cell>{other}</Table.Cell>
-                                </Table.Row>
-                            })
+                            data ?
+                                data.map(({name, seminar, lecture, science, practice, exam, workShow, other, consultation}) => {
+                                    return <Table.Row key={index++}>
+                                        <Table.Cell>{name}</Table.Cell>
+                                        <Table.Cell>{seminar}</Table.Cell>
+                                        <Table.Cell>{lecture}</Table.Cell>
+                                        <Table.Cell>{science}</Table.Cell>
+                                        <Table.Cell>{practice}</Table.Cell>
+                                        <Table.Cell>{workShow}</Table.Cell>
+                                        <Table.Cell>{consultation}</Table.Cell>
+                                        <Table.Cell>{exam}</Table.Cell>
+                                        <Table.Cell>{other}</Table.Cell>
+                                    </Table.Row>
+                                })
+                                :<div></div>
                         }
                     </Table.Body>
                 </Table>
-                {data && data.length > 0 ? <p></p>
+                {data && data.length > 0 ? <div></div>
                     :
                     <Divider horizontal>
                         <Message size='small' positive>
