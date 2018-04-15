@@ -17,7 +17,7 @@ const mapStateToProps = state => {
     const {department} = state;
     const {filter} = department;
     const {chairId} = filter;
-    const {chairs} = state.lecturerDisciplineWorkload;
+    const {chairs} = state.lecturer;
     const {isFetching, items} = chairs;
     return {
         initialValue: chairId,

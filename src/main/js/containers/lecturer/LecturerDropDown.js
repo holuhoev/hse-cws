@@ -15,7 +15,7 @@ const getOptions = (items, renderFieldName) => {
 };
 
 const mapStateToProps = state => {
-    const {lecturerFilter, workloadFilter, lecturers} = state.lecturerDisciplineWorkload;
+    const {lecturerFilter, workloadFilter, lecturers} = state.lecturer;
     const {lecturer} = workloadFilter;
     const {isFetching, items} = lecturers;
     return {

@@ -26,7 +26,7 @@ function fetchInstitutes() {
 }
 
 function shouldFetchInstitutes(state) {
-    const {institutes} = state.studentDisciplineWorkload;
+    const {institutes} = state.student;
     return !(institutes.items && institutes.items.length > 0);
 }
 

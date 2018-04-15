@@ -29,7 +29,7 @@ function fetchGroups() {
 }
 
 function shouldFetchGroups(state) {
-    const {groups} = state.studentDisciplineWorkload;
+    const {groups} = state.student;
     return !(groups.items && groups.items.length > 0);
 }
 

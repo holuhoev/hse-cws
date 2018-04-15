@@ -5,15 +5,14 @@ import NavigationBar from "../components/NavigationBar";
 const mapStateToProps = (state) => {
     const {application} = state;
     const {activeItem} = application;
+    const {workloads} = state[activeItem];
     return {
-        activeItem
+        activeItem,
+        workloads
     }
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    onButtonClick: () => {
-        // TODO???
-    },
     handleItemClick: (e, {name}) => {
         dispatch(setActiveItem(name))
     }

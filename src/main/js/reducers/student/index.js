@@ -8,7 +8,7 @@ import {faculties} from "./Faculties";
 import {institutes} from "./Institutes";
 
 
-const studentDisciplineWorkload = combineReducers({
+const student = combineReducers({
     studentFilter,
     workloadFilter,
     students,
@@ -18,5 +18,5 @@ const studentDisciplineWorkload = combineReducers({
     workloads
 });
 
-export default studentDisciplineWorkload;
+export default student;
 

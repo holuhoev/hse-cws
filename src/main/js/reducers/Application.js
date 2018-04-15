@@ -1,7 +1,7 @@
 import {SET_ACTIVE_ITEM} from "../actions/actionConsts";
 
 const initState = {
-    activeItem: 'students'
+    activeItem: 'student'
 };
 
 export function application(state = initState, action) {

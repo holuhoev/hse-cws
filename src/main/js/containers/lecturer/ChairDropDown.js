@@ -14,7 +14,7 @@ const getOptions = (items, renderFieldName) => {
 };
 
 const mapStateToProps = state => {
-    const {lecturerFilter, chairs} = state.lecturerDisciplineWorkload;
+    const {lecturerFilter, chairs} = state.lecturer;
     const {chairId} = lecturerFilter;
     const {isFetching, items} = chairs;
     return {

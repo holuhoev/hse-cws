@@ -4,8 +4,8 @@ import {fetchStudentDisciplineWorkload} from "../../actions/index";
 import WorkloadTable from "../../components/WorkloadTable";
 
 const mapStateToProps = state => {
-    const {studentDisciplineWorkload} = state;
-    const {workloadFilter, workloads} = studentDisciplineWorkload;
+    const {student} = state;
+    const {workloadFilter, workloads} = student;
     return {
         loading: workloads.isFetching,
         data: workloads.items,

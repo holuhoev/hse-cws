@@ -26,7 +26,7 @@ function fetchFaculties() {
 }
 
 function shouldFetchFaculties(state) {
-    const {faculties} = state.studentDisciplineWorkload;
+    const {faculties} = state.student;
     return !(faculties.items && faculties.items.length > 0);
 }
 

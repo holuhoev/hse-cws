@@ -1,12 +1,12 @@
 import {combineReducers} from "redux";
-import studentDisciplineWorkload from './student'
-import lecturerDisciplineWorkload from './lecturer'
+import student from './student'
+import lecturer from './lecturer'
 import {application} from "./Application";
 import department from "./department";
 
 const rootReducer = combineReducers({
-    studentDisciplineWorkload,
-    lecturerDisciplineWorkload,
+    student,
+    lecturer,
     department,
     application
 });

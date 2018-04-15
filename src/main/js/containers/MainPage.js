@@ -6,9 +6,9 @@ import DepartmentPage from "../components/department/DepartmentPage";
 
 const MainPage = ({activeItem}) => (
     <div>
-        {activeItem === 'students'
+        {activeItem === 'student'
             ? <StudentPage/>
-            : (activeItem === 'lecturers'
+            : (activeItem === 'lecturer'
                 ? <LecturerPage/>
                 : <DepartmentPage/>)
         }

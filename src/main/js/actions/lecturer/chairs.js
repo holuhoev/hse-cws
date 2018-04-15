@@ -27,7 +27,7 @@ function fetchChairs() {
 }
 
 function shouldFetchChairs(state) {
-    const {chairs} = state.lecturerDisciplineWorkload;
+    const {chairs} = state.lecturer;
     return !(chairs.items && chairs.items.length > 0);
 }
 

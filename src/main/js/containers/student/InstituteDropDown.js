@@ -16,7 +16,7 @@ const getOptions = (items, renderFieldName) => {
 };
 
 const mapStateToProps = state => {
-    const {studentFilter, institutes} = state.studentDisciplineWorkload;
+    const {studentFilter, institutes} = state.student;
     const {instituteId} = studentFilter;
     return {
         initialValue: instituteId,

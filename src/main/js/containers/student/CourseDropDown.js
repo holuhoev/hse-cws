@@ -12,7 +12,7 @@ const options = [
 ];
 
 const mapStateToProps = state => {
-    const {studentFilter} = state.studentDisciplineWorkload;
+    const {studentFilter} = state.student;
     const {course} = studentFilter;
     return {
         initialValue: course,

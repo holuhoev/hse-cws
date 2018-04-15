@@ -20,7 +20,7 @@ const filterFaculties = (items, instituteId) => {
 };
 
 const mapStateToProps = state => {
-    const {studentFilter, faculties} = state.studentDisciplineWorkload;
+    const {studentFilter, faculties} = state.student;
     const {facultyId, instituteId} = studentFilter;
     return {
         initialValue: facultyId,

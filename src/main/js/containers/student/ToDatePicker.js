@@ -3,8 +3,8 @@ import {selectStudentToDate} from "../../actions/student/dates";
 import DatePickerComponent from "../../components/DatePickerComponent";
 
 const mapStateToProps = (state) => {
-    const {studentDisciplineWorkload} = state;
-    const {workloadFilter} = studentDisciplineWorkload;
+    const {student} = state;
+    const {workloadFilter} = student;
     const {toDate} = workloadFilter;
     return {
         value: toDate

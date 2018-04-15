@@ -14,16 +14,21 @@ const getOptions = (items, renderFieldName) => {
     return options;
 };
 
-const filterGroups = (groups, facultyId) => {
-    return (facultyId && groups) ? groups.filter(group => group["facultyId"] === facultyId) : groups;
+const filterGroups = (groups, facultyId, instituteId, course) => {
+    return (groups)
+        ? groups.filter(group =>
+            (!facultyId || group["facultyId"] === facultyId)
+            && (!instituteId || group["instituteId"] === instituteId)
+            && (!course || group["course"] === course))
+        : groups;
 };
 
 const mapStateToProps = state => {
-    const {studentFilter, groups} = state.studentDisciplineWorkload;
-    const {groupId, facultyId} = studentFilter;
+    const {studentFilter, groups} = state.student;
+    const {groupId, facultyId, instituteId, course} = studentFilter;
     return {
         initialValue: groupId,
-        options: getOptions(filterGroups(groups.items, facultyId), "number"),
+        options: getOptions(filterGroups(groups.items, facultyId, instituteId, course), "number"),
         isLoading: groups.isFetching,
         updateOnFilterChange: false,
         placeHolder: 'Выбрать группу',
