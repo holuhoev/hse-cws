@@ -4,6 +4,7 @@ import {CHANGE_STUDENT_FILTER} from "../../actions/actionConsts";
 const initState = {
     instituteId: undefined,
     facultyId: undefined,
+    course: undefined,
     groupId: undefined,
     studentFio: ''
 };

@@ -5,6 +5,7 @@ import StudentWorkloadFilter from "./StudentWorkloadFilter";
 import {Segment} from 'semantic-ui-react'
 import FacultyDropDown from "../../containers/student/FacultyDropDown";
 import InstituteDropDown from "../../containers/student/InstituteDropDown";
+import CourseDropDown from "../../containers/student/CourseDropDown";
 
 const StudentPage = () => (
     <Segment.Group>
@@ -14,7 +15,7 @@ const StudentPage = () => (
             <Segment><FacultyDropDown/></Segment>
         </Segment.Group>
         <Segment.Group horizontal>
-            <Segment><GroupDropDown/></Segment>
+            <Segment><CourseDropDown/></Segment>
             <Segment><GroupDropDown/></Segment>
         </Segment.Group>
         <Segment>Фильтр загруженности.</Segment>
