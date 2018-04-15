@@ -2,20 +2,20 @@ import React from 'react'
 import FromDatePicker from "../../containers/lecturer/FromDatePicker";
 import ToDatePicker from "../../containers/lecturer/ToDatePicker";
 import LecturerDropDown from "../../containers/lecturer/LecturerDropDown";
-import {Button, Grid, Icon} from 'semantic-ui-react'
+import {Segment} from 'semantic-ui-react'
 
 const LecturerWorkloadFilter = () => (
-    <div>
-        <LecturerDropDown/>
-        <Grid columns='two' divided>
-            <Grid.Row>
-                <Grid.Column>
-                    <FromDatePicker/>
-                    <ToDatePicker/>
-                </Grid.Column>
-            </Grid.Row>
-        </Grid>
-    </div>
+    <Segment.Group horizontal>
+        <Segment>
+            <LecturerDropDown/>
+        </Segment>
+        <Segment>
+            <FromDatePicker/>
+        </Segment>
+        <Segment>
+            <ToDatePicker/>
+        </Segment>
+    </Segment.Group>
 );
 
 export default LecturerWorkloadFilter;

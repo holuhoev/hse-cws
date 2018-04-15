@@ -1,15 +1,8 @@
-import {CHANGE_LECTURER_SEARCH_QUERY, SELECT_CHAIR} from "../actionConsts";
+import {CHANGE_LECTURER_FILTER} from "../actionConsts";
 
-export function selectChair(chair) {
+export function changeLecturerFilter(value) {
     return {
-        type: SELECT_CHAIR,
-        chair
-    }
-}
-
-export function changeLecturerSearchQuery(searchQuery) {
-    return {
-        type: CHANGE_LECTURER_SEARCH_QUERY,
-        searchQuery
+        type: CHANGE_LECTURER_FILTER,
+        value
     }
 }

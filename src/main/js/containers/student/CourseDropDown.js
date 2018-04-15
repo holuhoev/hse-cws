@@ -26,11 +26,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     onChange: (e, {value}) => {
-        dispatch(changeStudentFilter({course: value, groupId: undefined, studentFio: ''}));
+        dispatch(changeStudentFilter({course: value, groupId: undefined, studentFio: undefined}));
         dispatch(selectStudent(undefined));
     },
     onRemoveButtonClick: (e) => {
-        dispatch(changeStudentFilter({course: undefined, groupId: undefined, studentFio: ''}));
+        dispatch(changeStudentFilter({course: undefined, groupId: undefined, studentFio: undefined}));
         dispatch(selectStudent(undefined));
     }
 });

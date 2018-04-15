@@ -25,3 +25,16 @@ function fetchChairs() {
 
     };
 }
+
+function shouldFetchChairs(state) {
+    const {chairs} = state.lecturerDisciplineWorkload;
+    return !(chairs.items && chairs.items.length > 0);
+}
+
+export function fetchChairsIfNeeded() {
+    return (dispatch, getState) => {
+        if (shouldFetchChairs(getState())) {
+            return dispatch(fetchChairs())
+        }
+    };
+}

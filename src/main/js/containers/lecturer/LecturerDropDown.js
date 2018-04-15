@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import ObjectDropDown from "../../components/ObjectDropDown";
 import {selectLecturer} from "../../actions/lecturer/workloadFilter";
-import {changeLecturerSearchQuery} from "../../actions/lecturer/lecturerFilter";
+import {changeLecturerFilter} from "../../actions/lecturer/lecturerFilter";
 import {fetchLecturers} from "../../actions/lecturer/lecturers";
 
 const getOptions = (items, renderFieldName) => {
@@ -24,7 +24,8 @@ const mapStateToProps = state => {
         isLoading: isFetching,
         updateOnFilterChange: true,
         filter: lecturerFilter,
-        placeHolder: 'Выбрать лектора'
+        placeHolder: 'Выбрать преподавателя',
+        label: 'Преподаватель'
     }
 };
 
@@ -34,11 +35,10 @@ const mapDispatchToProps = dispatch => ({
         dispatch(selectLecturer(value));
     },
     loadData: function (filter) {
-        const {chair, searchQuery} = filter;
-        dispatch(fetchLecturers({chairId: chair, lecturerFio: searchQuery}))
+        dispatch(fetchLecturers(filter))
     },
     onSearchChange: function (e, {searchQuery}) {
-        dispatch(changeLecturerSearchQuery(searchQuery))
+        dispatch(changeLecturerFilter({lecturerFio: searchQuery}))
     }
 });
 

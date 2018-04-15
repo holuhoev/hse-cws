@@ -1,21 +1,18 @@
-import {CHANGE_LECTURER_SEARCH_QUERY, SELECT_CHAIR} from "../../actions/actionConsts";
+import {CHANGE_LECTURER_FILTER} from "../../actions/actionConsts";
 
 const initState = {
-    chair: undefined,
-    searchQuery: ''
+    chairId: undefined,
+    lecturerFio: ''
 };
 
 
 export function lecturerFilter(state = initState, action) {
     switch (action.type) {
-        case SELECT_CHAIR:
-            return Object.assign({}, state, {
-                chair: action.chair
-            });
-        case CHANGE_LECTURER_SEARCH_QUERY:
-            return Object.assign({}, state, {
-                searchQuery: action.searchQuery
-            });
+        case CHANGE_LECTURER_FILTER:
+            return {
+                ...state,
+                ...action.value
+            };
         default:
             return state;
     }

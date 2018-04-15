@@ -24,9 +24,11 @@ public class Chair extends RuzObject {
     @Column(name = "faculty_id")
     private Integer facultyId;
 
+    @JsonAttribute
     @Column(name = "chair_name")
     private String name;
 
+    @JsonAttribute
     @Column(name = "code")
     private String code;
 
