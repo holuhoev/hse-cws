@@ -5,6 +5,7 @@ import {students} from "./Students";
 import {workloads} from "./Workloads";
 import {groups} from "./Groups";
 import {faculties} from "./Faculties";
+import {institutes} from "./Institutes";
 
 
 const studentDisciplineWorkload = combineReducers({
@@ -13,6 +14,7 @@ const studentDisciplineWorkload = combineReducers({
     students,
     groups,
     faculties,
+    institutes,
     workloads
 });
 

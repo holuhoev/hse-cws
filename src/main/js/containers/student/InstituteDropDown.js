@@ -1,8 +1,9 @@
 import {connect} from "react-redux";
 import ObjectDropDown from "../../components/ObjectDropDown";
-import {fetchGroupsIfNeeded} from "../../actions";
+
 import {selectStudent} from "../../actions/student/students";
 import {changeStudentFilter} from "../../actions/student/studentFilter";
+import {fetchInstitutesIfNeeded} from "../../actions/student/institutes";
 
 const getOptions = (items, renderFieldName) => {
     let options = [];
@@ -14,41 +15,37 @@ const getOptions = (items, renderFieldName) => {
     return options;
 };
 
-const filterGroups = (groups, facultyId) => {
-    return (facultyId && groups) ? groups.filter(group => group["facultyId"] === facultyId) : groups;
-};
-
 const mapStateToProps = state => {
-    const {studentFilter, groups} = state.studentDisciplineWorkload;
-    const {group, faculty} = studentFilter;
+    const {studentFilter, institutes} = state.studentDisciplineWorkload;
+    const {institute} = studentFilter;
     return {
-        initialValue: group,
-        options: getOptions(filterGroups(groups.items, faculty), "number"),
-        isLoading: groups.isFetching,
+        initialValue: institute,
+        options: getOptions(institutes.items, "name"),
+        isLoading: institutes.isFetching,
         updateOnFilterChange: false,
-        placeHolder: 'Выбрать группу',
-        label: 'Группа'
+        placeHolder: 'Выбрать факультет',
+        label: 'Факультет'
     }
 };
 
 
 const mapDispatchToProps = dispatch => ({
     onChange: (e, {value}) => {
-        dispatch(changeStudentFilter({group: value, searchQuery: ''}));
+        dispatch(changeStudentFilter({institute: value, faculty: undefined, group: undefined, searchQuery: ''}));
         dispatch(selectStudent(undefined));
     },
     loadData: () => {
-        dispatch(fetchGroupsIfNeeded())
+        dispatch(fetchInstitutesIfNeeded())
     },
     onRemoveButtonClick: (e) => {
-        dispatch(changeStudentFilter({group: undefined}));
+        dispatch(changeStudentFilter({institute: undefined, faculty: undefined, group: undefined, searchQuery: ''}))
         dispatch(selectStudent(undefined));
     }
 });
 
-const GroupDropDown = connect(
+const InstituteDropDown = connect(
     mapStateToProps,
     mapDispatchToProps
 )(ObjectDropDown);
 
-export default GroupDropDown;
+export default InstituteDropDown;

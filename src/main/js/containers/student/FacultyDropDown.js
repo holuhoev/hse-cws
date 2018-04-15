@@ -21,14 +21,14 @@ const filterFaculties = (items, instituteId) => {
 
 const mapStateToProps = state => {
     const {studentFilter, faculties} = state.studentDisciplineWorkload;
-    const {faculty} = studentFilter;
+    const {faculty, institute} = studentFilter;
     return {
         initialValue: faculty,
-        options: getOptions(faculties.items, "name"),
+        options: getOptions(filterFaculties(faculties.items, institute), "name"),
         isLoading: faculties.isFetching,
         updateOnFilterChange: false,
         placeHolder: 'Выбрать программу',
-        label: 'Образовательная программа:'
+        label: 'Образовательная программа'
     }
 };
 
@@ -42,7 +42,8 @@ const mapDispatchToProps = dispatch => ({
         dispatch(fetchFacultiesIfNeeded())
     },
     onRemoveButtonClick: (e) => {
-        dispatch(changeStudentFilter({faculty: undefined}))
+        dispatch(changeStudentFilter({faculty: undefined, group: undefined, searchQuery: ''}))
+        dispatch(selectStudent(undefined));
     }
 });
 
