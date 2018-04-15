@@ -71,20 +71,16 @@ public class LecturerWorkloadDatasource {
         BooleanBuilder lecturerBuilder = new BooleanBuilder();
         BooleanBuilder workloadBuilder = new BooleanBuilder();
 
-        if (chairId != null) {
-            lecturerBuilder.and(qLecturer.chairId.eq(chairId));
-        }
+        if (chairId == null || fromDate == null || toDate == null)
+            return DataSourceResult.createEmpty();
 
+        lecturerBuilder.and(qLecturer.chairId.eq(chairId));
+        workloadBuilder.and(qLecturerWorkload.date.after(fromDate));
+        workloadBuilder.and(qLecturerWorkload.date.before(toDate));
         if (fio != null && !fio.isEmpty()) {
             lecturerBuilder.and(qLecturer.fio.containsIgnoreCase(fio));
         }
-        if (fromDate != null) {
-            workloadBuilder.and(qLecturerWorkload.date.after(fromDate));
-        }
 
-        if (toDate != null) {
-            workloadBuilder.and(qLecturerWorkload.date.before(toDate));
-        }
 
         Iterable<Lecturer> lecturers;
         if (top != null) {

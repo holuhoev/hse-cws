@@ -2,12 +2,16 @@ import React from 'react'
 import {connect} from 'react-redux'
 import StudentPage from "../components/student/StudentPage";
 import LecturerPage from "../components/lecturer/LecturerPage";
+import DepartmentPage from "../components/department/DepartmentPage";
 
 const MainPage = ({activeItem}) => (
     <div>
         {activeItem === 'students'
             ? <StudentPage/>
-            : (activeItem === 'lecturers' ? <LecturerPage/> : <StudentPage/>)}
+            : (activeItem === 'lecturers'
+                ? <LecturerPage/>
+                : <DepartmentPage/>)
+        }
     </div>
 
 

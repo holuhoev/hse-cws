@@ -79,10 +79,11 @@ public class WorkloadLoader {
     private void loadLecturerWorkload() {
         logger.info("Lecturer workload loader starts.");
         lecturerWorkloadRepository.deleteAll();
-        LocalDate now = LocalDate.now();
+        LocalDate fromDate = LocalDate.of(2017, 9, 1);
         lecturerRepository.findAll().forEach(lecturer -> {
-            createAndSaveLecturerWorkload(lecturer, now.minusMonths(3), now.minusDays(1));
-            createAndSaveLecturerWorkload(lecturer, now, now.plusMonths(3));
+            createAndSaveLecturerWorkload(lecturer, fromDate, fromDate.plusMonths(4));
+            createAndSaveLecturerWorkload(lecturer, fromDate.plusMonths(4).plusDays(1), fromDate.plusMonths(8));
+            createAndSaveLecturerWorkload(lecturer, fromDate.plusMonths(8).plusDays(1), fromDate.plusMonths(2));
         });
         logger.info("Lecturer workload loader ends.");
     }
