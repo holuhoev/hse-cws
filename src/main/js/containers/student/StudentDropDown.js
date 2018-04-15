@@ -20,7 +20,7 @@ const mapStateToProps = state => {
     return {
         initialValue: studentId,
         options: getOptions(items, "fio"),
-        isLoading: isFetching,
+        // isLoading: isFetching,
         updateOnFilterChange: true,
         filter: studentFilter,
         label: 'Студент',
