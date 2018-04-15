@@ -40,7 +40,8 @@ const mapDispatchToProps = dispatch => ({
         dispatch(changeStudentFilter({studentFio: searchQuery}))
     },
     onRemoveButtonClick: (e) => {
-        dispatch(selectStudent(undefined))
+        dispatch(selectStudent(undefined));
+        dispatch(changeStudentFilter({studentFio: undefined}))
     }
 });
 
