@@ -46,13 +46,14 @@ class WorkloadTable extends React.Component {
                             <Table.HeaderCell>Показ работ</Table.HeaderCell>
                             <Table.HeaderCell>Консультация</Table.HeaderCell>
                             <Table.HeaderCell>Экзамен</Table.HeaderCell>
+                            <Table.HeaderCell>Контрольная работа</Table.HeaderCell>
                             <Table.HeaderCell>Другое</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
                         {
                             data ?
-                                data.map(({name, seminar, lecture, science, practice, exam, workShow, other, consultation}) => {
+                                data.map(({name, seminar, lecture, science, practice, exam, workShow, other, consultation, test}) => {
                                     return <Table.Row key={index++}>
                                         <Table.Cell>{name}</Table.Cell>
                                         <Table.Cell>{seminar}</Table.Cell>
@@ -62,10 +63,11 @@ class WorkloadTable extends React.Component {
                                         <Table.Cell>{workShow}</Table.Cell>
                                         <Table.Cell>{consultation}</Table.Cell>
                                         <Table.Cell>{exam}</Table.Cell>
+                                        <Table.Cell>{test}</Table.Cell>
                                         <Table.Cell>{other}</Table.Cell>
                                     </Table.Row>
                                 })
-                                :<div></div>
+                                : <div></div>
                         }
                     </Table.Body>
                 </Table>

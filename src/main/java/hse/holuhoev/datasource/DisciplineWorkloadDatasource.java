@@ -63,6 +63,7 @@ public class DisciplineWorkloadDatasource {
                                     Collectors.summingInt(Lesson::getHours)));
                     workload.setLecture(map.getOrDefault(LECTURE, 0));
                     workload.setExam(map.getOrDefault(EXAM, 0));
+                    workload.setTest(map.getOrDefault(TEST, 0));
                     workload.setSeminar(map.getOrDefault(SEMINAR, 0));
                     workload.setWorkShow(map.getOrDefault(WORK_SHOW, 0));
                     workload.setScience(map.getOrDefault(SCIENCE, 0));

@@ -10,6 +10,7 @@ public class DisciplineWorkload {
     private Integer science;
     private Integer practice;
     private Integer exam;
+    private Integer test;
     private Integer workShow;
     private Integer other;
     private Integer consultation;
@@ -87,5 +88,13 @@ public class DisciplineWorkload {
 
     public void setConsultation(Integer consultation) {
         this.consultation = consultation;
+    }
+
+    public Integer getTest() {
+        return test;
+    }
+
+    public void setTest(Integer test) {
+        this.test = test;
     }
 }
