@@ -4,10 +4,12 @@ import {changeDepartmentFilter} from "../../actions/department/filter";
 
 const mapStateToProps = (state) => {
     const {department} = state;
-    const {filter} = department;
+    const {filter, workloads} = department;
     const {fromDate} = filter;
+    const {isFetching} = workloads;
     return {
-        value: fromDate
+        value: fromDate,
+        disabled: isFetching
     }
 };
 
