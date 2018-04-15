@@ -34,11 +34,10 @@ const mapDispatchToProps = dispatch => ({
         dispatch(selectStudent(value));
     },
     loadData: function (filter) {
-        const {group, searchQuery} = filter;
-        dispatch(fetchStudents({groupId: group, studentFio: searchQuery}))
+        dispatch(fetchStudents(filter))
     },
     onSearchChange: function (e, {searchQuery}) {
-        dispatch(changeStudentFilter({searchQuery}))
+        dispatch(changeStudentFilter({studentFio: searchQuery}))
     },
     onRemoveButtonClick: (e) => {
         dispatch(selectStudent(undefined))

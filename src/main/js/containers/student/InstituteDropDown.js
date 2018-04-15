@@ -31,14 +31,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     onChange: (e, {value}) => {
-        dispatch(changeStudentFilter({institute: value, faculty: undefined, group: undefined, searchQuery: ''}));
+        dispatch(changeStudentFilter({instituteId: value, facultyId: undefined, groupId: undefined, studentFio: ''}));
         dispatch(selectStudent(undefined));
     },
     loadData: () => {
         dispatch(fetchInstitutesIfNeeded())
     },
     onRemoveButtonClick: (e) => {
-        dispatch(changeStudentFilter({institute: undefined, faculty: undefined, group: undefined, searchQuery: ''}))
+        dispatch(changeStudentFilter({instituteId: undefined, facultyId: undefined, groupId: undefined, studentFio: ''}))
         dispatch(selectStudent(undefined));
     }
 });

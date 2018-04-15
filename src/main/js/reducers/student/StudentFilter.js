@@ -2,10 +2,10 @@ import {CHANGE_STUDENT_FILTER} from "../../actions/actionConsts";
 
 
 const initState = {
-    institute: undefined,
-    faculty: undefined,
-    group: undefined,
-    searchQuery: ''
+    instituteId: undefined,
+    facultyId: undefined,
+    groupId: undefined,
+    studentFio: ''
 };
 
 export function studentFilter(state = initState, action) {
