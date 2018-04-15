@@ -25,6 +25,10 @@ class WorkloadTable extends React.Component {
         return !isEqual;
     }
 
+    formatWorkloadColumn(value) {
+        return value && value > 0 ? value : '-'
+    }
+
     render() {
         const {data, loading} = this.props;
         let index = 0;
@@ -56,15 +60,15 @@ class WorkloadTable extends React.Component {
                                 data.map(({name, seminar, lecture, science, practice, exam, workShow, other, consultation, test}) => {
                                     return <Table.Row key={index++}>
                                         <Table.Cell>{name}</Table.Cell>
-                                        <Table.Cell>{seminar}</Table.Cell>
-                                        <Table.Cell>{lecture}</Table.Cell>
-                                        <Table.Cell>{science}</Table.Cell>
-                                        <Table.Cell>{practice}</Table.Cell>
-                                        <Table.Cell>{workShow}</Table.Cell>
-                                        <Table.Cell>{consultation}</Table.Cell>
-                                        <Table.Cell>{exam}</Table.Cell>
-                                        <Table.Cell>{test}</Table.Cell>
-                                        <Table.Cell>{other}</Table.Cell>
+                                        <Table.Cell>{this.formatWorkloadColumn(seminar)}</Table.Cell>
+                                        <Table.Cell>{this.formatWorkloadColumn(lecture)}</Table.Cell>
+                                        <Table.Cell>{this.formatWorkloadColumn(science)}</Table.Cell>
+                                        <Table.Cell>{this.formatWorkloadColumn(practice)}</Table.Cell>
+                                        <Table.Cell>{this.formatWorkloadColumn(workShow)}</Table.Cell>
+                                        <Table.Cell>{this.formatWorkloadColumn(consultation)}</Table.Cell>
+                                        <Table.Cell>{this.formatWorkloadColumn(exam)}</Table.Cell>
+                                        <Table.Cell>{this.formatWorkloadColumn(test)}</Table.Cell>
+                                        <Table.Cell>{this.formatWorkloadColumn(other)}</Table.Cell>
                                     </Table.Row>
                                 })
                                 : <div></div>

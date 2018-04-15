@@ -22,12 +22,14 @@ public class KindOfWorkConverter implements AttributeConverter<KindOfWork, Strin
     private final static String TEST = "Контрольная работа";
     private final static String MASTER_CLASS = "Мастер-класс";
     private final static String PROJECT_PROPOSAL = "Project Proposal";
+    private final static String CASE = "Пробный письменный кейс-экзамен";
 
     @Override
     public KindOfWork convertToEntityAttribute(String ruzAttribute) {
         if (Strings.isNullOrEmpty(ruzAttribute)
                 || ruzAttribute.equals(MASTER_CLASS)
-                || ruzAttribute.equals(PROJECT_PROPOSAL))
+                || ruzAttribute.equals(PROJECT_PROPOSAL)
+                || ruzAttribute.equals(CASE))
             return KindOfWork.NULL;
         switch (ruzAttribute) {
             case LECTURE:
