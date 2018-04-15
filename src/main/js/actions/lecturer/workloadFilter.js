@@ -15,10 +15,10 @@ export function selectLecturerToDate(toDate) {
     }
 }
 
-export function selectLecturer(lecturer) {
+export function selectLecturer(lecturerId) {
     return {
         type: SELECT_LECTURER,
-        lecturer
+        lecturerId
     }
 }
 

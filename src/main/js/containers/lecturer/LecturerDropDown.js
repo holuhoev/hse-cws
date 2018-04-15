@@ -3,6 +3,8 @@ import ObjectDropDown from "../../components/ObjectDropDown";
 import {selectLecturer} from "../../actions/lecturer/workloadFilter";
 import {changeLecturerFilter} from "../../actions/lecturer/lecturerFilter";
 import {fetchLecturers} from "../../actions/lecturer/lecturers";
+import {changeStudentFilter} from "../../actions/student/studentFilter";
+import {selectStudent} from "../../actions/student/students";
 
 const getOptions = (items, renderFieldName) => {
     let options = [];
@@ -39,6 +41,10 @@ const mapDispatchToProps = dispatch => ({
     },
     onSearchChange: function (e, {searchQuery}) {
         dispatch(changeLecturerFilter({lecturerFio: searchQuery}))
+    },
+    onRemoveButtonClick: (e) => {
+        dispatch(selectLecturer(undefined));
+        dispatch(changeLecturerFilter({lecturerFio: undefined}))
     }
 });
 

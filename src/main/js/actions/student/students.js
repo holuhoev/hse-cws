@@ -16,10 +16,10 @@ export function studentsRequest(params) {
     }
 }
 
-export function selectStudent(student) {
+export function selectStudent(studentId) {
     return {
         type: SELECT_STUDENT,
-        student
+        studentId
     }
 }
 
