@@ -10,7 +10,7 @@ const LecturerPage = () => (
         <Segment.Group horizontal>
             <Segment><ChairDropDown/></Segment>
         </Segment.Group>
-        <Segment color='blue' tertiary>Фильтр загруженности.</Segment>
+        <Segment color='blue' secondary>Фильтр загруженности.</Segment>
         <LecturerWorkloadFilter/>
         <LecturerTable/>
     </Segment.Group>

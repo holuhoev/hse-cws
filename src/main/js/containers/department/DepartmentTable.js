@@ -39,7 +39,7 @@ class SumWorkloadTable extends React.Component {
                     <Loader size='big' content='Загрузка данных...'/>
                 </Dimmer>
                 }
-                <Table celled striped>
+                <Table celled striped sortable>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Преподаватель</Table.HeaderCell>

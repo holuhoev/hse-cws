@@ -9,7 +9,7 @@ import CourseDropDown from "../../containers/student/CourseDropDown";
 
 const StudentPage = () => (
     <Segment.Group>
-        <Segment inverted color='blue' size='large' tertiary>Фильтр студентов.</Segment>
+        <Segment color='blue' secondary >Фильтр студентов.</Segment>
         <Segment.Group horizontal>
             <Segment><InstituteDropDown/></Segment>
             <Segment><FacultyDropDown/></Segment>
@@ -18,7 +18,7 @@ const StudentPage = () => (
             <Segment><CourseDropDown/></Segment>
             <Segment><GroupDropDown/></Segment>
         </Segment.Group>
-        <Segment inverted color='blue' tertiary>Фильтр загруженности.</Segment>
+        <Segment color='blue' secondary>Фильтр загруженности.</Segment>
         <StudentWorkloadFilter/>
         <StudentTable/>
     </Segment.Group>
