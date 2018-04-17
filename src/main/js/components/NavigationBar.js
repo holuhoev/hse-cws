@@ -52,7 +52,7 @@ class NavigationBar extends Component {
         const {activeItem, handleItemClick, workloads} = this.props;
         const titles = (activeItem === 'department'
             ? ['Преподаватель', 'Часы']
-            : ['Наименование дисциплины', 'Семинары', 'Лекции', 'НИС', 'Практика', 'Показ работ', 'Консультация', 'Экзамен', 'Контрольная работа', 'Другое']);
+            : ['Наименование дисциплины', 'Семинары', 'Лекции', 'НИС', 'Практика', 'Показ работ', 'Консультация', 'Экзамен', 'Контрольная работа', 'Другое','Сумма']);
         return (
             <Menu secondary pointing color='blue'>
                 <Menu.Item header>

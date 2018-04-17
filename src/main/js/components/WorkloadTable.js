@@ -31,6 +31,7 @@ class WorkloadTable extends React.Component {
 
     render() {
         const {data, loading} = this.props;
+
         let index = 0;
         return (
             <Segment>
@@ -52,12 +53,13 @@ class WorkloadTable extends React.Component {
                             <Table.HeaderCell>Экзамен</Table.HeaderCell>
                             <Table.HeaderCell>Контрольная работа</Table.HeaderCell>
                             <Table.HeaderCell>Другое</Table.HeaderCell>
+                            <Table.HeaderCell>Сумма</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
                         {
                             data ?
-                                data.map(({name, seminar, lecture, science, practice, exam, workShow, other, consultation, test}) => {
+                                data.map(({name, seminar, lecture, science, practice, exam, workShow, other, consultation, test,total}) => {
                                     return <Table.Row key={index++}>
                                         <Table.Cell>{name}</Table.Cell>
                                         <Table.Cell>{this.formatWorkloadColumn(seminar)}</Table.Cell>
@@ -69,6 +71,7 @@ class WorkloadTable extends React.Component {
                                         <Table.Cell>{this.formatWorkloadColumn(exam)}</Table.Cell>
                                         <Table.Cell>{this.formatWorkloadColumn(test)}</Table.Cell>
                                         <Table.Cell>{this.formatWorkloadColumn(other)}</Table.Cell>
+                                        <Table.Cell>{this.formatWorkloadColumn(total)}</Table.Cell>
                                     </Table.Row>
                                 })
                                 : <div></div>

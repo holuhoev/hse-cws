@@ -14,6 +14,7 @@ public class DisciplineWorkload {
     private Integer workShow;
     private Integer other;
     private Integer consultation;
+    private Integer total;
 
     public DisciplineWorkload() {
     }
@@ -96,5 +97,13 @@ public class DisciplineWorkload {
 
     public void setTest(Integer test) {
         this.test = test;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 }

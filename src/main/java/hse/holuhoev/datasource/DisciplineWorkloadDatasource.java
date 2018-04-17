@@ -41,16 +41,15 @@ public class DisciplineWorkloadDatasource {
                                             final LocalDate toDate) {
         if (lecturerId == null || fromDate == null || toDate == null)
             return DataSourceResult.createEmpty();
-        Iterable<DisciplineWorkload> result = createWorkloads(
+        List<DisciplineWorkload> workloads = createWorkloads(
                 ruzApiService.getLecturerLessons(lecturerId, fromDate, toDate));
 
-        return DataSourceResult.create(result);
+        return DataSourceResult.create(workloads);
     }
 
 
-    private Iterable<DisciplineWorkload> createWorkloads(List<Lesson> lessons) {
-        // TODO: parse long date period
-        return lessons.stream()
+    private List<DisciplineWorkload> createWorkloads(List<Lesson> lessons) {
+        List<DisciplineWorkload> workloads = lessons.stream()
                 .collect(Collectors.groupingBy(Lesson::getDiscipline))
                 .entrySet()
                 .stream()
@@ -70,7 +69,38 @@ public class DisciplineWorkloadDatasource {
                     workload.setPractice(map.getOrDefault(PRACTICE, 0));
                     workload.setConsultation(map.getOrDefault(CONSULTATION, 0));
                     workload.setOther(map.getOrDefault(NULL, 0));
+                    workload.setTotal(map.values().stream().mapToInt(Integer::intValue).sum());
                     return workload;
                 }).collect(Collectors.toList());
+        DisciplineWorkload summ = new DisciplineWorkload();
+        summ.setName("Итог");
+        summ.setLecture(0);
+        summ.setExam(0);
+        summ.setTest(0);
+        summ.setSeminar(0);
+        summ.setScience(0);
+        summ.setWorkShow(0);
+        summ.setConsultation(0);
+        summ.setPractice(0);
+        summ.setOther(0);
+        summ.setTotal(0);
+        workloads.add(
+                workloads.stream()
+                        .reduce(summ, (disciplineWorkload, disciplineWorkload2) -> {
+                            disciplineWorkload.setTotal(disciplineWorkload.getTotal() + disciplineWorkload2.getTotal());
+                            disciplineWorkload.setLecture(disciplineWorkload.getLecture() + disciplineWorkload2.getLecture());
+                            disciplineWorkload.setExam(disciplineWorkload.getExam() + disciplineWorkload2.getExam());
+                            disciplineWorkload.setTest(disciplineWorkload.getTest() + disciplineWorkload2.getTest());
+                            disciplineWorkload.setSeminar(disciplineWorkload.getSeminar() + disciplineWorkload2.getSeminar());
+                            disciplineWorkload.setScience(disciplineWorkload.getScience() + disciplineWorkload2.getScience());
+                            disciplineWorkload.setWorkShow(disciplineWorkload.getWorkShow() + disciplineWorkload2.getWorkShow());
+                            disciplineWorkload.setOther(disciplineWorkload.getOther() + disciplineWorkload2.getOther());
+                            disciplineWorkload.setConsultation(disciplineWorkload.getConsultation() + disciplineWorkload2.getConsultation());
+                            disciplineWorkload.setPractice(disciplineWorkload.getPractice() + disciplineWorkload2.getPractice());
+                            return disciplineWorkload;
+                        })
+        );
+
+        return workloads;
     }
 }
