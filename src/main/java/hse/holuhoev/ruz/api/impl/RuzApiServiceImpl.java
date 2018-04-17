@@ -16,9 +16,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import static hse.holuhoev.ruz.URL.MAX_QUERY_DAYS;
 
 /**
  * @author Evgeny Kholukhoev
@@ -64,6 +68,16 @@ public class RuzApiServiceImpl implements RuzApiService {
 
     @Override
     public List<Lesson> getStudentLessons(Integer studentId, LocalDate fromDate, LocalDate toDate) {
+        List<Lesson> result = new LinkedList<>();
+        while (ChronoUnit.DAYS.between(fromDate, toDate) > MAX_QUERY_DAYS) {
+            result.addAll(getStudentLessonsForShortPeriod(studentId, fromDate, fromDate.plusDays(MAX_QUERY_DAYS)));
+            fromDate = fromDate.plusDays(MAX_QUERY_DAYS + 1);
+        }
+        result.addAll(getStudentLessonsForShortPeriod(studentId, fromDate, toDate));
+        return result;
+    }
+
+    private List<Lesson> getStudentLessonsForShortPeriod(Integer studentId, LocalDate fromDate, LocalDate toDate) {
         Map<Param, Object> params = new HashMap<>();
         params.put(Param.STUDENT_ID, studentId);
         params.put(Param.FROM_DATE, fromDate.format(formatter));
@@ -73,6 +87,16 @@ public class RuzApiServiceImpl implements RuzApiService {
 
     @Override
     public List<Lesson> getLecturerLessons(Integer lecturerId, LocalDate fromDate, LocalDate toDate) {
+        List<Lesson> result = new LinkedList<>();
+        while (ChronoUnit.DAYS.between(fromDate, toDate) > MAX_QUERY_DAYS) {
+            result.addAll(getLecturerLessonsForShortPeriod(lecturerId, fromDate, fromDate.plusDays(MAX_QUERY_DAYS)));
+            fromDate = fromDate.plusDays(MAX_QUERY_DAYS + 1);
+        }
+        result.addAll(getLecturerLessonsForShortPeriod(lecturerId, fromDate, toDate));
+        return result;
+    }
+
+    private List<Lesson> getLecturerLessonsForShortPeriod(Integer lecturerId, LocalDate fromDate, LocalDate toDate) {
         Map<Param, Object> params = new HashMap<>();
         params.put(Param.LECTURER_ID, lecturerId);
         params.put(Param.LESSON_TYPE, URL.LECTURER_LESSON_TYPE);
