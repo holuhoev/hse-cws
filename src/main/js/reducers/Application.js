@@ -1,15 +1,17 @@
-import {SET_ACTIVE_ITEM} from "../actions/actionConsts";
+import {CHANGE_APP_STATE} from "../actions/actionConsts";
 
 const initState = {
-    activeItem: 'student'
+    activeItem: 'student',
+    showTableFilter: false
 };
 
 export function application(state = initState, action) {
     switch (action.type) {
-        case SET_ACTIVE_ITEM:
-            return Object.assign({}, state, {
-                activeItem: action.activeItem
-            });
+        case CHANGE_APP_STATE:
+            return {
+                ...state,
+                ...action.value
+            };
         default:
             return state
     }

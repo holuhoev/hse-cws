@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {setActiveItem} from "../actions/application";
+import {changeAppState} from "../actions/application";
 import NavigationBar from "../components/NavigationBar";
 
 const mapStateToProps = (state) => {
@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     handleItemClick: (e, {name}) => {
-        dispatch(setActiveItem(name))
+        dispatch(changeAppState({activeItem: name}))
     }
 });
 

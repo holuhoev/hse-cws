@@ -1,8 +1,8 @@
-import {SET_ACTIVE_ITEM} from "./actionConsts";
+import {CHANGE_APP_STATE} from "./actionConsts";
 
-export const setActiveItem = (activeItem) => {
+export const changeAppState = (value) => {
     return {
-        type: SET_ACTIVE_ITEM,
-        activeItem
+        type: CHANGE_APP_STATE,
+        value
     }
 };

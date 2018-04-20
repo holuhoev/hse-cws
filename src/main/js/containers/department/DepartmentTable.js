@@ -1,7 +1,9 @@
 import {connect} from 'react-redux'
 import {fetchDepartmentWorkload} from "../../actions/department/workload";
 import React from "react";
-import {Dimmer, Divider, Loader, Message, Segment, Table} from "semantic-ui-react";
+import {Dimmer, Divider, Loader, Message, Segment, Table, Accordion, Icon, Input} from "semantic-ui-react";
+import {changeAppState} from "../../actions/application";
+import {changeDepartmentTableFilter} from "../../actions/department/tableFilter";
 
 class SumWorkloadTable extends React.Component {
     componentDidMount() {
@@ -30,7 +32,7 @@ class SumWorkloadTable extends React.Component {
     }
 
     render() {
-        const {data, loading} = this.props;
+        const {data, loading, showFilter, onShowFilterClick, changeTableFilter} = this.props;
         let index = 0;
         return (
             <Segment>
@@ -39,6 +41,15 @@ class SumWorkloadTable extends React.Component {
                     <Loader size='big' content='Загрузка данных...'/>
                 </Dimmer>
                 }
+                <Accordion styled>
+                    <Accordion.Title active={showFilter} index={0} onClick={() => onShowFilterClick(showFilter)}>
+                        <Icon name='dropdown'/>
+                        Показать фильтр
+                    </Accordion.Title>
+                    <Accordion.Content active={showFilter}>
+                        <Input label='Преподаватель' placeholder='ФИО...' icon='search' onChange={changeTableFilter}/>
+                    </Accordion.Content>
+                </Accordion>
                 <Table celled striped sortable>
                     <Table.Header>
                         <Table.Row>
@@ -72,19 +83,35 @@ class SumWorkloadTable extends React.Component {
     }
 }
 
+
+const visibleItems = (items, searchString) => {
+    return searchString && searchString.length > 0
+        ? items.filter(item => item["fio"].toLowerCase().indexOf(searchString.trim().toLowerCase()) !== -1)
+        : items
+};
+
 const mapStateToProps = state => {
-    const {department} = state;
-    const {filter, workloads} = department;
+    const {department, application} = state;
+    const {filter, workloads, tableFilter} = department;
+    const {showTableFilter} = application;
+    const {searchString} = tableFilter;
     return {
         loading: workloads.isFetching,
-        data: workloads.items,
-        filter
+        data: visibleItems(workloads.items, searchString),
+        filter,
+        showFilter: showTableFilter
     }
 };
 
 const mapDispatchToProps = dispatch => ({
     loadData: (filter) => {
         dispatch(fetchDepartmentWorkload(filter))
+    },
+    onShowFilterClick: (currentShowFilterState) => {
+        dispatch(changeAppState({showTableFilter: !currentShowFilterState}))
+    },
+    changeTableFilter: (e, data) => {
+        dispatch(changeDepartmentTableFilter({searchString: data.value}))
     }
 });
 
