@@ -1,8 +1,13 @@
-import {DEPARTMENT_WORKLOAD_RECEIVE, DEPARTMENT_WORKLOAD_REQUEST} from "../../actions/actionConsts";
+import {
+    DEPARTMENT_WORKLOAD_RECEIVE, DEPARTMENT_WORKLOAD_REQUEST,
+    UPDATE_DEPARTMENT_WORKLOAD
+} from "../../actions/actionConsts";
 
 let initState = {
     isFetching: false,
-    items: []
+    items: [],
+    column: null,
+    direction: null
 };
 
 export function workloads(state = initState, action) {
@@ -16,6 +21,11 @@ export function workloads(state = initState, action) {
                 isFetching: false,
                 items: action.data
             });
+        case UPDATE_DEPARTMENT_WORKLOAD:
+            return {
+                ...state,
+                ...action.value
+            };
         default:
             return state;
     }

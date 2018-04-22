@@ -1,14 +1,15 @@
 import {connect} from 'react-redux'
-import {fetchDepartmentWorkload} from "../../actions/department/workload";
+import {fetchDepartmentWorkload, updateDepartmentWorkload} from "../../actions/department/workload";
 import React from "react";
 import {Dimmer, Divider, Loader, Message, Segment, Table, Accordion, Icon, Input} from "semantic-ui-react";
 import {changeAppState} from "../../actions/application";
 import {changeDepartmentTableFilter} from "../../actions/department/tableFilter";
+import _ from 'lodash'
 
 class SumWorkloadTable extends React.Component {
     componentDidMount() {
-        const {loadData, filter, data} = this.props;
-        if (!data || data.length < 1) {
+        const {loadData, filter, items} = this.props;
+        if (!items || items.length < 1) {
             loadData(filter);
         }
     }
@@ -21,6 +22,29 @@ class SumWorkloadTable extends React.Component {
         }
     }
 
+    handleSort = clickedColumn => () => {
+        const {column, items, direction, updateWorkload} = this.props;
+
+        if (column !== clickedColumn) {
+            updateWorkload({
+                column: clickedColumn,
+                items: _.sortBy(items, [clickedColumn]),
+                direction: 'ascending',
+            });
+
+            return
+        }
+
+        updateWorkload({
+            items: items.reverse(),
+            direction: direction === 'ascending' ? 'descending' : 'ascending',
+        });
+    };
+
+    handleCellClick = lecturerId => () => {
+
+    };
+
     notEqual(obj1, obj2) {
         let isEqual = true;
         Object.keys(obj1).forEach(key => {
@@ -32,7 +56,7 @@ class SumWorkloadTable extends React.Component {
     }
 
     render() {
-        const {data, loading, showFilter, onShowFilterClick, changeTableFilter} = this.props;
+        const {items, loading, showFilter, onShowFilterClick, changeTableFilter, column, direction} = this.props;
         let index = 0;
         return (
             <Segment>
@@ -53,14 +77,20 @@ class SumWorkloadTable extends React.Component {
                 <Table celled striped sortable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>Преподаватель</Table.HeaderCell>
-                            <Table.HeaderCell>Часы</Table.HeaderCell>
+                            <Table.HeaderCell sorted={column === 'fio' ? direction : null}
+                                              onClick={this.handleSort('fio')}>
+                                Преподаватель
+                            </Table.HeaderCell>
+                            <Table.HeaderCell sorted={column === 'workload' ? direction : null}
+                                              onClick={this.handleSort('workload')}>
+                                Часы
+                            </Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
                         {
-                            data ?
-                                data.map(({fio, workload}) => {
+                            items ?
+                                items.map(({fio, workload}) => {
                                     return <Table.Row key={index++}>
                                         <Table.Cell>{fio}</Table.Cell>
                                         <Table.Cell>{workload}</Table.Cell>
@@ -70,7 +100,7 @@ class SumWorkloadTable extends React.Component {
                         }
                     </Table.Body>
                 </Table>
-                {data && data.length > 0 ? <div></div>
+                {items && items.length > 0 ? <div></div>
                     :
                     <Divider horizontal>
                         <Message size='small' positive>
@@ -93,12 +123,15 @@ const visibleItems = (items, searchString) => {
 const mapStateToProps = state => {
     const {department, application} = state;
     const {filter, workloads, tableFilter} = department;
+    const {isFetching, column, direction, items} = workloads;
     const {showTableFilter} = application;
     const {searchString} = tableFilter;
     return {
-        loading: workloads.isFetching,
-        data: visibleItems(workloads.items, searchString),
+        loading: isFetching,
+        items: visibleItems(items, searchString),
         filter,
+        column,
+        direction,
         showFilter: showTableFilter
     }
 };
@@ -112,6 +145,9 @@ const mapDispatchToProps = dispatch => ({
     },
     changeTableFilter: (e, data) => {
         dispatch(changeDepartmentTableFilter({searchString: data.value}))
+    },
+    updateWorkload: (value) => {
+        dispatch(updateDepartmentWorkload(value))
     }
 });
 

@@ -1,4 +1,4 @@
-import {DEPARTMENT_WORKLOAD_REQUEST, DEPARTMENT_WORKLOAD_RECEIVE} from "../actionConsts";
+import {DEPARTMENT_WORKLOAD_REQUEST, DEPARTMENT_WORKLOAD_RECEIVE, UPDATE_DEPARTMENT_WORKLOAD} from "../actionConsts";
 import fetch from "isomorphic-fetch";
 
 const format = 'YYYY-MM-DD';
@@ -10,6 +10,12 @@ export function departmentWorkloadRequest(params) {
     }
 }
 
+export const updateDepartmentWorkload = (value) => {
+    return {
+        type: UPDATE_DEPARTMENT_WORKLOAD,
+        value
+    }
+};
 
 export function departmentWorkloadReceive(params, json) {
     return {
