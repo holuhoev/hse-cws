@@ -1,5 +1,5 @@
 runtime: java
-env: standard
+env: flex
 
 handlers:
 - url: /.*
