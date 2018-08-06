@@ -1,5 +1,6 @@
 import {DEPARTMENT_WORKLOAD_REQUEST, DEPARTMENT_WORKLOAD_RECEIVE, UPDATE_DEPARTMENT_WORKLOAD} from "../actionConsts";
 import fetch from "isomorphic-fetch";
+import {HOST, PORT} from "../../config";
 
 const format = 'YYYY-MM-DD';
 
@@ -29,7 +30,7 @@ export function departmentWorkloadReceive(params, json) {
 export function fetchDepartmentWorkload({chairId, fromDate, toDate}) {
     return function (dispatch) {
         dispatch(departmentWorkloadRequest({chairId, fromDate, toDate}));
-        let url = new URL('http://localhost:8080/api/lecturer/sumWorkload');
+        let url = new URL(HOST + PORT + '/api/lecturer/sumWorkload');
         if (chairId) {
             url.searchParams.append("chairId", chairId);
         }

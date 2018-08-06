@@ -1,5 +1,6 @@
 import fetch from "isomorphic-fetch";
 import {SELECT_STUDENT, STUDENTS_RECEIVE, STUDENTS_REQUEST} from "../actionConsts";
+import {HOST, PORT} from "../../config";
 
 function normalize(data = []) {
     let result = {};
@@ -35,7 +36,7 @@ export function studentsReceive(json, params) {
 export function fetchStudents(params) {
     return function (dispatch) {
         dispatch(studentsRequest(params));
-        let url = new URL('http://localhost:8080/api/student/getAll');
+        let url = new URL(HOST + PORT + '/api/student/getAll');
         if (params) {
             Object.keys(params).forEach(key => {
                 if (params[key]) {

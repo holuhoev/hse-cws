@@ -1,5 +1,6 @@
 import {LECTURER_DISCIPLINE_WORKLOAD_RECEIVE, LECTURER_DISCIPLINE_WORKLOAD_REQUEST} from "../actionConsts";
 import fetch from "isomorphic-fetch";
+import {HOST, PORT} from "../../config";
 
 const format = 'YYYY-MM-DD';
 
@@ -23,7 +24,7 @@ export function lecturerDisciplineWorkloadReceive(params, json) {
 export function fetchLecturerDisciplineWorkload({lecturerId, fromDate, toDate}) {
     return function (dispatch) {
         dispatch(lecturerDisciplineWorkloadRequest({lecturerId, fromDate, toDate}));
-        let url = new URL('http://localhost:8080/api/lecturer/disciplineWorkload');
+        let url = new URL(HOST + PORT + '/api/lecturer/disciplineWorkload');
         if (lecturerId) {
             url.searchParams.append("lecturerId", lecturerId);
         }

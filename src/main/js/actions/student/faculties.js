@@ -1,5 +1,6 @@
 import fetch from "isomorphic-fetch";
 import {FACULTIES_RECEIVE, FACULTIES_REQUEST} from "../actionConsts";
+import {HOST, PORT} from "../../config";
 
 export function facultiesRequest() {
     return {
@@ -18,7 +19,7 @@ export function facultiesReceive(json) {
 function fetchFaculties() {
     return (dispatch) => {
         dispatch(facultiesRequest());
-        return fetch('http://localhost:8080/api/faculty')
+        return fetch(HOST + PORT + '/api/faculty')
             .then(response => response.json())
             .then(json => dispatch(facultiesReceive(json)));
 
