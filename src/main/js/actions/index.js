@@ -3,7 +3,7 @@ import {
     GROUPS_RECEIVE, GROUPS_REQUEST, STUDENT_DISCIPLINE_WORKLOAD_RECEIVE,
     STUDENT_DISCIPLINE_WORKLOAD_REQUEST
 } from "./actionConsts";
-import {HOST, PORT} from "../config";
+import {ADDRESS} from "../config";
 
 
 export function groupsRequest() {
@@ -23,7 +23,7 @@ export function groupsReceive(json) {
 function fetchGroups() {
     return (dispatch) => {
         dispatch(groupsRequest());
-        return fetch(HOST + PORT + '/api/group')
+        return fetch(ADDRESS + '/api/group')
             .then(response => response.json())
             .then(json => dispatch(groupsReceive(json)));
 
@@ -64,7 +64,7 @@ export function studentDisciplineWorkloadReceive(value) {
 export function fetchStudentDisciplineWorkload({studentId, fromDate, toDate}) {
     return function (dispatch) {
         dispatch(studentDisciplineWorkloadRequest({isFetching: true}));
-        let url = new URL(HOST + PORT + '/api/student/disciplineWorkload');
+        let url = new URL(ADDRESS + '/api/student/disciplineWorkload');
         if (studentId) {
             url.searchParams.append("studentId", studentId);
         }

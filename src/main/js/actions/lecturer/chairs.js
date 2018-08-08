@@ -1,6 +1,6 @@
 import fetch from "isomorphic-fetch";
 import {CHAIRS_RECEIVE, CHAIRS_REQUEST} from "../actionConsts";
-import {HOST, PORT} from "../../config";
+import {ADDRESS} from "../../config";
 
 
 export function chairsRequest() {
@@ -20,7 +20,7 @@ export function chairsReceive(json) {
 function fetchChairs() {
     return (dispatch) => {
         dispatch(chairsRequest());
-        return fetch(HOST + PORT + '/api/chair')
+        return fetch(ADDRESS + '/api/chair')
             .then(response => response.json())
             .then(json => dispatch(chairsReceive(json)));
 

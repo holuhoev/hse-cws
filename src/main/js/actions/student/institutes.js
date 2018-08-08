@@ -1,6 +1,6 @@
 import fetch from "isomorphic-fetch";
 import {INSTITUTES_RECEIVE, INSTITUTES_REQUEST} from "../actionConsts";
-import {HOST, PORT} from "../../config";
+import {ADDRESS} from "../../config";
 
 export function institutesRequest() {
     return {
@@ -19,7 +19,7 @@ export function institutesReceive(json) {
 function fetchInstitutes() {
     return (dispatch) => {
         dispatch(institutesRequest());
-        return fetch(HOST + PORT + '/api/institute')
+        return fetch(ADDRESS + '/api/institute')
             .then(response => response.json())
             .then(json => dispatch(institutesReceive(json)));
 
