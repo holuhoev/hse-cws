@@ -60,7 +60,6 @@ public class WorkloadLoader {
     }
 
     private void createAndSaveStudentWorkload(Student student, LocalDate fromDate, LocalDate toDate) {
-        // TODO: (Delete dublicates)
         studentWorkloadRepository.saveAll(ruzApiService.getStudentLessons(student.getId(), fromDate, toDate)
                 .stream()
                 .collect(Collectors.groupingBy(Lesson::getDate, Collectors.summingInt(Lesson::getHours)))
@@ -78,12 +77,20 @@ public class WorkloadLoader {
 
     private void loadLecturerWorkload() {
         logger.info("Lecturer workload loader starts.");
-        lecturerWorkloadRepository.deleteAll();
-        LocalDate fromDate = LocalDate.of(2017, 9, 1);
+        LocalDate fromDate = LocalDate.now();
+        // TODO: Scheduler
+        // Удалять только загруженности, где дата >= "сегодня"
+        QLecturerWorkload qLecturerWorkload = QLecturerWorkload.lecturerWorkload;
+        lecturerWorkloadRepository.deleteAll(
+                lecturerWorkloadRepository.findAll(
+                        qLecturerWorkload.date.eq(fromDate)
+                                .or(qLecturerWorkload.date.after(fromDate))
+                )
+        );
         lecturerRepository.findAll().forEach(lecturer -> {
-            createAndSaveLecturerWorkload(lecturer, fromDate, fromDate.plusMonths(4));
-            createAndSaveLecturerWorkload(lecturer, fromDate.plusMonths(4).plusDays(1), fromDate.plusMonths(8));
-            createAndSaveLecturerWorkload(lecturer, fromDate.plusMonths(8).plusDays(1), fromDate.plusMonths(2));
+            // загружаем на полгода вперед.
+            createAndSaveLecturerWorkload(lecturer, fromDate, fromDate.plusMonths(3));
+            createAndSaveLecturerWorkload(lecturer, fromDate.plusMonths(3).plusDays(1), fromDate.plusMonths(6));
         });
         logger.info("Lecturer workload loader ends.");
     }
