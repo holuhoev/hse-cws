@@ -13,8 +13,8 @@ public class DataBaseScheduler {
         this.dataBaseLoader = dataBaseLoader;
     }
 
-    // Run every day at 00:10 on server time
-    @Scheduled(cron = "0 10 0 * * ?")
+    // Run every day at 01:00 on server time
+    @Scheduled(cron = "0 0 1 * * ?")
     private void loadDataBase() {
         dataBaseLoader.run("true","false","true");
     }
